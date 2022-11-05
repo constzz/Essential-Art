@@ -30,6 +30,20 @@ class URLSessionHTTPClientTests: XCTestCase {
         wait(for: [exp], timeout: 5.0)
     }
     
+    func test_cancelGetFromURL_deliversErrorInResponse() {
+        
+        let error = resultErrorFor(
+            client: makeSUT(),
+            data: anyData,
+            response: httpURLResponse,
+            error: nil,
+            taskHandler: { task in
+                task.cancel()
+        })
+        
+        XCTAssertEqual((error as? NSError)?.code, URLError.cancelled.rawValue)
+    }
+    
     func test_getFromURL_failsOnRequestError() {
         let error = resultErrorFor(client: makeSUT(), data: nil, response: nil, error: anyError)
         XCTAssertNotNil(error)
@@ -97,10 +111,11 @@ class URLSessionHTTPClientTests: XCTestCase {
         data: Data?,
         response: URLResponse?,
         error: Error?,
+        taskHandler: ((HTTPClientTask) -> Void)? = nil,
         file: StaticString = #file,
         line: UInt = #line
     ) -> Error? {
-        switch resultFor(client: client, data: data, response: response, error: error) {
+        switch resultFor(client: client, data: data, response: response, error: error, taskHandler: taskHandler) {
         case .success((let data, let response)):
             XCTFail("Expected failure, recieved \(data) and \(response) instead.")
             return nil
@@ -114,16 +129,18 @@ class URLSessionHTTPClientTests: XCTestCase {
         data: Data?,
         response: URLResponse?,
         error: Error?,
+        taskHandler: ((HTTPClientTask) -> Void)? = nil,
         file: StaticString = #file,
         line: UInt = #line
     ) -> HTTPClient.Result {
         URLProtocolStub.stubRequestsWith(data: data, response: response, error: error)
         var result: HTTPClient.Result!
         let exp = expectation(description: "Wait for completion")
-        client.get(from: anyURL) { completionResult in
+        let task = client.get(from: anyURL) { completionResult in
             result = completionResult
             exp.fulfill()
         }
+        taskHandler?(task)
         
         wait(for: [exp], timeout: 5.0)
         
