@@ -85,7 +85,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         file: StaticString = #file,
         line: UInt = #line
     ) -> HTTPClient.Result {
-        URLProtocolStub.stubRequestsWith(data: data, response: response, error: anyError)
+        URLProtocolStub.stubRequestsWith(data: data, response: response, error: error)
         var result: HTTPClient.Result!
         let exp = expectation(description: "Wait for completion")
         client.get(from: anyURL) { completionResult in
