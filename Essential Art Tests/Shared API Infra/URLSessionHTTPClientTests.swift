@@ -49,10 +49,24 @@ class URLSessionHTTPClientTests: XCTestCase {
         XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: nil, error: nil))
     }
     
+    func test_getFromURL_succedsWithDataOnValidRequest() {
+        let emptyData = Data()
+        switch resultFor(client: makeSUT(), data: emptyData, response: successfulHTTPURLResponse, error: nil) {
+        case .success((let data, let response)):
+            XCTAssertEqual(data, emptyData)
+            XCTAssertEqual(response.statusCode, successfulHTTPURLResponse?.statusCode)
+            XCTAssertEqual(response.url, successfulHTTPURLResponse?.url)
+        case .failure(let error):
+            XCTFail("Expected success, but recieved \(error) instead.")
+        }
+    }
+    
+    
     private var anyURL = URL(string: "http://any-url.com")!
     private var anyError = NSError(domain: "any-error", code: 0)
     private var nonHTTPURLResponse = URLResponse()
     private var httpURLResponse = HTTPURLResponse()
+    private lazy var successfulHTTPURLResponse = HTTPURLResponse(url: anyURL, statusCode: 200, httpVersion: nil, headerFields: nil)
     private var anyData = Data("any data".utf8)
     
     private func makeSUT() -> HTTPClient {
@@ -150,6 +164,8 @@ private class URLProtocolStub: URLProtocol {
         
         if let error = stub.error {
             client?.urlProtocol(self, didFailWithError: error)
+        } else {
+            client?.urlProtocolDidFinishLoading(self)
         }
         
         stub.observer?(request)
