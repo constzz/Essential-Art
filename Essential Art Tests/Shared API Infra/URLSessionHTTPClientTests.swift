@@ -26,17 +26,29 @@ class URLSessionHTTPClientTests: XCTestCase {
     }
     
     func test_getFromURL_failsOnRequestError() {
+        let error = resultErrorFor(client: makeSUT(), data: nil, response: nil, error: anyError)
+        XCTAssertNotNil(error)
+    }
+    
+    func test_getFromURL_failsOnInvalidRepresentation() {
+        XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: anyData, response: nil, error: nil))
+        XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: anyData, response: nil, error: anyError))
+        XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: anyData, response: nonHTTPURLResponse, error: nil))
+        XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: anyData, response: nonHTTPURLResponse, error: anyError))
         
-        switch resultFor(client: makeSUT(), data: nil, response: nil, error: anyError) {
-        case .success((let data, let response)):
-            XCTFail("Expected failure, recieved \(data) and \(response) instead.")
-        case .failure(let error):
-            XCTAssertNotNil(error)
-        }
+        XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: nonHTTPURLResponse, error: nil))
+        XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: nonHTTPURLResponse, error: anyError))
+        XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: httpURLResponse, error: nil))
+        XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: httpURLResponse, error: anyError))
+        
+        XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: nil, error: nil))
     }
     
     private var anyURL = URL(string: "http://any-url.com")!
     private var anyError = NSError(domain: "any-error", code: 0)
+    private var nonHTTPURLResponse = URLResponse()
+    private var httpURLResponse = HTTPURLResponse()
+    private var anyData = Data("any data".utf8)
     
     private func makeSUT() -> HTTPClient {
         let configuration = URLSessionConfiguration.ephemeral
@@ -46,6 +58,23 @@ class URLSessionHTTPClientTests: XCTestCase {
         let client = URLSessionHTTPClient(session: session)
         
         return client
+    }
+    
+    private func resultErrorFor(
+        client: HTTPClient,
+        data: Data?,
+        response: URLResponse?,
+        error: Error?,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) -> Error? {
+        switch resultFor(client: client, data: data, response: response, error: error) {
+        case .success((let data, let response)):
+            XCTFail("Expected failure, recieved \(data) and \(response) instead.")
+            return nil
+        case .failure(let error):
+            return error
+        }
     }
     
     private func resultFor(
