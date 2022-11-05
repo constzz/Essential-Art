@@ -40,6 +40,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: anyData, response: nil, error: anyError))
         XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: anyData, response: nonHTTPURLResponse, error: nil))
         XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: anyData, response: nonHTTPURLResponse, error: anyError))
+        XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: anyData, response: httpURLResponse, error: anyError))
         
         XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: nonHTTPURLResponse, error: nil))
         XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: nonHTTPURLResponse, error: anyError))
