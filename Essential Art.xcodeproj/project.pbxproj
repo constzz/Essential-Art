@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BB5EDFDC291640B200D6A84C /* Essential_Art.h in Headers */ = {isa = PBXBuildFile; fileRef = BB5EDFDB291640B200D6A84C /* Essential_Art.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BB5EDFD8291640B200D6A84C /* Essential_Art.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Essential_Art.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB5EDFDB291640B200D6A84C /* Essential_Art.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Essential_Art.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +43,6 @@
 		BB5EDFDA291640B200D6A84C /* Essential Art */ = {
 			isa = PBXGroup;
 			children = (
-				BB5EDFDB291640B200D6A84C /* Essential_Art.h */,
 			);
 			path = "Essential Art";
 			sourceTree = "<group>";
@@ -57,7 +54,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB5EDFDC291640B200D6A84C /* Essential_Art.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
