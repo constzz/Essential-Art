@@ -10,6 +10,11 @@ import XCTest
 import Essential_Art
 
 class URLSessionHTTPClientTests: XCTestCase {
+    
+    override func tearDown() {
+        URLProtocolStub.stub = nil
+    }
+    
     func test_getFromURL_performsGETRequestFromURL() {
         let url = anyURL
         let exp = expectation(description: "Request is performed")
