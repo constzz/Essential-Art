@@ -43,7 +43,6 @@ class URLSessionHTTPClientTests: XCTestCase {
         
         XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: nonHTTPURLResponse, error: nil))
         XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: nonHTTPURLResponse, error: anyError))
-        XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: httpURLResponse, error: nil))
         XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: httpURLResponse, error: anyError))
         
         XCTAssertNotNil(resultErrorFor(client: makeSUT(), data: nil, response: nil, error: nil))
@@ -61,6 +60,19 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
     }
     
+    func test_getFromURL_succedsWithEmptyDataOnValidRequestAndNilDataRecieved() {
+        let emptyData = Data()
+
+        switch resultFor(client: makeSUT(), data: nil, response: successfulHTTPURLResponse, error: nil) {
+        case .success((let data, let response)):
+            XCTAssertEqual(data, emptyData)
+            XCTAssertEqual(response.statusCode, successfulHTTPURLResponse?.statusCode)
+            XCTAssertEqual(response.url, successfulHTTPURLResponse?.url)
+        case .failure(let error):
+            XCTFail("Expected success, but recieved \(error) instead.")
+        }
+    }
+
     
     private var anyURL = URL(string: "http://any-url.com")!
     private var anyError = NSError(domain: "any-error", code: 0)
