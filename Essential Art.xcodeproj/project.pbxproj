@@ -11,6 +11,7 @@
 		BB5EDFF62916431B00D6A84C /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDFF52916431B00D6A84C /* URLSessionHTTPClient.swift */; };
 		BB5EE00F2916449600D6A84C /* Essential_Art.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5EDFD8291640B200D6A84C /* Essential_Art.framework */; };
 		BB5EE017291644C200D6A84C /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE016291644C200D6A84C /* URLSessionHTTPClientTests.swift */; };
+		BB5EE01A2916629400D6A84C /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE0192916629400D6A84C /* URLProtocolStub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		BB5EDFF52916431B00D6A84C /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		BB5EE00B2916449600D6A84C /* Essential Art Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Essential Art Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5EE016291644C200D6A84C /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
+		BB5EE0192916629400D6A84C /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,9 +106,18 @@
 		BB5EE015291644A700D6A84C /* Shared API Infra */ = {
 			isa = PBXGroup;
 			children = (
+				BB5EE0182916628000D6A84C /* Helpers */,
 				BB5EE016291644C200D6A84C /* URLSessionHTTPClientTests.swift */,
 			);
 			path = "Shared API Infra";
+			sourceTree = "<group>";
+		};
+		BB5EE0182916628000D6A84C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BB5EE0192916629400D6A84C /* URLProtocolStub.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB5EE017291644C200D6A84C /* URLSessionHTTPClientTests.swift in Sources */,
+				BB5EE01A2916629400D6A84C /* URLProtocolStub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
