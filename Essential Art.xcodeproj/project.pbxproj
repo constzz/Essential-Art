@@ -15,6 +15,8 @@
 		BB5EE01F29183F5700D6A84C /* ArticEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE01E29183F5700D6A84C /* ArticEndpoint.swift */; };
 		BB5EE02229183F7D00D6A84C /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE02129183F7D00D6A84C /* Artwork.swift */; };
 		BB5EE02529183FF800D6A84C /* ArticEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE02429183FF800D6A84C /* ArticEndpointTests.swift */; };
+		BB5EE027291843B200D6A84C /* ArtworkMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE026291843B200D6A84C /* ArtworkMapper.swift */; };
+		BB5EE029291843E600D6A84C /* ArtworkMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE028291843E600D6A84C /* ArtworkMapperTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 		BB5EE01E29183F5700D6A84C /* ArticEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticEndpoint.swift; sourceTree = "<group>"; };
 		BB5EE02129183F7D00D6A84C /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		BB5EE02429183FF800D6A84C /* ArticEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticEndpointTests.swift; sourceTree = "<group>"; };
+		BB5EE026291843B200D6A84C /* ArtworkMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkMapper.swift; sourceTree = "<group>"; };
+		BB5EE028291843E600D6A84C /* ArtworkMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkMapperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				BB5EE01E29183F5700D6A84C /* ArticEndpoint.swift */,
+				BB5EE026291843B200D6A84C /* ArtworkMapper.swift */,
 			);
 			path = "Artic API";
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				BB5EE02429183FF800D6A84C /* ArticEndpointTests.swift */,
+				BB5EE028291843E600D6A84C /* ArtworkMapperTests.swift */,
 			);
 			path = "Artic API";
 			sourceTree = "<group>";
@@ -266,6 +272,7 @@
 				BB5EE01F29183F5700D6A84C /* ArticEndpoint.swift in Sources */,
 				BB5EDFE4291640D800D6A84C /* HTTPClient.swift in Sources */,
 				BB5EE02229183F7D00D6A84C /* Artwork.swift in Sources */,
+				BB5EE027291843B200D6A84C /* ArtworkMapper.swift in Sources */,
 				BB5EDFF62916431B00D6A84C /* URLSessionHTTPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB5EE017291644C200D6A84C /* URLSessionHTTPClientTests.swift in Sources */,
+				BB5EE029291843E600D6A84C /* ArtworkMapperTests.swift in Sources */,
 				BB5EE01A2916629400D6A84C /* URLProtocolStub.swift in Sources */,
 				BB5EE02529183FF800D6A84C /* ArticEndpointTests.swift in Sources */,
 			);
