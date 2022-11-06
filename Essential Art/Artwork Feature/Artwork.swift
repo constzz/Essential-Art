@@ -7,4 +7,9 @@
 
 import Foundation
 
-public struct Artwork {}
+public struct Artwork {
+    let id: UUID
+    let title: String
+    let thumbnail: URL
+    let artist: String
+}
