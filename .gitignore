@@ -13,7 +13,6 @@ xcuserdata
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
-*.xcscheme
 
 ## Obj-C/Swift specific
 *.hmap
