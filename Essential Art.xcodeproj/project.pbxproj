@@ -12,6 +12,9 @@
 		BB5EE00F2916449600D6A84C /* Essential_Art.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5EDFD8291640B200D6A84C /* Essential_Art.framework */; };
 		BB5EE017291644C200D6A84C /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE016291644C200D6A84C /* URLSessionHTTPClientTests.swift */; };
 		BB5EE01A2916629400D6A84C /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE0192916629400D6A84C /* URLProtocolStub.swift */; };
+		BB5EE01F29183F5700D6A84C /* ArticEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE01E29183F5700D6A84C /* ArticEndpoint.swift */; };
+		BB5EE02229183F7D00D6A84C /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE02129183F7D00D6A84C /* Artwork.swift */; };
+		BB5EE02529183FF800D6A84C /* ArticEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE02429183FF800D6A84C /* ArticEndpointTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +34,9 @@
 		BB5EE00B2916449600D6A84C /* Essential Art Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Essential Art Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5EE016291644C200D6A84C /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		BB5EE0192916629400D6A84C /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
+		BB5EE01E29183F5700D6A84C /* ArticEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticEndpoint.swift; sourceTree = "<group>"; };
+		BB5EE02129183F7D00D6A84C /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
+		BB5EE02429183FF800D6A84C /* ArticEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticEndpointTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,8 @@
 		BB5EDFDA291640B200D6A84C /* Essential Art */ = {
 			isa = PBXGroup;
 			children = (
+				BB5EE02029183F7200D6A84C /* Artwork Feature */,
+				BB5EE01D29183F3800D6A84C /* Artic API */,
 				BB5EDFE2291640CB00D6A84C /* Shared API */,
 				BB5EDFF4291641F400D6A84C /* Shared API Infra */,
 			);
@@ -98,6 +106,7 @@
 		BB5EE00C2916449600D6A84C /* Essential Art Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BB5EE02329183FE900D6A84C /* Artic API */,
 				BB5EE015291644A700D6A84C /* Shared API Infra */,
 			);
 			path = "Essential Art Tests";
@@ -118,6 +127,30 @@
 				BB5EE0192916629400D6A84C /* URLProtocolStub.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BB5EE01D29183F3800D6A84C /* Artic API */ = {
+			isa = PBXGroup;
+			children = (
+				BB5EE01E29183F5700D6A84C /* ArticEndpoint.swift */,
+			);
+			path = "Artic API";
+			sourceTree = "<group>";
+		};
+		BB5EE02029183F7200D6A84C /* Artwork Feature */ = {
+			isa = PBXGroup;
+			children = (
+				BB5EE02129183F7D00D6A84C /* Artwork.swift */,
+			);
+			path = "Artwork Feature";
+			sourceTree = "<group>";
+		};
+		BB5EE02329183FE900D6A84C /* Artic API */ = {
+			isa = PBXGroup;
+			children = (
+				BB5EE02429183FF800D6A84C /* ArticEndpointTests.swift */,
+			);
+			path = "Artic API";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,7 +263,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB5EE01F29183F5700D6A84C /* ArticEndpoint.swift in Sources */,
 				BB5EDFE4291640D800D6A84C /* HTTPClient.swift in Sources */,
+				BB5EE02229183F7D00D6A84C /* Artwork.swift in Sources */,
 				BB5EDFF62916431B00D6A84C /* URLSessionHTTPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +276,7 @@
 			files = (
 				BB5EE017291644C200D6A84C /* URLSessionHTTPClientTests.swift in Sources */,
 				BB5EE01A2916629400D6A84C /* URLProtocolStub.swift in Sources */,
+				BB5EE02529183FF800D6A84C /* ArticEndpointTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
