@@ -33,6 +33,14 @@ class ArtworkMapperTests: XCTestCase {
         }
     }
     
+    func test_map_deliversEmptyList_on200ResponseStatusCodeAndEmptyJSONlist() throws {
+        let emptyJSON = makeArtworksJSON([])
+        
+        let artworks = try ArtworkMapper.map(data: emptyJSON, response: HTTPURLResponse(statusCode: 200))
+        
+        XCTAssertEqual(artworks, [])
+    }
+    
     private func makeArtworksJSON(
         _ artworks: [[String: Any]]
     ) -> Data {

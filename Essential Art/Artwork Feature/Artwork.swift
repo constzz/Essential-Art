@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Artwork {
+public struct Artwork: Equatable {
     let id: UUID
     let title: String
     let imageURL: URL

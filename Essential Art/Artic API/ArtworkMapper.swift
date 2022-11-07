@@ -13,6 +13,10 @@ public final class ArtworkMapper {
         case invalidData
     }
     
+    private struct ArtworkRoot: Decodable {
+        let data: [ArtworkModel]
+    }
+    
     private struct ArtworkModel: Decodable {
         let id: UUID
         let title: String
@@ -50,7 +54,7 @@ public final class ArtworkMapper {
 
     public static func map(data: Data, response: HTTPURLResponse) throws -> [Artwork] {
         guard response.statusCode == validResponseCode,
-                let artworks = try? JSONDecoder().decode([ArtworkModel].self, from: data) else {
+              let artworks = try? JSONDecoder().decode(ArtworkRoot.self, from: data).data else {
             throw Error.invalidData
         }
         return artworks.compactMap { $0.artwork }
