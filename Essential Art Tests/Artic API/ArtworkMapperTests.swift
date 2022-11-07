@@ -22,6 +22,17 @@ class ArtworkMapperTests: XCTestCase {
         }
     }
     
+    func test_map_throwsErrorOnInvalidData() throws {
+        let invalidData = Data("invalid data".utf8)
+        
+        let non200StatusCodes = [199, 200, 201, 299, 301, 400, 502]
+        try non200StatusCodes.forEach { statusCode in
+            XCTAssertThrowsError(
+                try ArtworkMapper.map(data: invalidData, response: HTTPURLResponse(statusCode: statusCode))
+            )
+        }
+    }
+    
     private func makeArtworksJSON(
         _ artworks: [[String: Any]]
     ) -> Data {
