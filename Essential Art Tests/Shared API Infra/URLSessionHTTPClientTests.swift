@@ -102,6 +102,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         let session = URLSession(configuration: configuration)
         
         let client = URLSessionHTTPClient(session: session)
+        trackForMemoryLeaks(client)
         
         return client
     }
