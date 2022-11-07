@@ -10,6 +10,6 @@ import Foundation
 public struct Artwork {
     let id: UUID
     let title: String
-    let thumbnail: URL
+    let imageURL: URL
     let artist: String
 }
