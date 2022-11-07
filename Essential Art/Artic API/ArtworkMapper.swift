@@ -15,36 +15,35 @@ public final class ArtworkMapper {
     
     private struct ArtworkRoot: Decodable {
         let data: [ArtworkModel]
+        private let config: Config
+        
+        var baseURL: URL {
+            config.iiifURL
+        }
+        
+        private struct Config: Decodable {
+            let iiifURL: URL
+            private enum CodingKeys: String, CodingKey {
+                case iiifURL = "iiif_url"
+            }
+        }
     }
     
     private struct ArtworkModel: Decodable {
         let id: UUID
         let title: String
         let artist: String
-        private let config: Config
         
-        var imageURL: URL? {
-            return .init(string:
-                config.iiifURL
-                    .appending("\(id.uuidString)")
-                    .appending("full/843,/0/default.jpg")
-            )
-        }
-        
-        var artwork: Artwork? {
-            guard let imageURL = imageURL else { return nil }
+        func artwork(withBaseURL baseURL: URL) -> Artwork {
+            let imageURL = baseURL
+                .appendingPathComponent("\(id.uuidString)")
+                .appendingPathComponent("full/843,/0/default.jpg")
+
             return Artwork(id: id, title: title, imageURL: imageURL, artist: artist)
         }
         
-        private struct Config: Decodable {
-            let iiifURL: String
-            private enum CodingKeys: String, CodingKey {
-                case iiifURL = "iiif_url"
-            }
-        }
-        
         private enum CodingKeys: String, CodingKey {
-            case id, title, artist = "artist_display", config
+            case id, title, artist = "artist_display"
         }
     }
     
@@ -54,9 +53,10 @@ public final class ArtworkMapper {
 
     public static func map(data: Data, response: HTTPURLResponse) throws -> [Artwork] {
         guard response.statusCode == validResponseCode,
-              let artworks = try? JSONDecoder().decode(ArtworkRoot.self, from: data).data else {
+              let artworkRoot = try? JSONDecoder().decode(ArtworkRoot.self, from: data)
+        else {
             throw Error.invalidData
         }
-        return artworks.compactMap { $0.artwork }
+        return artworkRoot.data.compactMap { $0.artwork(withBaseURL: artworkRoot.baseURL) }
     }
 }

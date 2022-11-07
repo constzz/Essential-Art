@@ -12,4 +12,17 @@ public struct Artwork: Equatable {
     let title: String
     let imageURL: URL
     let artist: String
+    
+    public init(
+        id: UUID,
+        title: String,
+        imageURL: URL,
+        artist: String
+    ) {
+        self.id = id
+        self.title = title
+        self.imageURL = imageURL
+        self.artist = artist
+
+    }
 }
