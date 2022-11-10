@@ -52,8 +52,6 @@ class Essential_Art_API_EndToEnd_Tests: XCTestCase {
     private var baseURL = URL(string:"https://api.artic.edu")!
     
     private func getArtworks(limit: Int) -> Swift.Result<[Artwork], Error> {
-        let configuration = URLSessionConfiguration.ephemeral
-        let session = URLSession(configuration: configuration)
         let url = ArticEndpoint.get.url(baseURL: baseURL)
             .appendingPathComponent("/search")
             .appending([
@@ -62,13 +60,21 @@ class Essential_Art_API_EndToEnd_Tests: XCTestCase {
                 URLQueryItem(name: "fields", value: "id,title,artist_display,image_id"),
             ])!
         
+        return request(fromURL: url, mappingWith: ArtworkMapper.map)
+    }
+    
+    private func request<T>(fromURL url: URL, mappingWith mapper: @escaping (Data, HTTPURLResponse) throws -> T) -> Swift.Result<T, Error> {
+        let configuration = URLSessionConfiguration.ephemeral
+        let session = URLSession(configuration: configuration)
+        
+        
         let exp = expectation(description: "Wait for completion")
-        var result: Swift.Result<[Artwork], Error>!
+        var result: Swift.Result<T, Error>!
         
         URLSessionHTTPClient(session: session).get(from: url) { recievedResult in
             result = .init(catching: {
                 let (data, response) = (try recievedResult.get().0, try recievedResult.get().1)
-                return try ArtworkMapper.map(data: data, response: response)
+                return try mapper(data, response)
             })
             exp.fulfill()
         }
