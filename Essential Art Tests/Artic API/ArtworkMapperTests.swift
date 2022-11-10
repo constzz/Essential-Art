@@ -44,14 +44,14 @@ class ArtworkMapperTests: XCTestCase {
     func test_map_deliversItems_on200ResponseStatusCodeAndItemsJSON() throws {
         let baseURL = anyURL
         let artwork1 = makeArtwork(
-            id: UUID(),
+            imageID: "1234",
             title: "Any title",
             baseURL: baseURL,
             urlSuffix: "full/843,/0/default.jpg",
             artist: "A famous one")
         
         let artwork2 = makeArtwork(
-            id: UUID(),
+            imageID: "5678",
             title: "The art of programming",
             baseURL: baseURL,
             urlSuffix: "full/843,/0/default.jpg",
@@ -65,7 +65,7 @@ class ArtworkMapperTests: XCTestCase {
     }
     
     private func makeArtwork(
-        id: UUID,
+        imageID: String,
         title: String,
         baseURL: URL,
         urlSuffix: String,
@@ -73,15 +73,14 @@ class ArtworkMapperTests: XCTestCase {
     ) -> (model: Artwork, json: [String: Any]) {
         
         let json = [
-            "id": id.uuidString,
+            "image_id": imageID,
             "artist_display": artist,
             "title": title
         ].compactMapValues({$0})
         
         let artwork = Artwork(
-            id: id,
             title: title,
-            imageURL: baseURL.appendingPathComponent(id.uuidString).appendingPathComponent(urlSuffix),
+            imageURL: baseURL.appendingPathComponent(imageID).appendingPathComponent(urlSuffix),
             artist: artist)
         
         return (artwork, json)

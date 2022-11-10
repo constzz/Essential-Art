@@ -30,20 +30,21 @@ public final class ArtworkMapper {
     }
     
     private struct ArtworkModel: Decodable {
-        let id: UUID
+        let imageID: String
         let title: String
         let artist: String
         
-        func artwork(withBaseURL baseURL: URL) -> Artwork {
+        func artwork(withBaseURL baseURL: URL) throws -> Artwork {
+            
             let imageURL = baseURL
-                .appendingPathComponent("\(id.uuidString)")
-                .appendingPathComponent("full/843,/0/default.jpg")
+                .appendingPathComponent("/\(imageID)")
+                .appendingPathComponent("/full/843,/0/default.jpg")
 
-            return Artwork(id: id, title: title, imageURL: imageURL, artist: artist)
+            return Artwork(title: title, imageURL: imageURL, artist: artist)
         }
         
         private enum CodingKeys: String, CodingKey {
-            case id, title, artist = "artist_display"
+            case imageID = "image_id", title, artist = "artist_display"
         }
     }
     
@@ -57,6 +58,6 @@ public final class ArtworkMapper {
         else {
             throw Error.invalidData
         }
-        return artworkRoot.data.compactMap { $0.artwork(withBaseURL: artworkRoot.baseURL) }
+        return artworkRoot.data.compactMap { try? $0.artwork(withBaseURL: artworkRoot.baseURL) }
     }
 }
