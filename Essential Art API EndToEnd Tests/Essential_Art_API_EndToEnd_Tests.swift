@@ -36,6 +36,16 @@ class Essential_Art_API_EndToEnd_Tests: XCTestCase {
         }
     }
     
+    func test_endToEndTestServerGETArtworkImageData_returnsNonEmptyData() {
+        switch getArtowkImageData() {
+        case .success(let data):
+            XCTAssert(!data.isEmpty, "Expected artwork image data to be not empty.")
+            
+        case .failure(let error):
+            XCTFail("Expected success result, but recieved \(error) instead")
+        }
+    }
+    
     private let expectedArtist = "Vincent van Gogh Dutch, 1853 1890"
     private lazy var expectedArtworks = [
         Artwork(title: "The Bedroom", imageURL: imageURLForID("25c31d8d-21a4-9ea1-1d73-6a2eca4dda7e"), artist: expectedArtist),
@@ -61,6 +71,12 @@ class Essential_Art_API_EndToEnd_Tests: XCTestCase {
             ])!
         
         return request(fromURL: url, mappingWith: ArtworkMapper.map)
+    }
+    
+    func getArtowkImageData() -> Swift.Result<Data, Error> {
+        let url = imageURLForID("25c31d8d-21a4-9ea1-1d73-6a2eca4dda7e")
+        
+        return request(fromURL: url, mappingWith: ArticImageDataMapper.map)
     }
     
     private func request<T>(fromURL url: URL, mappingWith mapper: @escaping (Data, HTTPURLResponse) throws -> T) -> Swift.Result<T, Error> {
