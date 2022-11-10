@@ -34,6 +34,20 @@
                ReferencedContainer = "container:Essential Art.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB5EE04E291C37EB00D6A84C"
+               BuildableName = "Essential Art API EndToEnd Tests.xctest"
+               BlueprintName = "Essential Art API EndToEnd Tests"
+               ReferencedContainer = "container:Essential Art.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -41,6 +55,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
+      enableThreadSanitizer = "YES"
       systemAttachmentLifetime = "keepNever"
       userAttachmentLifetime = "keepAlways"
       codeCoverageEnabled = "YES"
@@ -71,6 +86,18 @@
                BlueprintIdentifier = "BB5EE00A2916449600D6A84C"
                BuildableName = "Essential Art Tests.xctest"
                BlueprintName = "Essential Art Tests"
+               ReferencedContainer = "container:Essential Art.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB5EE04E291C37EB00D6A84C"
+               BuildableName = "Essential Art API EndToEnd Tests.xctest"
+               BlueprintName = "Essential Art API EndToEnd Tests"
                ReferencedContainer = "container:Essential Art.xcodeproj">
             </BuildableReference>
          </TestableReference>
