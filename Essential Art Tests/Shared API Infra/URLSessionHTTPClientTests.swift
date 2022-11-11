@@ -89,8 +89,6 @@ class URLSessionHTTPClientTests: XCTestCase {
     }
 
     
-    private var anyURL = URL(string: "http://any-url.com")!
-    private var anyError = NSError(domain: "any-error", code: 0)
     private var nonHTTPURLResponse = URLResponse()
     private var httpURLResponse = HTTPURLResponse()
     private lazy var successfulHTTPURLResponse = HTTPURLResponse(url: anyURL, statusCode: 200, httpVersion: nil, headerFields: nil)

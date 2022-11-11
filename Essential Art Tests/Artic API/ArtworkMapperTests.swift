@@ -100,9 +100,6 @@ class ArtworkMapperTests: XCTestCase {
     }
 }
 
-var anyURL = URL(string: "http://any-url.com")!
-var anyURL2 = URL(string: "http://another-url.com")!
-
 extension HTTPURLResponse {
     convenience init(statusCode: Int) {
         self.init(url: anyURL, statusCode: statusCode, httpVersion: nil, headerFields: nil)!

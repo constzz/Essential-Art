@@ -153,7 +153,6 @@ class CacheArtworksUseCaseTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    private var anyError = NSError(domain: "any-error", code: 0)
     
     private func makeSUT(
         currentDate: @escaping () -> Date = Date.init,
