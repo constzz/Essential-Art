@@ -42,6 +42,7 @@ class ArtworksStoreSpy: ArtworksStore {
     
     func insert(_ artworks: [Artwork], timestamp: Date) throws {
         receivedMessages.append(.insert(artworks, timestamp))
+        try stubbedInsertionResult?.get()
     }
     
     func retrieve() throws -> [Artwork] {
@@ -55,7 +56,14 @@ class ArtworksStoreSpy: ArtworksStore {
     }
     
     // MARK: Stubbing helpers
+    typealias InsertionResult = Swift.Result<Void, Error>
+    private var stubbedInsertionResult: InsertionResult?
+    func stubInsertionWith(_ insertionResult: InsertionResult) {
+        stubbedInsertionResult = insertionResult
+    }
+    
     var stubbedArtworks: [Artwork] = []
+    
     
     typealias DeletionResult = Swift.Result<Void, Error>
     private var deletionResult: DeletionResult?
@@ -111,8 +119,20 @@ class CacheArtworksUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         let deletionError = anyError
         
-        expect(sut, toCompleteWithError: deletionError, when: {
+        expectOnSave(sut, toCompleteWithError: deletionError, when: {
             store.stubDeletionWith(.failure(deletionError))
+        })
+    }
+    
+    func test_save_failsOnInsertionError() {
+        let (sut, store) = makeSUT()
+        let insertionError = anyError
+        
+        expectOnSave(sut, toCompleteWithError: insertionError, when: {
+            store.stubDeletionWith(.success(()))
+            try! store.deleteCachedArtworks()
+            
+            store.stubInsertionWith(.failure(insertionError))
         })
     }
     
@@ -140,7 +160,7 @@ class CacheArtworksUseCaseTests: XCTestCase {
         return (models, models.map { LocalArtwork(title: $0.title, imageURL: $0.imageURL, artist: $0.artist) })
     }
     
-    private func expect(
+    private func expectOnSave(
         _ sut: LocalArtworksLoader,
         toCompleteWithError expectedError: NSError?,
         when action: () -> Void,
