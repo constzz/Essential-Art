@@ -106,6 +106,16 @@ class CacheArtworksUseCaseTests: XCTestCase {
         
         XCTAssertEqual(store.receivedMessages, [.deleteCache, .insert(artworks, timestampStubbed)])
     }
+    
+    func test_save_failsOnDeletionError() {
+        let (sut, store) = makeSUT()
+        let deletionError = anyError
+        
+        expect(sut, toCompleteWithError: deletionError, when: {
+            store.stubDeletionWith(.failure(deletionError))
+        })
+    }
+    
     // MARK: - Helpers
     private var anyError = NSError(domain: "any-error", code: 0)
     
