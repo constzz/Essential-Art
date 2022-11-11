@@ -26,8 +26,43 @@ public struct LocalArtwork: Equatable {
     }
 }
 
-class ArtworksStoreSpy {
-    var receivedMessages = [String]()
+protocol ArtworksStore {
+    func insert(_ artworks: [Artwork], timestamp: Date) throws
+    func deleteCachedArtworks() throws
+    func retrieve() throws -> [Artwork]
+}
+
+class ArtworksStoreSpy: ArtworksStore {
+    enum Message: Equatable {
+        case deleteCache
+        case retrieve
+        case insert([Artwork], Date)
+    }
+    var receivedMessages = [Message]()
+    
+    func insert(_ artworks: [Artwork], timestamp: Date) throws {
+        try deleteCachedArtworks()
+        receivedMessages.append(.insert(artworks, timestamp))
+    }
+    
+    func retrieve() throws -> [Artwork] {
+        receivedMessages.append(.retrieve)
+        return stubbedArtworks
+    }
+    
+    func deleteCachedArtworks() throws {
+        receivedMessages.append(.deleteCache)
+        try deletionResult?.get()
+    }
+    
+    // MARK: Stubbing helpers
+    var stubbedArtworks: [Artwork] = []
+    
+    typealias DeletionResult = Swift.Result<Void, Error>
+    private var deletionResult: DeletionResult?
+    func stubDeletionWith(_ deletionResult: DeletionResult) {
+        self.deletionResult = deletionResult
+    }
 }
 
 class LocalArtworksLoader {
@@ -40,7 +75,8 @@ class LocalArtworksLoader {
     }
     
     func save(_ artworks: [Artwork]) throws {
-        
+        try store.deleteCachedArtworks()
+        try store.insert(artworks, timestamp: .init())
     }
 }
 
@@ -52,7 +88,19 @@ class CacheArtworksUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [])
     }
     
+    /// Deletion happens to clear the previous cached items
+    func test_save_doesNotCacheOnDeletionError() {
+        let (sut, store) = makeSUT()
+        let deletionError = anyError
+        store.stubDeletionWith(.failure(deletionError))
+        
+        try? sut.save(uniqueArtworks().models)
+        
+        XCTAssertEqual(store.receivedMessages, [.deleteCache])
+    }
+    
     // MARK: - Helpers
+    private var anyError = NSError(domain: "any-error", code: 0)
     
     private func makeSUT(
         currentDate: @escaping () -> Date = Date.init,
