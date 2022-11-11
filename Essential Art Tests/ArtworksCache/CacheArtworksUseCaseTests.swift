@@ -41,7 +41,6 @@ class ArtworksStoreSpy: ArtworksStore {
     var receivedMessages = [Message]()
     
     func insert(_ artworks: [Artwork], timestamp: Date) throws {
-        try deleteCachedArtworks()
         receivedMessages.append(.insert(artworks, timestamp))
     }
     
@@ -76,7 +75,7 @@ class LocalArtworksLoader {
     
     func save(_ artworks: [Artwork]) throws {
         try store.deleteCachedArtworks()
-        try store.insert(artworks, timestamp: .init())
+        try store.insert(artworks, timestamp: currentDate())
     }
 }
 
@@ -99,6 +98,14 @@ class CacheArtworksUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.deleteCache])
     }
     
+    func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
+        let timestampStubbed = Date()
+        let (sut, store) = makeSUT(currentDate: { timestampStubbed })
+        let artworks = uniqueArtworks().models
+        try? sut.save(artworks)
+        
+        XCTAssertEqual(store.receivedMessages, [.deleteCache, .insert(artworks, timestampStubbed)])
+    }
     // MARK: - Helpers
     private var anyError = NSError(domain: "any-error", code: 0)
     
