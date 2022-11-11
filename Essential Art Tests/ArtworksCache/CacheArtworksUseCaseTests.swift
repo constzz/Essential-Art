@@ -136,6 +136,17 @@ class CacheArtworksUseCaseTests: XCTestCase {
         })
     }
     
+    func test_save_succeedsOnSuccessfulCacheInsertion() {
+        let (sut, store) = makeSUT()
+        
+        expectOnSave(sut, toCompleteWithError: nil, when: {
+            store.stubDeletionWith(.success(()))
+            try! store.deleteCachedArtworks()
+            
+            store.stubInsertionWith(.success(()))
+        })
+    }
+    
     // MARK: - Helpers
     private var anyError = NSError(domain: "any-error", code: 0)
     
