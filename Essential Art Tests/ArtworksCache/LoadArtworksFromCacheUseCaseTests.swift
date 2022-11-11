@@ -25,6 +25,15 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
     
+    func test_load_failsOnRetrievalError() {
+        let (sut, store) = makeSUT()
+        let retrievalError = anyError
+        
+        expect(sut, toCompleteWith: .failure(retrievalError), when: {
+            store.stubRetrievalWith(.failure(retrievalError))
+        })
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(

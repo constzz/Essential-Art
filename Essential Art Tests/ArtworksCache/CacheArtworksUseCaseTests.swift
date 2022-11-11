@@ -47,7 +47,7 @@ class ArtworksStoreSpy: ArtworksStore {
     
     func retrieve() throws -> [Artwork] {
         receivedMessages.append(.retrieve)
-        return stubbedArtworks
+        return try retrieveResult?.get() ?? stubbedArtworks
     }
     
     func deleteCachedArtworks() throws {
@@ -56,6 +56,12 @@ class ArtworksStoreSpy: ArtworksStore {
     }
     
     // MARK: Stubbing helpers
+    typealias RetrieveResult = Swift.Result<[Artwork], Error>
+    private var retrieveResult: RetrieveResult?
+    func stubRetrievalWith(_ retrieveResult: RetrieveResult) {
+        self.retrieveResult = retrieveResult
+    }
+    
     typealias InsertionResult = Swift.Result<Void, Error>
     private var stubbedInsertionResult: InsertionResult?
     func stubInsertionWith(_ insertionResult: InsertionResult) {
