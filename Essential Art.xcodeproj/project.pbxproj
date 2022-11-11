@@ -21,6 +21,7 @@
 		BB5EE052291C37EB00D6A84C /* Essential_Art_API_EndToEnd_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE051291C37EB00D6A84C /* Essential_Art_API_EndToEnd_Tests.swift */; };
 		BB5EE053291C37EB00D6A84C /* Essential_Art.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5EDFD8291640B200D6A84C /* Essential_Art.framework */; };
 		BB5EE05A291CE5AD00D6A84C /* ArticImageDataMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE059291CE5AD00D6A84C /* ArticImageDataMapper.swift */; };
+		BB5EE05F291D9BF800D6A84C /* CacheArtworksUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE05E291D9BF800D6A84C /* CacheArtworksUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		BB5EE04F291C37EB00D6A84C /* Essential Art API EndToEnd Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Essential Art API EndToEnd Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5EE051291C37EB00D6A84C /* Essential_Art_API_EndToEnd_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Essential_Art_API_EndToEnd_Tests.swift; sourceTree = "<group>"; };
 		BB5EE059291CE5AD00D6A84C /* ArticImageDataMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticImageDataMapper.swift; sourceTree = "<group>"; };
+		BB5EE05E291D9BF800D6A84C /* CacheArtworksUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheArtworksUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		BB5EE00C2916449600D6A84C /* Essential Art Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BB5EE05D291D9BD400D6A84C /* ArtworksCache */,
 				BB5EE02C2919A35D00D6A84C /* Helpers */,
 				BB5EE02329183FE900D6A84C /* Artic API */,
 				BB5EE015291644A700D6A84C /* Shared API Infra */,
@@ -200,6 +203,14 @@
 				BB5EE051291C37EB00D6A84C /* Essential_Art_API_EndToEnd_Tests.swift */,
 			);
 			path = "Essential Art API EndToEnd Tests";
+			sourceTree = "<group>";
+		};
+		BB5EE05D291D9BD400D6A84C /* ArtworksCache */ = {
+			isa = PBXGroup;
+			children = (
+				BB5EE05E291D9BF800D6A84C /* CacheArtworksUseCaseTests.swift */,
+			);
+			path = ArtworksCache;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB5EE017291644C200D6A84C /* URLSessionHTTPClientTests.swift in Sources */,
+				BB5EE05F291D9BF800D6A84C /* CacheArtworksUseCaseTests.swift in Sources */,
 				BB5EE029291843E600D6A84C /* ArtworkMapperTests.swift in Sources */,
 				BB5EE01A2916629400D6A84C /* URLProtocolStub.swift in Sources */,
 				BB5EE02529183FF800D6A84C /* ArticEndpointTests.swift in Sources */,
