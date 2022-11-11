@@ -42,6 +42,14 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
         })
     }
     
+    func test_load_deliversNoArtworksOnCacheExpiration() {
+        let artworks = uniqueArtworks().models
+        let fixedCurrentDate = Date()
+        let expirationTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: -1)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+        
+        expect(sut, toCompleteWith: .success([]), when: {
+            store.stubRetrievalWith(artworks, dated: expirationTimestamp)
         })
     }
     

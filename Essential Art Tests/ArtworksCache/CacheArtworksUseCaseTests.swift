@@ -13,26 +13,23 @@ public struct LocalArtwork: Equatable {
     public let title: String
     public let imageURL: URL
     public let artist: String
-    /// Date when when LocalArtwork was added to the local storage
-    public let timestamp: Date
     
     public init(
         title: String,
         imageURL: URL,
-        artist: String,
-        timestamp: Date
+        artist: String
     ) {
         self.title = title
         self.imageURL = imageURL
         self.artist = artist
-        self.timestamp = timestamp
     }
 }
 
+typealias ArtworksCached = (artworks: [Artwork], timestamp: Date)
 protocol ArtworksStore {
     func insert(_ artworks: [Artwork], timestamp: Date) throws
     func deleteCachedArtworks() throws
-    func retrieve() throws -> [LocalArtwork]?
+    func retrieve() throws -> ArtworksCached?
 }
 
 class ArtworksStoreSpy: ArtworksStore {
@@ -48,7 +45,7 @@ class ArtworksStoreSpy: ArtworksStore {
         try stubbedInsertionResult?.get()
     }
     
-    func retrieve() throws -> [LocalArtwork]? {
+    func retrieve() throws -> ArtworksCached? {
         receivedMessages.append(.retrieve)
         return try retrieveResult?.get()
     }
@@ -59,13 +56,10 @@ class ArtworksStoreSpy: ArtworksStore {
     }
     
     // MARK: Stubbing helpers
-    typealias RetrieveResult = Swift.Result<[LocalArtwork], Error>
+    typealias RetrieveResult = Swift.Result<ArtworksCached, Error>
     private var retrieveResult: RetrieveResult?
     func stubRetrievalWith(_ artworks: [Artwork], dated timestamp: Date) {
-        let localArtworks = artworks.map {
-            LocalArtwork(title: $0.title, imageURL: $0.imageURL, artist: $0.artist, timestamp: timestamp)
-        }
-        self.retrieveResult = .success(localArtworks)
+        self.retrieveResult = .success((artworks, timestamp))
     }
     
     func stubRetrievalWithError(_ error: Swift.Error) {
@@ -102,12 +96,32 @@ class LocalArtworksLoader {
     }
     
     func load() throws -> [Artwork] {
-        return try store.retrieve()
+        if let cache = try store.retrieve(), ArtworksCachePolicy.validate(cache.timestamp, against: currentDate()) {
+            return cache.artworks
+        }
+        return []
     }
     
     func save(_ artworks: [Artwork]) throws {
         try store.deleteCachedArtworks()
         try store.insert(artworks, timestamp: currentDate())
+    }
+}
+
+final class ArtworksCachePolicy {
+    private init () {}
+
+    private static let calendar = Calendar(identifier: .gregorian)
+    
+    private static var maxCacheAgeInDays: Int {
+        return 14
+    }
+    
+    static func validate(_ timestamp: Date, against date: Date) -> Bool {
+        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
+            return false
+        }
+        return date < maxCacheAge
     }
 }
 
