@@ -42,6 +42,18 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
         })
     }
     
+    func test_load_deliversCachedArtworksOnNonExpiredCache() {
+        let artworks = uniqueArtworks().models
+        let fixedCurrentDate = Date()
+        let nonExpiredTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+        
+        expect(sut, toCompleteWith: .success(artworks), when: {
+            store.stubRetrievalWith(artworks, dated: nonExpiredTimestamp)
+        })
+    }
+
+    
     func test_load_deliversNoArtworksOnCacheExpiration() {
         let artworks = uniqueArtworks().models
         let fixedCurrentDate = Date()
@@ -53,6 +65,18 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
         })
     }
     
+    func test_load_deliversNoArtworksOnExpiredCache() {
+        let artworks = uniqueArtworks().models
+        let fixedCurrentDate = Date()
+        let expiredTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: -1)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+        
+        expect(sut, toCompleteWith: .success([]), when: {
+            store.stubRetrievalWith(artworks, dated: expiredTimestamp)
+
+        })
+    }
+
     func test_load_hasNoSideEffectsOnRetrievalError() {
         let (sut, store) = makeSUT()
         store.stubRetrievalWithError(anyError)
