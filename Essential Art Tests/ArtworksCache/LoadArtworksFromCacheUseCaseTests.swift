@@ -45,7 +45,7 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
     func test_load_deliversCachedArtworksOnNonExpiredCache() {
         let artworks = uniqueArtworks().models
         let fixedCurrentDate = Date()
-        let nonExpiredTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
+        let nonExpiredTimestamp = fixedCurrentDate.minusArtworksCacheMaxAge().adding(seconds: 1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         expect(sut, toCompleteWith: .success(artworks), when: {
@@ -57,7 +57,7 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
     func test_load_deliversNoArtworksOnCacheExpiration() {
         let artworks = uniqueArtworks().models
         let fixedCurrentDate = Date()
-        let expirationTimestamp = fixedCurrentDate.adding(days: -14)
+        let expirationTimestamp = fixedCurrentDate.minusArtworksCacheMaxAge()
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         expect(sut, toCompleteWith: .success([]), when: {
@@ -68,7 +68,7 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
     func test_load_deliversNoArtworksOnExpiredCache() {
         let artworks = uniqueArtworks().models
         let fixedCurrentDate = Date()
-        let expiredTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: -1)
+        let expiredTimestamp = fixedCurrentDate.minusArtworksCacheMaxAge().adding(seconds: -1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         expect(sut, toCompleteWith: .success([]), when: {
@@ -98,7 +98,7 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
     func test_load_hasNoSideEffectsOnNonExpiredCache() {
         let artworks = uniqueArtworks()
         let fixedCurrentDate = Date()
-        let nonExpiredTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
+        let nonExpiredTimestamp = fixedCurrentDate.minusArtworksCacheMaxAge().adding(seconds: 1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         store.stubRetrievalWith(artworks.models, dated: nonExpiredTimestamp)
         
@@ -110,7 +110,7 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
     func test_load_hasNoSideEffectsOnCacheExpiration() {
         let artworks = uniqueArtworks()
         let fixedCurrentDate = Date()
-        let expirationTimestamp = fixedCurrentDate.adding(days: -14)
+        let expirationTimestamp = fixedCurrentDate.minusArtworksCacheMaxAge()
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         store.stubRetrievalWith(artworks.models, dated: expirationTimestamp)
         
@@ -122,7 +122,7 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
     func test_load_hasNoSideEffectsOnExpiredCache() {
         let artworks = uniqueArtworks()
         let fixedCurrentDate = Date()
-        let expiredTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: -1)
+        let expiredTimestamp = fixedCurrentDate.minusArtworksCacheMaxAge().adding(seconds: -1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         store.stubRetrievalWith(artworks.models, dated: expiredTimestamp)
         

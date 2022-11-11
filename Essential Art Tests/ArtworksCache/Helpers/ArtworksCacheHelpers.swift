@@ -16,3 +16,9 @@ func uniqueArtworks() -> (models: [Artwork], localItems: [LocalArtwork]) {
     let models = [uniqueArtwork(), uniqueArtwork()]
     return (models, models.map { LocalArtwork(title: $0.title, imageURL: $0.imageURL, artist: $0.artist) })
 }
+
+extension Date {
+    func minusArtworksCacheMaxAge() -> Date {
+        return adding(days: -14)
+    }
+}
