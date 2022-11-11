@@ -34,6 +34,14 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
         })
     }
     
+    func test_load_deliversNoArtworksOnEmptyCache() {
+        let (sut, store) = makeSUT()
+        
+        expect(sut, toCompleteWith: .success([]), when: {
+            store.stubRetrievalWith(.success([]))
+        })
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(
