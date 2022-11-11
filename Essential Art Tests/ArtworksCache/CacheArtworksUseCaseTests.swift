@@ -85,6 +85,10 @@ class LocalArtworksLoader {
         self.currentDate = currentDate
     }
     
+    func load() throws -> [Artwork] {
+        return try store.retrieve()
+    }
+    
     func save(_ artworks: [Artwork]) throws {
         try store.deleteCachedArtworks()
         try store.insert(artworks, timestamp: currentDate())
