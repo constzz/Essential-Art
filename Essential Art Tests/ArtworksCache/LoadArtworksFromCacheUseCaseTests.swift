@@ -30,7 +30,7 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
         let retrievalError = anyError
         
         expect(sut, toCompleteWith: .failure(retrievalError), when: {
-            store.stubRetrievalWith(.failure(retrievalError))
+            store.stubRetrievalWithError(retrievalError)
         })
     }
     
@@ -38,7 +38,10 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         
         expect(sut, toCompleteWith: .success([]), when: {
-            store.stubRetrievalWith(.success([]))
+            store.stubRetrievalWith([], dated: .init())
+        })
+    }
+    
         })
     }
     

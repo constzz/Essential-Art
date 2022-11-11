@@ -14,5 +14,5 @@ func uniqueArtwork() -> Artwork {
 
 func uniqueArtworks() -> (models: [Artwork], localItems: [LocalArtwork]) {
     let models = [uniqueArtwork(), uniqueArtwork()]
-    return (models, models.map { LocalArtwork(title: $0.title, imageURL: $0.imageURL, artist: $0.artist) })
+    return (models, models.map { LocalArtwork(title: $0.title, imageURL: $0.imageURL, artist: $0.artist, timestamp: .init()) })
 }

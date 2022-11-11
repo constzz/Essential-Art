@@ -13,23 +13,26 @@ public struct LocalArtwork: Equatable {
     public let title: String
     public let imageURL: URL
     public let artist: String
+    /// Date when when LocalArtwork was added to the local storage
+    public let timestamp: Date
     
     public init(
         title: String,
         imageURL: URL,
-        artist: String
+        artist: String,
+        timestamp: Date
     ) {
         self.title = title
         self.imageURL = imageURL
         self.artist = artist
-        
+        self.timestamp = timestamp
     }
 }
 
 protocol ArtworksStore {
     func insert(_ artworks: [Artwork], timestamp: Date) throws
     func deleteCachedArtworks() throws
-    func retrieve() throws -> [Artwork]
+    func retrieve() throws -> [LocalArtwork]?
 }
 
 class ArtworksStoreSpy: ArtworksStore {
@@ -45,9 +48,9 @@ class ArtworksStoreSpy: ArtworksStore {
         try stubbedInsertionResult?.get()
     }
     
-    func retrieve() throws -> [Artwork] {
+    func retrieve() throws -> [LocalArtwork]? {
         receivedMessages.append(.retrieve)
-        return try retrieveResult?.get() ?? stubbedArtworks
+        return try retrieveResult?.get()
     }
     
     func deleteCachedArtworks() throws {
@@ -56,10 +59,17 @@ class ArtworksStoreSpy: ArtworksStore {
     }
     
     // MARK: Stubbing helpers
-    typealias RetrieveResult = Swift.Result<[Artwork], Error>
+    typealias RetrieveResult = Swift.Result<[LocalArtwork], Error>
     private var retrieveResult: RetrieveResult?
-    func stubRetrievalWith(_ retrieveResult: RetrieveResult) {
-        self.retrieveResult = retrieveResult
+    func stubRetrievalWith(_ artworks: [Artwork], dated timestamp: Date) {
+        let localArtworks = artworks.map {
+            LocalArtwork(title: $0.title, imageURL: $0.imageURL, artist: $0.artist, timestamp: timestamp)
+        }
+        self.retrieveResult = .success(localArtworks)
+    }
+    
+    func stubRetrievalWithError(_ error: Swift.Error) {
+        retrieveResult = .failure(error)
     }
     
     typealias InsertionResult = Swift.Result<Void, Error>
@@ -100,6 +110,13 @@ class LocalArtworksLoader {
         try store.insert(artworks, timestamp: currentDate())
     }
 }
+
+private extension LocalArtwork {
+    var model: Artwork {
+        return Artwork(title: title, imageURL: imageURL, artist: artist)
+    }
+}
+
 
 class CacheArtworksUseCaseTests: XCTestCase {
     
