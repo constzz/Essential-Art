@@ -70,6 +70,10 @@ class ArtworksStoreSpy: ArtworksStore {
     func stubDeletionWith(_ deletionResult: DeletionResult) {
         self.deletionResult = deletionResult
     }
+    func completeDeletionSuccessfully() {
+        stubDeletionWith(.success(()))
+        try! deleteCachedArtworks()
+    }
 }
 
 class LocalArtworksLoader {
@@ -129,9 +133,7 @@ class CacheArtworksUseCaseTests: XCTestCase {
         let insertionError = anyError
         
         expectOnSave(sut, toCompleteWithError: insertionError, when: {
-            store.stubDeletionWith(.success(()))
-            try! store.deleteCachedArtworks()
-            
+            store.completeDeletionSuccessfully()
             store.stubInsertionWith(.failure(insertionError))
         })
     }
@@ -140,8 +142,7 @@ class CacheArtworksUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         
         expectOnSave(sut, toCompleteWithError: nil, when: {
-            store.stubDeletionWith(.success(()))
-            try! store.deleteCachedArtworks()
+            store.completeDeletionSuccessfully()
             
             store.stubInsertionWith(.success(()))
         })
