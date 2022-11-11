@@ -172,15 +172,6 @@ class CacheArtworksUseCaseTests: XCTestCase {
         return (sut, store)
     }
     
-    func uniqueArtwork() -> Artwork {
-        return Artwork(title: "any", imageURL: anyURL, artist: "any")
-    }
-    
-    private func uniqueArtworks() -> (models: [Artwork], localItems: [LocalArtwork]) {
-        let models = [uniqueArtwork(), uniqueArtwork()]
-        return (models, models.map { LocalArtwork(title: $0.title, imageURL: $0.imageURL, artist: $0.artist) })
-    }
-    
     private func expectOnSave(
         _ sut: LocalArtworksLoader,
         toCompleteWithError expectedError: NSError?,

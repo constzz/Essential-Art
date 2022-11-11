@@ -24,6 +24,7 @@
 		BB5EE05F291D9BF800D6A84C /* CacheArtworksUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE05E291D9BF800D6A84C /* CacheArtworksUseCaseTests.swift */; };
 		BB5EE061291E98A000D6A84C /* LoadArtworksFromCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE060291E98A000D6A84C /* LoadArtworksFromCacheUseCaseTests.swift */; };
 		BB5EE063291E9C4300D6A84C /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE062291E9C4300D6A84C /* SharedTestHelpers.swift */; };
+		BB5EE066291EB3F400D6A84C /* ArtworksCacheHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE065291EB3F400D6A84C /* ArtworksCacheHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		BB5EE05E291D9BF800D6A84C /* CacheArtworksUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheArtworksUseCaseTests.swift; sourceTree = "<group>"; };
 		BB5EE060291E98A000D6A84C /* LoadArtworksFromCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadArtworksFromCacheUseCaseTests.swift; sourceTree = "<group>"; };
 		BB5EE062291E9C4300D6A84C /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
+		BB5EE065291EB3F400D6A84C /* ArtworksCacheHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksCacheHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,10 +215,19 @@
 		BB5EE05D291D9BD400D6A84C /* ArtworksCache */ = {
 			isa = PBXGroup;
 			children = (
+				BB5EE064291EB3E300D6A84C /* Helpers */,
 				BB5EE05E291D9BF800D6A84C /* CacheArtworksUseCaseTests.swift */,
 				BB5EE060291E98A000D6A84C /* LoadArtworksFromCacheUseCaseTests.swift */,
 			);
 			path = ArtworksCache;
+			sourceTree = "<group>";
+		};
+		BB5EE064291EB3E300D6A84C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BB5EE065291EB3F400D6A84C /* ArtworksCacheHelpers.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +384,7 @@
 			files = (
 				BB5EE017291644C200D6A84C /* URLSessionHTTPClientTests.swift in Sources */,
 				BB5EE05F291D9BF800D6A84C /* CacheArtworksUseCaseTests.swift in Sources */,
+				BB5EE066291EB3F400D6A84C /* ArtworksCacheHelpers.swift in Sources */,
 				BB5EE061291E98A000D6A84C /* LoadArtworksFromCacheUseCaseTests.swift in Sources */,
 				BB5EE029291843E600D6A84C /* ArtworkMapperTests.swift in Sources */,
 				BB5EE063291E9C4300D6A84C /* SharedTestHelpers.swift in Sources */,
