@@ -53,6 +53,15 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
         })
     }
     
+    func test_load_hasNoSideEffectsOnRetrievalError() {
+        let (sut, store) = makeSUT()
+        store.stubRetrievalWithError(anyError)
+        
+        _ = try? sut.load()
+        
+        XCTAssertEqual(store.receivedMessages, [.retrieve])
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(
