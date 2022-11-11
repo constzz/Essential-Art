@@ -71,6 +71,18 @@ class LoadArtworksFromCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
     
+    func test_load_hasNoSideEffectsOnNonExpiredCache() {
+        let artworks = uniqueArtworks()
+        let fixedCurrentDate = Date()
+        let nonExpiredTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+        store.stubRetrievalWith(artworks.models, dated: nonExpiredTimestamp)
+        
+        _ = try? sut.load()
+        
+        XCTAssertEqual(store.receivedMessages, [.retrieve])
+    }
+
     // MARK: - Helpers
     
     private func makeSUT(
