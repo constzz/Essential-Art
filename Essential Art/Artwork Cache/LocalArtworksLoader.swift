@@ -27,4 +27,17 @@ public class LocalArtworksLoader {
         try store.deleteCachedArtworks()
         try store.insert(artworks, timestamp: currentDate())
     }
+    
+    public func validateCache() throws {
+        do {
+            if let cache = try store.retrieve() {
+                if !ArtworksCachePolicy.validate(cache.timestamp, against: currentDate()) {
+                    try store.deleteCachedArtworks()
+                }
+            }
+        } catch {
+            try store.deleteCachedArtworks()
+        }
+    }
+    
 }

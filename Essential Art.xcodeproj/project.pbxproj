@@ -30,6 +30,7 @@
 		BB5EE06D291EDDCE00D6A84C /* LocalArtworksLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE06C291EDDCE00D6A84C /* LocalArtworksLoader.swift */; };
 		BB5EE06F291EDDE000D6A84C /* ArtworksCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE06E291EDDE000D6A84C /* ArtworksCachePolicy.swift */; };
 		BB5EE071291EDEAB00D6A84C /* ArtworksStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE070291EDEAB00D6A84C /* ArtworksStoreSpy.swift */; };
+		BB5EE073291F9ACD00D6A84C /* ValidateArtworksCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE072291F9ACD00D6A84C /* ValidateArtworksCacheUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		BB5EE06C291EDDCE00D6A84C /* LocalArtworksLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalArtworksLoader.swift; sourceTree = "<group>"; };
 		BB5EE06E291EDDE000D6A84C /* ArtworksCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksCachePolicy.swift; sourceTree = "<group>"; };
 		BB5EE070291EDEAB00D6A84C /* ArtworksStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksStoreSpy.swift; sourceTree = "<group>"; };
+		BB5EE072291F9ACD00D6A84C /* ValidateArtworksCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateArtworksCacheUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,7 @@
 				BB5EE064291EB3E300D6A84C /* Helpers */,
 				BB5EE05E291D9BF800D6A84C /* CacheArtworksUseCaseTests.swift */,
 				BB5EE060291E98A000D6A84C /* LoadArtworksFromCacheUseCaseTests.swift */,
+				BB5EE072291F9ACD00D6A84C /* ValidateArtworksCacheUseCaseTests.swift */,
 			);
 			path = ArtworksCache;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				BB5EE066291EB3F400D6A84C /* ArtworksCacheHelpers.swift in Sources */,
 				BB5EE061291E98A000D6A84C /* LoadArtworksFromCacheUseCaseTests.swift in Sources */,
 				BB5EE029291843E600D6A84C /* ArtworkMapperTests.swift in Sources */,
+				BB5EE073291F9ACD00D6A84C /* ValidateArtworksCacheUseCaseTests.swift in Sources */,
 				BB5EE063291E9C4300D6A84C /* SharedTestHelpers.swift in Sources */,
 				BB5EE01A2916629400D6A84C /* URLProtocolStub.swift in Sources */,
 				BB5EE02529183FF800D6A84C /* ArticEndpointTests.swift in Sources */,
