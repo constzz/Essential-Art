@@ -16,6 +16,12 @@ class CoreDataArtworksStoreTests: XCTestCase {
         expect(sut, toRetrieve: .success(.none))
     }
     
+    func test_retrieve_hasNoSideEffectsOnEmptyCache() {
+        let sut = makeSUT()
+        
+        expect(sut, toRetrieveTwice: .success(.none))
+    }
+    
     private func makeSUT() -> ArtworksStore {
         let storeURL = URL(fileURLWithPath: "/dev/null") // path to temporary directory
         let sut = try! CoreDataArtworksStore(storeURL: storeURL)
@@ -43,5 +49,15 @@ class CoreDataArtworksStoreTests: XCTestCase {
         default:
             XCTFail("Expected to retrieve \(expectedResult), got \(retrievedResult) instead", file: file, line: line)
         }
+    }
+    
+    private func expect(
+        _ sut: ArtworksStore,
+        toRetrieveTwice expectedResult: Swift.Result<ArtworksCached?, Error>,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) {
+        expect(sut, toRetrieve: expectedResult, file: file, line: line)
+        expect(sut, toRetrieve: expectedResult, file: file, line: line)
     }
 }
