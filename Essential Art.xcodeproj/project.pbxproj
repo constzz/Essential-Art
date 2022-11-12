@@ -31,6 +31,12 @@
 		BB5EE06F291EDDE000D6A84C /* ArtworksCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE06E291EDDE000D6A84C /* ArtworksCachePolicy.swift */; };
 		BB5EE071291EDEAB00D6A84C /* ArtworksStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE070291EDEAB00D6A84C /* ArtworksStoreSpy.swift */; };
 		BB5EE073291F9ACD00D6A84C /* ValidateArtworksCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE072291F9ACD00D6A84C /* ValidateArtworksCacheUseCaseTests.swift */; };
+		BB5EE079291FC68500D6A84C /* ManagedArtworksCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE078291FC68500D6A84C /* ManagedArtworksCache.swift */; };
+		BB5EE07C291FC70700D6A84C /* ArtworksStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE07A291FC70700D6A84C /* ArtworksStore.xcdatamodeld */; };
+		BB5EE07E2920122A00D6A84C /* CoreDataArtworksStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE07D2920122A00D6A84C /* CoreDataArtworksStore.swift */; };
+		BB5EE0802920128E00D6A84C /* ManagedArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE07F2920128E00D6A84C /* ManagedArtwork.swift */; };
+		BB5EE082292012C000D6A84C /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE081292012C000D6A84C /* CoreDataHelpers.swift */; };
+		BB5EE084292012F000D6A84C /* CoreDataArtworksStore+ArtworksStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE083292012F000D6A84C /* CoreDataArtworksStore+ArtworksStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +82,12 @@
 		BB5EE06E291EDDE000D6A84C /* ArtworksCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksCachePolicy.swift; sourceTree = "<group>"; };
 		BB5EE070291EDEAB00D6A84C /* ArtworksStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksStoreSpy.swift; sourceTree = "<group>"; };
 		BB5EE072291F9ACD00D6A84C /* ValidateArtworksCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateArtworksCacheUseCaseTests.swift; sourceTree = "<group>"; };
+		BB5EE078291FC68500D6A84C /* ManagedArtworksCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedArtworksCache.swift; sourceTree = "<group>"; };
+		BB5EE07B291FC70700D6A84C /* ArtworksStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArtworksStore.xcdatamodel; sourceTree = "<group>"; };
+		BB5EE07D2920122A00D6A84C /* CoreDataArtworksStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataArtworksStore.swift; sourceTree = "<group>"; };
+		BB5EE07F2920128E00D6A84C /* ManagedArtwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedArtwork.swift; sourceTree = "<group>"; };
+		BB5EE081292012C000D6A84C /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
+		BB5EE083292012F000D6A84C /* CoreDataArtworksStore+ArtworksStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataArtworksStore+ArtworksStore.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,12 +260,34 @@
 		BB5EE067291EDD4300D6A84C /* Artwork Cache */ = {
 			isa = PBXGroup;
 			children = (
+				BB5EE076291FC66700D6A84C /* Infrastructure */,
 				BB5EE06A291EDD8600D6A84C /* ArtworksStore.swift */,
 				BB5EE068291EDD6D00D6A84C /* LocalArtwork.swift */,
 				BB5EE06C291EDDCE00D6A84C /* LocalArtworksLoader.swift */,
 				BB5EE06E291EDDE000D6A84C /* ArtworksCachePolicy.swift */,
 			);
 			path = "Artwork Cache";
+			sourceTree = "<group>";
+		};
+		BB5EE076291FC66700D6A84C /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				BB5EE077291FC66F00D6A84C /* Core Data */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		BB5EE077291FC66F00D6A84C /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				BB5EE07A291FC70700D6A84C /* ArtworksStore.xcdatamodeld */,
+				BB5EE07D2920122A00D6A84C /* CoreDataArtworksStore.swift */,
+				BB5EE07F2920128E00D6A84C /* ManagedArtwork.swift */,
+				BB5EE078291FC68500D6A84C /* ManagedArtworksCache.swift */,
+				BB5EE081292012C000D6A84C /* CoreDataHelpers.swift */,
+				BB5EE083292012F000D6A84C /* CoreDataArtworksStore+ArtworksStore.swift */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,11 +429,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB5EE082292012C000D6A84C /* CoreDataHelpers.swift in Sources */,
+				BB5EE07C291FC70700D6A84C /* ArtworksStore.xcdatamodeld in Sources */,
 				BB5EE06B291EDD8600D6A84C /* ArtworksStore.swift in Sources */,
 				BB5EE01F29183F5700D6A84C /* ArticEndpoint.swift in Sources */,
+				BB5EE079291FC68500D6A84C /* ManagedArtworksCache.swift in Sources */,
 				BB5EDFE4291640D800D6A84C /* HTTPClient.swift in Sources */,
+				BB5EE084292012F000D6A84C /* CoreDataArtworksStore+ArtworksStore.swift in Sources */,
+				BB5EE07E2920122A00D6A84C /* CoreDataArtworksStore.swift in Sources */,
 				BB5EE06D291EDDCE00D6A84C /* LocalArtworksLoader.swift in Sources */,
 				BB5EE02229183F7D00D6A84C /* Artwork.swift in Sources */,
+				BB5EE0802920128E00D6A84C /* ManagedArtwork.swift in Sources */,
 				BB5EE027291843B200D6A84C /* ArtworkMapper.swift in Sources */,
 				BB5EE05A291CE5AD00D6A84C /* ArticImageDataMapper.swift in Sources */,
 				BB5EE06F291EDDE000D6A84C /* ArtworksCachePolicy.swift in Sources */,
@@ -741,6 +781,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BB5EE07A291FC70700D6A84C /* ArtworksStore.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BB5EE07B291FC70700D6A84C /* ArtworksStore.xcdatamodel */,
+			);
+			currentVersion = BB5EE07B291FC70700D6A84C /* ArtworksStore.xcdatamodel */;
+			path = ArtworksStore.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BB5EDFCF291640B200D6A84C /* Project object */;
 }
