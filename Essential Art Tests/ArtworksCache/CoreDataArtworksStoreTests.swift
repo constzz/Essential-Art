@@ -40,6 +40,15 @@ class CoreDataArtworksStoreTests: XCTestCase {
         expect(sut, toRetrieveTwice: .success(.some((artworks, timestamp))))
     }
     
+    func test_insert_deliversNoErrorOnEmptyCache() throws {
+        let sut = makeSUT()
+        let artworks = uniqueArtworks().models
+        let timestamp = Date()
+        try sut.insert(artworks, timestamp: timestamp)
+        
+        expect(sut, toRetrieve: .success((artworks, timestamp)))
+    }
+    
     private func makeSUT() -> ArtworksStore {
         let storeURL = URL(fileURLWithPath: "/dev/null") // path to temporary directory
         let sut = try! CoreDataArtworksStore(storeURL: storeURL)
