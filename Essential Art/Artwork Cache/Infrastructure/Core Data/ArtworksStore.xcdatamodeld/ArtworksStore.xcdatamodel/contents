@@ -8,10 +8,10 @@
     </entity>
     <entity name="ManagedArtworksCache" representedClassName=".ManagedArtworksCache" syncable="YES">
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="artworks" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ManagedArtwork" inverseName="cache" inverseEntity="ManagedArtwork"/>
+        <relationship name="artworks" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ManagedArtwork" inverseName="cache" inverseEntity="ManagedArtwork"/>
     </entity>
     <elements>
+        <element name="ManagedArtwork" positionX="-54" positionY="-9" width="128" height="89"/>
         <element name="ManagedArtworksCache" positionX="-63" positionY="-18" width="128" height="59"/>
-        <element name="ManagedArtwork" positionX="-54" positionY="-9" width="128" height="103"/>
     </elements>
 </model>
