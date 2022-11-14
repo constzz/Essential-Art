@@ -35,6 +35,18 @@ class Essential_Art_Cache_Integration_Tests: XCTestCase {
         expect(artworksLoaderToPerformLoad, toLoad: artworks)
     }
     
+    func test_saveArtworks_overridesItemsSavedOnASeparateInstance() {
+        let artworksLoaderToPerformFirtsSave = makeSUT()
+        let artworksLoaderToPerformLastSave = makeSUT()
+        let artworksLoaderToPerformLoad = makeSUT()
+        let artworks = uniqueArtworks().models
+        
+        save(uniqueArtworks().models, with: artworksLoaderToPerformFirtsSave)
+        save(artworks, with: artworksLoaderToPerformLastSave)
+        
+        expect(artworksLoaderToPerformLoad, toLoad: artworks)
+    }
+    
     // MARK: - Helpers
     private func makeSUT() -> LocalArtworksLoader {
         let store: ArtworksStore = try! CoreDataArtworksStore(storeURL: testSpecificStoreURL)
