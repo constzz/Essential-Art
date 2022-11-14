@@ -11,8 +11,7 @@ extension CoreDataArtworksStore: ArtworksStore {
     public func insert(_ artworks: [Artwork], timestamp: Date) throws {
         try performSync { context in
             Result {
-                let cache = ManagedArtworksCache(context: context)
-                context.userInfo.removeAllObjects()
+                let cache = try ManagedArtworksCache.newUniqueInstance(in: context)
                 cache.artworks = NSOrderedSet(array: artworks.map { artwork in
                     let managed = ManagedArtwork(context: context)
                     managed.artist = artwork.artist
@@ -20,6 +19,7 @@ extension CoreDataArtworksStore: ArtworksStore {
                     managed.title = artwork.title
                     return managed
                 })
+                context.userInfo.removeAllObjects()
                 cache.timestamp = timestamp
                 try context.save()
             }
