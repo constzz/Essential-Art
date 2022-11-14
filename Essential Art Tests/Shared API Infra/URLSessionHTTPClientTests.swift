@@ -141,7 +141,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
         taskHandler?(task)
         
-        wait(for: [exp], timeout: 5.0)
+        wait(for: [exp], timeout: 10.0)
         
         return result
 
