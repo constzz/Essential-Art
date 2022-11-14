@@ -47,6 +47,17 @@ class Essential_Art_Cache_Integration_Tests: XCTestCase {
         expect(artworksLoaderToPerformLoad, toLoad: artworks)
     }
     
+    func test_validateArtworksCache_doesNotDeleteRecentlySavedArtworks() {
+        let artworksLoaderToPerformSave = makeSUT()
+        let artworksLoaderToPerformValidation = makeSUT()
+        let artworks = uniqueArtworks().models
+        
+        save(artworks, with: artworksLoaderToPerformSave)
+        validateCache(artworksLoaderToPerformValidation)
+        
+        expect(artworksLoaderToPerformSave, toLoad: artworks)
+    }
+    
     // MARK: - Helpers
     private func makeSUT() -> LocalArtworksLoader {
         let store: ArtworksStore = try! CoreDataArtworksStore(storeURL: testSpecificStoreURL)
@@ -70,6 +81,16 @@ class Essential_Art_Cache_Integration_Tests: XCTestCase {
             try loader.save(artworks)
         } catch {
             XCTFail("Expected to save artworks successfully, got error: \(error)", file: file, line: line)
+        }
+    }
+    
+    private func validateCache(_ sut: LocalArtworksLoader, file: StaticString = #file, line: UInt = #line) {
+        let result = Swift.Result { try sut.validateCache() }
+        switch result {
+        case .success:
+            break
+        case .failure(let error):
+            XCTFail("Expected to validate successfully, but recieved \(error) instead.", file: file, line: line)
         }
     }
     
