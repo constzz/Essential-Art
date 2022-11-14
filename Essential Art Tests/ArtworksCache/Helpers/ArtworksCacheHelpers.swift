@@ -9,7 +9,7 @@ import Foundation
 import Essential_Art
 
 func uniqueArtwork() -> Artwork {
-    return Artwork(title: "any", imageURL: anyURL, artist: "any")
+    return Artwork(title: UUID().uuidString, imageURL: anyURL, artist: "any")
 }
 
 func uniqueArtworks() -> (models: [Artwork], localItems: [LocalArtwork]) {
