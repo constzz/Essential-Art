@@ -101,6 +101,16 @@
                ReferencedContainer = "container:Essential Art.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB5EE08B2922966900D6A84C"
+               BuildableName = "Essential Art Cache Integration Tests.xctest"
+               BlueprintName = "Essential Art Cache Integration Tests"
+               ReferencedContainer = "container:Essential Art.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
