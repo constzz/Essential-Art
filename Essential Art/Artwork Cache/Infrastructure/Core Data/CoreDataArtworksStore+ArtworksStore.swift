@@ -27,7 +27,11 @@ extension CoreDataArtworksStore: ArtworksStore {
     }
     
     public func deleteCachedArtworks() throws {
-        
+        try performSync { context in
+            Result {
+                try ManagedArtworksCache.deleteCache(in: context)
+            }
+        }
     }
     
     public func retrieve() throws -> ArtworksCached? {
