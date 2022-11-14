@@ -57,7 +57,7 @@ class Essential_Art_Cache_Integration_Tests: XCTestCase {
         do {
             try loader.save(artworks)
         } catch {
-            XCTFail("Expected to save feed successfully, got error: \(error)", file: file, line: line)
+            XCTFail("Expected to save artworks successfully, got error: \(error)", file: file, line: line)
         }
     }
     
