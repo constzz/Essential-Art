@@ -40,6 +40,8 @@
 		BB5EE084292012F000D6A84C /* CoreDataArtworksStore+ArtworksStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE083292012F000D6A84C /* CoreDataArtworksStore+ArtworksStore.swift */; };
 		BB5EE08F2922966900D6A84C /* Essential_Art_Cache_Integration_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE08E2922966900D6A84C /* Essential_Art_Cache_Integration_Tests.swift */; };
 		BB5EE0902922966900D6A84C /* Essential_Art.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5EDFD8291640B200D6A84C /* Essential_Art.framework */; };
+		BB5EE0962922992800D6A84C /* ArtworksCacheHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE065291EB3F400D6A84C /* ArtworksCacheHelpers.swift */; };
+		BB5EE097292299C000D6A84C /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE062291E9C4300D6A84C /* SharedTestHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -541,6 +543,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB5EE08F2922966900D6A84C /* Essential_Art_Cache_Integration_Tests.swift in Sources */,
+				BB5EE0962922992800D6A84C /* ArtworksCacheHelpers.swift in Sources */,
+				BB5EE097292299C000D6A84C /* SharedTestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
