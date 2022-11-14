@@ -74,6 +74,13 @@ class CoreDataArtworksStoreTests: XCTestCase {
         XCTAssertNoThrow(try sut.deleteCachedArtworks())
     }
     
+    func test_delete_hasNoSideEffectsOnEmptyCache() throws {
+        let sut = makeSUT()
+        
+        try sut.deleteCachedArtworks()
+        expect(sut, toRetrieve: .success(.none))
+    }
+    
     private func makeSUT() -> ArtworksStore {
         let storeURL = URL(fileURLWithPath: "/dev/null") // path to temporary directory
         let sut = try! CoreDataArtworksStore(storeURL: storeURL)
