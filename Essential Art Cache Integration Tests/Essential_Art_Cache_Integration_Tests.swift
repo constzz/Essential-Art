@@ -58,10 +58,22 @@ class Essential_Art_Cache_Integration_Tests: XCTestCase {
         expect(artworksLoaderToPerformSave, toLoad: artworks)
     }
     
+    func test_validateArtworksCache_deletesArtworksSavedInADistantPast() {
+        let artworksLoaderToPerformSave = makeSUT(currentDate: .distantPast)
+        let artworksLoaderToPerformValidation = makeSUT(currentDate: .init())
+        let artworks = uniqueArtworks().models
+        
+        save(artworks, with: artworksLoaderToPerformSave)
+        validateCache(artworksLoaderToPerformValidation)
+        
+        expect(artworksLoaderToPerformSave, toLoad: [])
+    }
+
+    
     // MARK: - Helpers
-    private func makeSUT() -> LocalArtworksLoader {
+    private func makeSUT(currentDate: Date = .init()) -> LocalArtworksLoader {
         let store: ArtworksStore = try! CoreDataArtworksStore(storeURL: testSpecificStoreURL)
-        let loader = LocalArtworksLoader(store: store, currentDate: Date.init)
+        let loader = LocalArtworksLoader(store: store, currentDate: { currentDate })
         
         return loader
     }
