@@ -25,6 +25,16 @@ class Essential_Art_Cache_Integration_Tests: XCTestCase {
         expect(artworksLoader, toLoad: [])
     }
     
+    func test_loadArtworks_deliversItemsSavedOnASeparateInstance() {
+        let artworksLoaderToPerformSave = makeSUT()
+        let artworksLoaderToPerformLoad = makeSUT()
+        let artworks = uniqueArtworks().models
+        
+        save(artworks, with: artworksLoaderToPerformSave)
+        
+        expect(artworksLoaderToPerformLoad, toLoad: artworks)
+    }
+    
     // MARK: - Helpers
     private func makeSUT() -> LocalArtworksLoader {
         let store: ArtworksStore = try! CoreDataArtworksStore(storeURL: testSpecificStoreURL)
@@ -33,7 +43,6 @@ class Essential_Art_Cache_Integration_Tests: XCTestCase {
         return loader
     }
     
-    
     private func expect(_ sut: LocalArtworksLoader, toLoad expectedArtworks: [Artwork], file: StaticString = #file, line: UInt = #line) {
         let result = Swift.Result { try sut.load() }
         switch result {
@@ -41,6 +50,14 @@ class Essential_Art_Cache_Integration_Tests: XCTestCase {
             XCTAssertEqual(artworks, expectedArtworks, file: file, line: line)
         case .failure(let error):
             XCTFail("Expected to load artworks, but recieved \(error) instead.")
+        }
+    }
+    
+    private func save(_ artworks: [Artwork], with loader: LocalArtworksLoader, file: StaticString = #file, line: UInt = #line) {
+        do {
+            try loader.save(artworks)
+        } catch {
+            XCTFail("Expected to save feed successfully, got error: \(error)", file: file, line: line)
         }
     }
     
