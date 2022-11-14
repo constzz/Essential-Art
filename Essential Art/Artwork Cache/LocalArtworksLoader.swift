@@ -29,15 +29,12 @@ public class LocalArtworksLoader {
     }
     
     public func validateCache() throws {
-        do {
-            if let cache = try store.retrieve() {
-                if !ArtworksCachePolicy.validate(cache.timestamp, against: currentDate()) {
-                    try store.deleteCachedArtworks()
-                }
-            }
-        } catch {
+        guard
+            let cache = try? store.retrieve(),
+            ArtworksCachePolicy.validate(cache.timestamp, against: currentDate())
+        else {
             try store.deleteCachedArtworks()
+            return
         }
     }
-    
 }
