@@ -7,60 +7,7 @@
 
 import Foundation
 import XCTest
-
-struct ResourceLoadingViewModel {
-    let isLoading: Bool
-}
-
-protocol ResourceLoadingView {
-    func display(_ viewModel: ResourceLoadingViewModel)
-}
-
-struct ResourceErrorViewModel {
-    let errorMessage: String?
-    static let noError = ResourceErrorViewModel(errorMessage: nil)
-}
-
-protocol ResourceErrorView {
-    func display(_ viewModel: ResourceErrorViewModel)
-}
-
-public protocol ResourceView {
-    associatedtype ResourceViewModel
-    
-    func display(_ viewModel: ResourceViewModel)
-}
-
-public final class LoadResourcePresenter<Resource, View: ResourceView> {
-    
-    public typealias Mapper = (Resource) -> View.ResourceViewModel
-    private let loadingView: ResourceLoadingView
-    private let errorView: ResourceErrorView
-    private let resourceView: View
-    private let mapper: Mapper
-    
-    init(
-        loadingView: ResourceLoadingView,
-        errorView: ResourceErrorView,
-        resourceView: View,
-        mapper: @escaping Mapper
-    ) {
-        self.loadingView = loadingView
-        self.errorView = errorView
-        self.resourceView = resourceView
-        self.mapper = mapper
-    }
-    
-    func didStartLoading() {
-        errorView.display(.noError)
-        loadingView.display(.init(isLoading: true))
-    }
-    
-    func didFinishLoading(with resource: Resource) {
-        resourceView.display(mapper(resource))
-        loadingView.display(.init(isLoading: false))
-    }
-}
+import Essential_Art
 
 class LoadResourcePresenterTests: XCTestCase {
     func test_init_doesNotSendMessagesToView() {
