@@ -1,0 +1,8 @@
+/* 
+  Shared.strings
+  Essential Art
+
+  Created by Konstantin Bezzemelnyi on 15.11.2022.
+  
+*/
+"GENERIC_CONNECTION_ERROR" = "Помилка з'єдання з сервером";
