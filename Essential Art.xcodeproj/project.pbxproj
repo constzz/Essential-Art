@@ -11,6 +11,9 @@
 		BB0492522923F63400B136AB /* ResourceLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492512923F63400B136AB /* ResourceLoadingView.swift */; };
 		BB0492542923F65E00B136AB /* ResourceErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492532923F65E00B136AB /* ResourceErrorView.swift */; };
 		BB0492592923F80D00B136AB /* Shared.strings in Resources */ = {isa = PBXBuildFile; fileRef = BB04925B2923F80D00B136AB /* Shared.strings */; };
+		BB04925F2923FAF800B136AB /* ArtworkPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04925E2923FAF800B136AB /* ArtworkPresenter.swift */; };
+		BB0492622923FB1600B136AB /* ArtworkPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492612923FB1600B136AB /* ArtworkPresenterTests.swift */; };
+		BB0492652923FB6700B136AB /* Artworks.strings in Resources */ = {isa = PBXBuildFile; fileRef = BB0492672923FB6700B136AB /* Artworks.strings */; };
 		BB5EDFE4291640D800D6A84C /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDFE3291640D800D6A84C /* HTTPClient.swift */; };
 		BB5EDFF62916431B00D6A84C /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDFF52916431B00D6A84C /* URLSessionHTTPClient.swift */; };
 		BB5EE00F2916449600D6A84C /* Essential_Art.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5EDFD8291640B200D6A84C /* Essential_Art.framework */; };
@@ -79,6 +82,10 @@
 		BB0492532923F65E00B136AB /* ResourceErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceErrorView.swift; sourceTree = "<group>"; };
 		BB04925A2923F80D00B136AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Shared.strings; sourceTree = "<group>"; };
 		BB04925C2923F81000B136AB /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Shared.strings; sourceTree = "<group>"; };
+		BB04925E2923FAF800B136AB /* ArtworkPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPresenter.swift; sourceTree = "<group>"; };
+		BB0492612923FB1600B136AB /* ArtworkPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPresenterTests.swift; sourceTree = "<group>"; };
+		BB0492662923FB6700B136AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Artworks.strings; sourceTree = "<group>"; };
+		BB0492682923FB6A00B136AB /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Artworks.strings; sourceTree = "<group>"; };
 		BB5EDFD8291640B200D6A84C /* Essential_Art.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Essential_Art.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5EDFE3291640D800D6A84C /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		BB5EDFF52916431B00D6A84C /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
@@ -162,6 +169,23 @@
 			path = "Shared Presentation";
 			sourceTree = "<group>";
 		};
+		BB04925D2923FAE300B136AB /* Artwork Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				BB04925E2923FAF800B136AB /* ArtworkPresenter.swift */,
+				BB0492672923FB6700B136AB /* Artworks.strings */,
+			);
+			path = "Artwork Presentation";
+			sourceTree = "<group>";
+		};
+		BB0492602923FB0400B136AB /* Artwork Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				BB0492612923FB1600B136AB /* ArtworkPresenterTests.swift */,
+			);
+			path = "Artwork Presentation";
+			sourceTree = "<group>";
+		};
 		BB5EDFCE291640B200D6A84C = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +211,7 @@
 		BB5EDFDA291640B200D6A84C /* Essential Art */ = {
 			isa = PBXGroup;
 			children = (
+				BB04925D2923FAE300B136AB /* Artwork Presentation */,
 				BB04924E2923F5FB00B136AB /* Shared Presentation */,
 				BB5EE067291EDD4300D6A84C /* Artwork Cache */,
 				BB5EE02029183F7200D6A84C /* Artwork Feature */,
@@ -216,6 +241,7 @@
 		BB5EE00C2916449600D6A84C /* Essential Art Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BB0492602923FB0400B136AB /* Artwork Presentation */,
 				BB5EE0982923EA8500D6A84C /* Shared  Presentation */,
 				BB5EE05D291D9BD400D6A84C /* ArtworksCache */,
 				BB5EE02C2919A35D00D6A84C /* Helpers */,
@@ -495,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB0492592923F80D00B136AB /* Shared.strings in Resources */,
+				BB0492652923FB6700B136AB /* Artworks.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +560,7 @@
 				BB5EE06B291EDD8600D6A84C /* ArtworksStore.swift in Sources */,
 				BB5EE01F29183F5700D6A84C /* ArticEndpoint.swift in Sources */,
 				BB5EE079291FC68500D6A84C /* ManagedArtworksCache.swift in Sources */,
+				BB04925F2923FAF800B136AB /* ArtworkPresenter.swift in Sources */,
 				BB5EDFE4291640D800D6A84C /* HTTPClient.swift in Sources */,
 				BB5EE084292012F000D6A84C /* CoreDataArtworksStore+ArtworksStore.swift in Sources */,
 				BB5EE07E2920122A00D6A84C /* CoreDataArtworksStore.swift in Sources */,
@@ -565,6 +593,7 @@
 				BB5EE02529183FF800D6A84C /* ArticEndpointTests.swift in Sources */,
 				BB5EE02E2919A36F00D6A84C /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				BB5EE071291EDEAB00D6A84C /* ArtworksStoreSpy.swift in Sources */,
+				BB0492622923FB1600B136AB /* ArtworkPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,6 +643,15 @@
 				BB04925C2923F81000B136AB /* uk */,
 			);
 			name = Shared.strings;
+			sourceTree = "<group>";
+		};
+		BB0492672923FB6700B136AB /* Artworks.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB0492662923FB6700B136AB /* en */,
+				BB0492682923FB6A00B136AB /* uk */,
+			);
+			name = Artworks.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
