@@ -25,19 +25,40 @@ protocol ResourceErrorView {
     func display(_ viewModel: ResourceErrorViewModel)
 }
 
-final class LoadResourcePresenter {
+public protocol ResourceView {
+    associatedtype ResourceViewModel
     
+    func display(_ viewModel: ResourceViewModel)
+}
+
+public final class LoadResourcePresenter<Resource, View: ResourceView> {
+    
+    public typealias Mapper = (Resource) -> View.ResourceViewModel
     private let loadingView: ResourceLoadingView
     private let errorView: ResourceErrorView
+    private let resourceView: View
+    private let mapper: Mapper
     
-    init(loadingView: ResourceLoadingView, errorView: ResourceErrorView) {
+    init(
+        loadingView: ResourceLoadingView,
+        errorView: ResourceErrorView,
+        resourceView: View,
+        mapper: @escaping Mapper
+    ) {
         self.loadingView = loadingView
         self.errorView = errorView
+        self.resourceView = resourceView
+        self.mapper = mapper
     }
     
     func didStartLoading() {
         errorView.display(.noError)
         loadingView.display(.init(isLoading: true))
+    }
+    
+    func didFinishLoading(with resource: Resource) {
+        resourceView.display(mapper(resource))
+        loadingView.display(.init(isLoading: false))
     }
 }
 
@@ -59,17 +80,37 @@ class LoadResourcePresenterTests: XCTestCase {
         ])
     }
     
-    private func makeSUT() -> (LoadResourcePresenter, ViewSpy) {
+    func test_didFinishLoadingResource_displaysResourceAndStopsLoading() {
+        let (sut, view) = makeSUT(mapper: { resource in
+            resource + " view model"
+        })
+        
+        sut.didFinishLoading(with: "resource")
+        
+        XCTAssertEqual(view.messages, [
+            .display(resourceViewModel: "resource view model"),
+            .display(isLoading: false)
+        ])
+    }
+    
+    typealias SUT = LoadResourcePresenter<String, ViewSpy>
+    
+    private func makeSUT(
+        mapper: @escaping SUT.Mapper = { _ in "any"}
+    ) -> (SUT, ViewSpy) {
         let view = ViewSpy()
-        let presenter = LoadResourcePresenter(loadingView: view, errorView: view)
+        let presenter = SUT(loadingView: view, errorView: view, resourceView: view, mapper: mapper)
         return (presenter, view)
     }
     
-    class ViewSpy: ResourceLoadingView, ResourceErrorView {
+    class ViewSpy: ResourceLoadingView, ResourceErrorView, ResourceView {
+        typealias ResourceViewModel = String
         enum Message: Equatable {
             case display(isLoading: Bool)
             case display(errorMessage: String?)
+            case display(resourceViewModel: ResourceViewModel)
         }
+        
         var messages = [Message]()
         
         func display(_ viewModel: ResourceLoadingViewModel) {
@@ -78,6 +119,10 @@ class LoadResourcePresenterTests: XCTestCase {
         
         func display(_ viewModel: ResourceErrorViewModel) {
             messages.append(.display(errorMessage: viewModel.errorMessage))
+        }
+        
+        func display(_ viewModel: ResourceViewModel) {
+            messages.append(.display(resourceViewModel: viewModel))
         }
     }
 }
