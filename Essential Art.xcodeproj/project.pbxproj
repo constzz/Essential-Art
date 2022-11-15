@@ -21,6 +21,9 @@
 		BB049299292403AE00B136AB /* XCTestCase+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB049298292403AE00B136AB /* XCTestCase+Snapshot.swift */; };
 		BB04929B292404E100B136AB /* Essential_Art.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5EDFD8291640B200D6A84C /* Essential_Art.framework */; };
 		BB04929C292404E100B136AB /* Essential_Art.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB5EDFD8291640B200D6A84C /* Essential_Art.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BB0492A1292418BF00B136AB /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492A0292418BF00B136AB /* ListViewController.swift */; };
+		BB0492A529241A5800B136AB /* EMPTY_LIST_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492A329241A5800B136AB /* EMPTY_LIST_dark.png */; };
+		BB0492A629241A5800B136AB /* EMPTY_LIST_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492A429241A5800B136AB /* EMPTY_LIST_light.png */; };
 		BB5EDFE4291640D800D6A84C /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDFE3291640D800D6A84C /* HTTPClient.swift */; };
 		BB5EDFF62916431B00D6A84C /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDFF52916431B00D6A84C /* URLSessionHTTPClient.swift */; };
 		BB5EE00F2916449600D6A84C /* Essential_Art.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5EDFD8291640B200D6A84C /* Essential_Art.framework */; };
@@ -127,6 +130,9 @@
 		BB0492942924038400B136AB /* UIImage+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+TestHelpers.swift"; sourceTree = "<group>"; };
 		BB0492962924039D00B136AB /* UIViewController+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Snapshot.swift"; sourceTree = "<group>"; };
 		BB049298292403AE00B136AB /* XCTestCase+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Snapshot.swift"; sourceTree = "<group>"; };
+		BB0492A0292418BF00B136AB /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		BB0492A329241A5800B136AB /* EMPTY_LIST_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMPTY_LIST_dark.png; sourceTree = "<group>"; };
+		BB0492A429241A5800B136AB /* EMPTY_LIST_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMPTY_LIST_light.png; sourceTree = "<group>"; };
 		BB5EDFD8291640B200D6A84C /* Essential_Art.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Essential_Art.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5EDFE3291640D800D6A84C /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		BB5EDFF52916431B00D6A84C /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
@@ -254,6 +260,7 @@
 		BB0492812924031400B136AB /* Shared UI */ = {
 			isa = PBXGroup;
 			children = (
+				BB0492A0292418BF00B136AB /* ListViewController.swift */,
 			);
 			path = "Shared UI";
 			sourceTree = "<group>";
@@ -269,6 +276,7 @@
 		BB0492902924033900B136AB /* Shared UI */ = {
 			isa = PBXGroup;
 			children = (
+				BB0492A229241A5800B136AB /* snapshots */,
 				BB0492932924037500B136AB /* Helpers */,
 				BB0492912924035A00B136AB /* ListSnapshotTests.swift */,
 			);
@@ -290,6 +298,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BB0492A229241A5800B136AB /* snapshots */ = {
+			isa = PBXGroup;
+			children = (
+				BB0492A329241A5800B136AB /* EMPTY_LIST_dark.png */,
+				BB0492A429241A5800B136AB /* EMPTY_LIST_light.png */,
+			);
+			path = snapshots;
 			sourceTree = "<group>";
 		};
 		BB5EDFCE291640B200D6A84C = {
@@ -635,6 +652,7 @@
 				TargetAttributes = {
 					BB049279292401F000B136AB = {
 						CreatedOnToolsVersion = 13.4.1;
+						LastSwiftMigration = 1340;
 					};
 					BB0492852924033000B136AB = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -692,6 +710,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB0492A629241A5800B136AB /* EMPTY_LIST_light.png in Resources */,
+				BB0492A529241A5800B136AB /* EMPTY_LIST_dark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,6 +752,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB0492A1292418BF00B136AB /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -867,6 +888,7 @@
 		BB04927F292401F000B136AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -889,6 +911,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -896,6 +919,7 @@
 		BB049280292401F000B136AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -925,6 +949,7 @@
 		BB04928E2924033000B136AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -948,6 +973,7 @@
 		BB04928F2924033000B136AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
