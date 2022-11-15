@@ -14,6 +14,11 @@
 		BB04925F2923FAF800B136AB /* ArtworkPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04925E2923FAF800B136AB /* ArtworkPresenter.swift */; };
 		BB0492622923FB1600B136AB /* ArtworkPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492612923FB1600B136AB /* ArtworkPresenterTests.swift */; };
 		BB0492652923FB6700B136AB /* Artworks.strings in Resources */ = {isa = PBXBuildFile; fileRef = BB0492672923FB6700B136AB /* Artworks.strings */; };
+		BB04928A2924033000B136AB /* Essential_Art_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB04927A292401F000B136AB /* Essential_Art_iOS.framework */; };
+		BB0492922924035A00B136AB /* ListSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492912924035A00B136AB /* ListSnapshotTests.swift */; };
+		BB0492952924038400B136AB /* UIImage+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492942924038400B136AB /* UIImage+TestHelpers.swift */; };
+		BB0492972924039D00B136AB /* UIViewController+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492962924039D00B136AB /* UIViewController+Snapshot.swift */; };
+		BB049299292403AE00B136AB /* XCTestCase+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB049298292403AE00B136AB /* XCTestCase+Snapshot.swift */; };
 		BB5EDFE4291640D800D6A84C /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDFE3291640D800D6A84C /* HTTPClient.swift */; };
 		BB5EDFF62916431B00D6A84C /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDFF52916431B00D6A84C /* URLSessionHTTPClient.swift */; };
 		BB5EE00F2916449600D6A84C /* Essential_Art.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5EDFD8291640B200D6A84C /* Essential_Art.framework */; };
@@ -53,6 +58,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BB04928B2924033000B136AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB5EDFCF291640B200D6A84C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BB049279292401F000B136AB;
+			remoteInfo = "Essential Art iOS";
+		};
 		BB5EE0102916449600D6A84C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BB5EDFCF291640B200D6A84C /* Project object */;
@@ -87,6 +99,11 @@
 		BB0492662923FB6700B136AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Artworks.strings; sourceTree = "<group>"; };
 		BB0492682923FB6A00B136AB /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Artworks.strings; sourceTree = "<group>"; };
 		BB04927A292401F000B136AB /* Essential_Art_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Essential_Art_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB0492862924033000B136AB /* Essential Art iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Essential Art iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB0492912924035A00B136AB /* ListSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSnapshotTests.swift; sourceTree = "<group>"; };
+		BB0492942924038400B136AB /* UIImage+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+TestHelpers.swift"; sourceTree = "<group>"; };
+		BB0492962924039D00B136AB /* UIViewController+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Snapshot.swift"; sourceTree = "<group>"; };
+		BB049298292403AE00B136AB /* XCTestCase+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Snapshot.swift"; sourceTree = "<group>"; };
 		BB5EDFD8291640B200D6A84C /* Essential_Art.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Essential_Art.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5EDFE3291640D800D6A84C /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		BB5EDFF52916431B00D6A84C /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
@@ -129,6 +146,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB0492832924033000B136AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB04928A2924033000B136AB /* Essential_Art_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,8 +222,43 @@
 		BB04927B292401F000B136AB /* Essential Art iOS */ = {
 			isa = PBXGroup;
 			children = (
+				BB0492812924031400B136AB /* Shared UI */,
 			);
 			path = "Essential Art iOS";
+			sourceTree = "<group>";
+		};
+		BB0492812924031400B136AB /* Shared UI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Shared UI";
+			sourceTree = "<group>";
+		};
+		BB0492872924033000B136AB /* Essential Art iOS Tests */ = {
+			isa = PBXGroup;
+			children = (
+				BB0492902924033900B136AB /* Shared UI */,
+			);
+			path = "Essential Art iOS Tests";
+			sourceTree = "<group>";
+		};
+		BB0492902924033900B136AB /* Shared UI */ = {
+			isa = PBXGroup;
+			children = (
+				BB0492932924037500B136AB /* Helpers */,
+				BB0492912924035A00B136AB /* ListSnapshotTests.swift */,
+			);
+			path = "Shared UI";
+			sourceTree = "<group>";
+		};
+		BB0492932924037500B136AB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BB0492942924038400B136AB /* UIImage+TestHelpers.swift */,
+				BB0492962924039D00B136AB /* UIViewController+Snapshot.swift */,
+				BB049298292403AE00B136AB /* XCTestCase+Snapshot.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		BB5EDFCE291640B200D6A84C = {
@@ -209,6 +269,7 @@
 				BB5EE050291C37EB00D6A84C /* Essential Art API EndToEnd Tests */,
 				BB5EE08D2922966900D6A84C /* Essential Art Cache Integration Tests */,
 				BB04927B292401F000B136AB /* Essential Art iOS */,
+				BB0492872924033000B136AB /* Essential Art iOS Tests */,
 				BB5EDFD9291640B200D6A84C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -221,6 +282,7 @@
 				BB5EE04F291C37EB00D6A84C /* Essential Art API EndToEnd Tests.xctest */,
 				BB5EE08C2922966900D6A84C /* Essential Art Cache Integration Tests.xctest */,
 				BB04927A292401F000B136AB /* Essential_Art_iOS.framework */,
+				BB0492862924033000B136AB /* Essential Art iOS Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -437,6 +499,24 @@
 			productReference = BB04927A292401F000B136AB /* Essential_Art_iOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		BB0492852924033000B136AB /* Essential Art iOS Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB04928D2924033000B136AB /* Build configuration list for PBXNativeTarget "Essential Art iOS Tests" */;
+			buildPhases = (
+				BB0492822924033000B136AB /* Sources */,
+				BB0492832924033000B136AB /* Frameworks */,
+				BB0492842924033000B136AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BB04928C2924033000B136AB /* PBXTargetDependency */,
+			);
+			name = "Essential Art iOS Tests";
+			productName = "Essential Art iOS Tests";
+			productReference = BB0492862924033000B136AB /* Essential Art iOS Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BB5EDFD7291640B200D6A84C /* Essential Art */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BB5EDFDF291640B200D6A84C /* Build configuration list for PBXNativeTarget "Essential Art" */;
@@ -522,6 +602,10 @@
 					BB049279292401F000B136AB = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
+					BB0492852924033000B136AB = {
+						CreatedOnToolsVersion = 13.4.1;
+						LastSwiftMigration = 1340;
+					};
 					BB5EDFD7291640B200D6A84C = {
 						CreatedOnToolsVersion = 13.4.1;
 						LastSwiftMigration = 1340;
@@ -557,12 +641,20 @@
 				BB5EE04E291C37EB00D6A84C /* Essential Art API EndToEnd Tests */,
 				BB5EE08B2922966900D6A84C /* Essential Art Cache Integration Tests */,
 				BB049279292401F000B136AB /* Essential Art iOS */,
+				BB0492852924033000B136AB /* Essential Art iOS Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BB049278292401F000B136AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB0492842924033000B136AB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -606,6 +698,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB0492822924033000B136AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0492922924035A00B136AB /* ListSnapshotTests.swift in Sources */,
+				BB0492972924039D00B136AB /* UIViewController+Snapshot.swift in Sources */,
+				BB049299292403AE00B136AB /* XCTestCase+Snapshot.swift in Sources */,
+				BB0492952924038400B136AB /* UIImage+TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,6 +781,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BB04928C2924033000B136AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BB049279292401F000B136AB /* Essential Art iOS */;
+			targetProxy = BB04928B2924033000B136AB /* PBXContainerItemProxy */;
+		};
 		BB5EE0112916449600D6A84C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BB5EDFD7291640B200D6A84C /* Essential Art */;
@@ -740,6 +848,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.konstantin.bezzemelnyi.Essential-Art-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -768,7 +877,53 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.konstantin.bezzemelnyi.Essential-Art-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		BB04928E2924033000B136AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S7242VTUBZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.konstantin.bezzemelnyi.Essential-Art-iOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		BB04928F2924033000B136AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S7242VTUBZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.konstantin.bezzemelnyi.Essential-Art-iOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -1062,6 +1217,15 @@
 			buildConfigurations = (
 				BB04927F292401F000B136AB /* Debug */,
 				BB049280292401F000B136AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB04928D2924033000B136AB /* Build configuration list for PBXNativeTarget "Essential Art iOS Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB04928E2924033000B136AB /* Debug */,
+				BB04928F2924033000B136AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
