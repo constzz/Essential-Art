@@ -30,13 +30,23 @@ class ArtworsSnapshotTests: XCTestCase {
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORKS_WITH_FAILED_IMAGE_LOADING_dark")
     }
     
-    func test_feedWithLoadMoreIndicator() {
+    func test_artworksWithLoadMoreIndicator() {
         let sut = makeSUT()
         
         sut.display(artworksWithLoadMoreIndicator())
         
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORKS_WITH_LOAD_MORE_INDICATOR_light")
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORKS_WITH_LOAD_MORE_INDICATOR_dark")
+    }
+
+    func test_artworksWithLoadMoreError() {
+        let sut = makeSUT()
+        
+        sut.display(loadMoreError())
+        
+        assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORKS_WITH_LOAD_MORE_ERROR_light")
+        assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORKS_WITH_LOAD_MORE_ERROR_dark")
+        assert(snapshot: sut.snapshot(for: .iPhone13(style: .light, contentSize: .extraExtraExtraLarge)), named: "ARTWORKS_WITH_LOAD_MORE_ERROR_extraExtraExtraLarge")
     }
 
 
@@ -94,6 +104,12 @@ class ArtworsSnapshotTests: XCTestCase {
     private func artworksWithLoadMoreIndicator() -> [CellController] {
         let loadMore = LoadMoreCellController(callback: {})
         loadMore.display(ResourceLoadingViewModel(isLoading: true))
+        return artworksWith(loadMore: loadMore)
+    }
+    
+    private func loadMoreError() -> [CellController] {
+        let loadMore = LoadMoreCellController(callback: {})
+        loadMore.display(ResourceErrorViewModel(errorMessage: "Multiline \n error \nmessage"))
         return artworksWith(loadMore: loadMore)
     }
     
