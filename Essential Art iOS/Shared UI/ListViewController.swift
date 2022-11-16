@@ -37,7 +37,13 @@ extension CellController: Hashable {
 
 
 
-public final class ListViewController: UITableViewController, ResourceLoadingView, ResourceErrorView {
+public class ListViewController: UITableViewController, ResourceLoadingView, ResourceErrorView {
+    
+    private lazy var dataSource: UITableViewDiffableDataSource<Int, CellController> = {
+        .init(tableView: tableView) { (tableView, index, controller) in
+            controller.dataSource.tableView(tableView, cellForRowAt: index)
+        }
+    }()
     
     private(set) lazy var errorView = ErrorView()
     
@@ -48,10 +54,27 @@ public final class ListViewController: UITableViewController, ResourceLoadingVie
             errorView.widthAnchor.constraint(equalTo: view.widthAnchor),
             errorView.topAnchor.constraint(equalTo: view.topAnchor)
         ])
+        
+        configureTableView()
     }
     
-    public func display(_ cellControllers: [CellController]) {
+    private func configureTableView() {
+        dataSource.defaultRowAnimation = .fade
+        tableView.dataSource = dataSource
+    }
+    
+    public func display(_ sections: [CellController]...) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, CellController>()
+        sections.enumerated().forEach { section, cellControllers in
+            snapshot.appendSections([section])
+            snapshot.appendItems(cellControllers, toSection: section)
+        }
         
+        if #available(iOS 15.0, *) {
+            dataSource.applySnapshotUsingReloadData(snapshot)
+        } else {
+            dataSource.apply(snapshot)
+        }
     }
     
     public func display(_ viewModel: ResourceLoadingViewModel) {
