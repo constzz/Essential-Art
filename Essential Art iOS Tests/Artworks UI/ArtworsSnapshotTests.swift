@@ -29,6 +29,16 @@ class ArtworsSnapshotTests: XCTestCase {
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORKS_WITH_FAILED_IMAGE_LOADING_light")
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORKS_WITH_FAILED_IMAGE_LOADING_dark")
     }
+    
+    func test_feedWithLoadMoreIndicator() {
+        let sut = makeSUT()
+        
+        sut.display(artworksWithLoadMoreIndicator())
+        
+        assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORKS_WITH_LOAD_MORE_INDICATOR_light")
+        assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORKS_WITH_LOAD_MORE_INDICATOR_dark")
+    }
+
 
     
     private func makeSUT() -> ListViewController {
@@ -59,8 +69,8 @@ class ArtworsSnapshotTests: XCTestCase {
         }
     }
     
-    private func failedArtworksItems() -> [CellController] {
-        let imageStubs = [
+    private func artworksWithContent() -> [ImageStub] {
+        return [
             ImageStub(title: "First art",
                       artist: "Apple",
                       image: nil),
@@ -68,8 +78,10 @@ class ArtworsSnapshotTests: XCTestCase {
                       artist: "Another artist",
                       image: nil)
         ]
-        
-        return imageStubs.map { stub in
+    }
+    
+    private func failedArtworksItems() -> [CellController] {
+        return artworksWithContent().map { stub in
             let cellController = ArtworksItemCellController(
                 viewModel: stub.viewModel,
                 delegate: stub,
@@ -79,6 +91,25 @@ class ArtworsSnapshotTests: XCTestCase {
         }
     }
     
+    private func artworksWithLoadMoreIndicator() -> [CellController] {
+        let loadMore = LoadMoreCellController(callback: {})
+        loadMore.display(ResourceLoadingViewModel(isLoading: true))
+        return artworksWith(loadMore: loadMore)
+    }
+    
+    private func artworksWith(loadMore: LoadMoreCellController) -> [CellController] {
+        let stub = artworksWithContent().last!
+        let cellController = ArtworksItemCellController(
+            viewModel: stub.viewModel,
+            delegate: stub,
+            selection: {})
+        stub.controller = cellController
+        
+        return [
+            CellController(id: UUID(), cellController),
+            CellController(id: UUID(), loadMore)
+        ]
+    }
     
 }
  
