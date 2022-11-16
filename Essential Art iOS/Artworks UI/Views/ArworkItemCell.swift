@@ -11,6 +11,7 @@ public class ArworkItemCell: UITableViewCell, Reusable {
     
     private enum Constants {
         static let verticalCellSpacing: CGFloat = 12
+        static let horizontalCellSpacing: CGFloat = 20
         static let textToImageSpacing: CGFloat = 4
     }
     
@@ -29,6 +30,16 @@ public class ArworkItemCell: UITableViewCell, Reusable {
     lazy var artworkImageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
+    }()
+    
+    private lazy var artworkImageViewContainer: UIView = {
+        let view = UIView()
+        view.prepareForAutoLayout()
+        view.heightAnchor.constraint(equalToConstant: 320).isActive = true
+        view.layer.cornerRadius = 8
+        view.layer.masksToBounds = true
+        view.backgroundColor = .systemGray
+        return view
     }()
     
     lazy var artworkImageRetryButton: UIButton = {
@@ -51,23 +62,42 @@ public class ArworkItemCell: UITableViewCell, Reusable {
     
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: Self.reuseIdentifier)
+        
+        addStackView(stackViewContainer)
+        addSubviewsToStackView(stackViewContainer)
+                
+        addImageView(artworkImageView, inContainer: artworkImageViewContainer)
+    }
+        
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+// MARK: - UI setup
+private extension ArworkItemCell {
+    func addStackView(_ stackView: UIStackView) {
         addSubview(stackViewContainer)
         stackViewContainer.pinToSuperView(top: Constants.verticalCellSpacing,
                                           bottom: -Constants.verticalCellSpacing)
         
-        stackViewContainer.addArrangedSubview(titleLabel)
-        stackViewContainer.addSpace(size: Constants.textToImageSpacing, axis: .vertical)
-        stackViewContainer.addArrangedSubview(artworkImageView)
-        stackViewContainer.addSpace(size: Constants.textToImageSpacing, axis: .vertical)
-        stackViewContainer.addArrangedSubview(artistLabel)
-        
-        artworkImageView.prepareForAutoLayout()
-        artworkImageView.heightAnchor.constraint(equalToConstant: 320).isActive = true
-        artworkImageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+                                          left: Constants.horizontalCellSpacing,
+                                          bottom: -Constants.verticalCellSpacing,
+                                          right: -Constants.horizontalCellSpacing)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func addSubviewsToStackView(_ stackView: UIStackView) {
+        stackViewContainer.addArrangedSubview(titleLabel)
+        stackViewContainer.addSpace(size: Constants.textToImageSpacing, axis: .vertical)
+        stackViewContainer.addArrangedSubview(artworkImageViewContainer)
+        stackViewContainer.addSpace(size: Constants.textToImageSpacing, axis: .vertical)
+        stackViewContainer.addArrangedSubview(artistLabel)
+    }
+    
+    func addImageView(_ view: UIView, inContainer container: UIView) {
+        artworkImageViewContainer.addSubview(artworkImageView)
+        artworkImageView.pinTo(view: artworkImageViewContainer)
     }
     
 }
