@@ -36,8 +36,19 @@ extension CellController: Hashable {
 }
 
 
+
 public final class ListViewController: UITableViewController, ResourceLoadingView, ResourceErrorView {
     
+    private(set) lazy var errorView = ErrorView()
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        view.add(view: errorView, constraints: [
+            errorView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            errorView.topAnchor.constraint(equalTo: view.topAnchor)
+        ])
+    }
     
     public func display(_ cellControllers: [CellController]) {
         
@@ -48,7 +59,7 @@ public final class ListViewController: UITableViewController, ResourceLoadingVie
     }
     
     public func display(_ viewModel: ResourceErrorViewModel) {
-        
+        errorView.message = viewModel.errorMessage
     }
     
     

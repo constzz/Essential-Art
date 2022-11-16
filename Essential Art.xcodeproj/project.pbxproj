@@ -24,6 +24,9 @@
 		BB0492A1292418BF00B136AB /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492A0292418BF00B136AB /* ListViewController.swift */; };
 		BB0492A529241A5800B136AB /* EMPTY_LIST_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492A329241A5800B136AB /* EMPTY_LIST_dark.png */; };
 		BB0492A629241A5800B136AB /* EMPTY_LIST_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492A429241A5800B136AB /* EMPTY_LIST_light.png */; };
+		BB0492AA29241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492A729241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_dark.png */; };
+		BB0492AB29241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492A829241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png */; };
+		BB0492AC29241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492A929241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light.png */; };
 		BB0492AF29241B9B00B136AB /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492AE29241B9B00B136AB /* ErrorView.swift */; };
 		BB0492B22924CA6900B136AB /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492B12924CA6900B136AB /* UIView+Extensions.swift */; };
 		BB5EDFE4291640D800D6A84C /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDFE3291640D800D6A84C /* HTTPClient.swift */; };
@@ -135,6 +138,9 @@
 		BB0492A0292418BF00B136AB /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		BB0492A329241A5800B136AB /* EMPTY_LIST_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMPTY_LIST_dark.png; sourceTree = "<group>"; };
 		BB0492A429241A5800B136AB /* EMPTY_LIST_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMPTY_LIST_light.png; sourceTree = "<group>"; };
+		BB0492A729241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIST_WITH_ERROR_MESSAGE_dark.png; sourceTree = "<group>"; };
+		BB0492A829241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png; sourceTree = "<group>"; };
+		BB0492A929241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIST_WITH_ERROR_MESSAGE_light.png; sourceTree = "<group>"; };
 		BB0492AE29241B9B00B136AB /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		BB0492B12924CA6900B136AB /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		BB5EDFD8291640B200D6A84C /* Essential_Art.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Essential_Art.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +270,8 @@
 		BB0492812924031400B136AB /* Shared UI */ = {
 			isa = PBXGroup;
 			children = (
+				BB0492B02924CA5C00B136AB /* Helpers */,
+				BB0492AD29241B9200B136AB /* Views */,
 				BB0492A0292418BF00B136AB /* ListViewController.swift */,
 			);
 			path = "Shared UI";
@@ -307,6 +315,9 @@
 		BB0492A229241A5800B136AB /* snapshots */ = {
 			isa = PBXGroup;
 			children = (
+				BB0492A729241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_dark.png */,
+				BB0492A829241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png */,
+				BB0492A929241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light.png */,
 				BB0492A329241A5800B136AB /* EMPTY_LIST_dark.png */,
 				BB0492A429241A5800B136AB /* EMPTY_LIST_light.png */,
 			);
@@ -731,6 +742,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB0492A629241A5800B136AB /* EMPTY_LIST_light.png in Resources */,
+				BB0492AA29241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_dark.png in Resources */,
+				BB0492AB29241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png in Resources */,
+				BB0492AC29241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light.png in Resources */,
 				BB0492A529241A5800B136AB /* EMPTY_LIST_dark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
