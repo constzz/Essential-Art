@@ -14,6 +14,10 @@ class ArtworkPresenterTests: XCTestCase {
         XCTAssertEqual(ArtworkPresenter.title, localized("ARTWORKS_VIEW_TITLE"))
     }
     
+    func test_artworkItemRetryButton_isLocalized() {
+        XCTAssertEqual(ArtworkPresenter.retryButtonTitle, localized("ARTWORKS_VIEW_RETRY_BUTTON_TITLE"))
+    }
+    
     // MARK: - Helpers
     private func localized(_ key: String, file: StaticString = #filePath, line: UInt = #line) -> String {
         let table = "Artworks"

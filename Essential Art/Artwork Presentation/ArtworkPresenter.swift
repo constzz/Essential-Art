@@ -15,4 +15,12 @@ public final class ArtworkPresenter {
         bundle: Bundle(for: ArtworkPresenter.self),
         comment: "Title for artworks view"
     )
+    
+    public static let retryButtonTitle: String = NSLocalizedString(
+        "ARTWORKS_VIEW_RETRY_BUTTON_TITLE",
+        tableName: "Artworks",
+        bundle: Bundle(for: ArtworkPresenter.self),
+        comment: "Title for retry button on artwork item on failed loading for artworks image view"
+    )
+
 }
