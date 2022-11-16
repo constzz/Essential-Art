@@ -25,6 +25,7 @@
 		BB0492A529241A5800B136AB /* EMPTY_LIST_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492A329241A5800B136AB /* EMPTY_LIST_dark.png */; };
 		BB0492A629241A5800B136AB /* EMPTY_LIST_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492A429241A5800B136AB /* EMPTY_LIST_light.png */; };
 		BB0492AF29241B9B00B136AB /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492AE29241B9B00B136AB /* ErrorView.swift */; };
+		BB0492B22924CA6900B136AB /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492B12924CA6900B136AB /* UIView+Extensions.swift */; };
 		BB5EDFE4291640D800D6A84C /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDFE3291640D800D6A84C /* HTTPClient.swift */; };
 		BB5EDFF62916431B00D6A84C /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDFF52916431B00D6A84C /* URLSessionHTTPClient.swift */; };
 		BB5EE00F2916449600D6A84C /* Essential_Art.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5EDFD8291640B200D6A84C /* Essential_Art.framework */; };
@@ -135,6 +136,7 @@
 		BB0492A329241A5800B136AB /* EMPTY_LIST_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMPTY_LIST_dark.png; sourceTree = "<group>"; };
 		BB0492A429241A5800B136AB /* EMPTY_LIST_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMPTY_LIST_light.png; sourceTree = "<group>"; };
 		BB0492AE29241B9B00B136AB /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		BB0492B12924CA6900B136AB /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		BB5EDFD8291640B200D6A84C /* Essential_Art.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Essential_Art.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5EDFE3291640D800D6A84C /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		BB5EDFF52916431B00D6A84C /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
@@ -317,6 +319,14 @@
 				BB0492AE29241B9B00B136AB /* ErrorView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BB0492B02924CA5C00B136AB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BB0492B12924CA6900B136AB /* UIView+Extensions.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		BB5EDFCE291640B200D6A84C = {
@@ -762,6 +772,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB0492B22924CA6900B136AB /* UIView+Extensions.swift in Sources */,
 				BB0492A1292418BF00B136AB /* ListViewController.swift in Sources */,
 				BB0492AF29241B9B00B136AB /* ErrorView.swift in Sources */,
 			);
