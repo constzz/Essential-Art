@@ -41,6 +41,8 @@
 		BB0492D92925447400B136AB /* ARTWORKS_WITH_CONTENT_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492D62925447400B136AB /* ARTWORKS_WITH_CONTENT_dark.png */; };
 		BB0492DA2925447400B136AB /* ARTWORKS_WITH_CONTENT_light_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492D72925447400B136AB /* ARTWORKS_WITH_CONTENT_light_extraExtraExtraLarge.png */; };
 		BB0492DC2925679000B136AB /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0492DB2925679000B136AB /* UIStackView+Extensions.swift */; };
+		BB0492DF29256A1900B136AB /* ARTWORKS_WITH_FAILED_IMAGE_LOADING_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492DD29256A1900B136AB /* ARTWORKS_WITH_FAILED_IMAGE_LOADING_light.png */; };
+		BB0492E029256A1900B136AB /* ARTWORKS_WITH_FAILED_IMAGE_LOADING_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0492DE29256A1900B136AB /* ARTWORKS_WITH_FAILED_IMAGE_LOADING_dark.png */; };
 		BB5EDFE4291640D800D6A84C /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDFE3291640D800D6A84C /* HTTPClient.swift */; };
 		BB5EDFF62916431B00D6A84C /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDFF52916431B00D6A84C /* URLSessionHTTPClient.swift */; };
 		BB5EE00F2916449600D6A84C /* Essential_Art.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5EDFD8291640B200D6A84C /* Essential_Art.framework */; };
@@ -167,6 +169,8 @@
 		BB0492D62925447400B136AB /* ARTWORKS_WITH_CONTENT_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARTWORKS_WITH_CONTENT_dark.png; sourceTree = "<group>"; };
 		BB0492D72925447400B136AB /* ARTWORKS_WITH_CONTENT_light_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARTWORKS_WITH_CONTENT_light_extraExtraExtraLarge.png; sourceTree = "<group>"; };
 		BB0492DB2925679000B136AB /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
+		BB0492DD29256A1900B136AB /* ARTWORKS_WITH_FAILED_IMAGE_LOADING_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARTWORKS_WITH_FAILED_IMAGE_LOADING_light.png; sourceTree = "<group>"; };
+		BB0492DE29256A1900B136AB /* ARTWORKS_WITH_FAILED_IMAGE_LOADING_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARTWORKS_WITH_FAILED_IMAGE_LOADING_dark.png; sourceTree = "<group>"; };
 		BB5EDFD8291640B200D6A84C /* Essential_Art.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Essential_Art.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5EDFE3291640D800D6A84C /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		BB5EDFF52916431B00D6A84C /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
@@ -417,6 +421,8 @@
 		BB0492D42925447400B136AB /* snapshots */ = {
 			isa = PBXGroup;
 			children = (
+				BB0492DE29256A1900B136AB /* ARTWORKS_WITH_FAILED_IMAGE_LOADING_dark.png */,
+				BB0492DD29256A1900B136AB /* ARTWORKS_WITH_FAILED_IMAGE_LOADING_light.png */,
 				BB0492D52925447400B136AB /* ARTWORKS_WITH_CONTENT_light.png */,
 				BB0492D62925447400B136AB /* ARTWORKS_WITH_CONTENT_dark.png */,
 				BB0492D72925447400B136AB /* ARTWORKS_WITH_CONTENT_light_extraExtraExtraLarge.png */,
@@ -827,7 +833,9 @@
 			files = (
 				BB0492A629241A5800B136AB /* EMPTY_LIST_light.png in Resources */,
 				BB0492AA29241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_dark.png in Resources */,
+				BB0492E029256A1900B136AB /* ARTWORKS_WITH_FAILED_IMAGE_LOADING_dark.png in Resources */,
 				BB0492AB29241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png in Resources */,
+				BB0492DF29256A1900B136AB /* ARTWORKS_WITH_FAILED_IMAGE_LOADING_light.png in Resources */,
 				BB0492AC29241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light.png in Resources */,
 				BB0492A529241A5800B136AB /* EMPTY_LIST_dark.png in Resources */,
 				BB0492D92925447400B136AB /* ARTWORKS_WITH_CONTENT_dark.png in Resources */,

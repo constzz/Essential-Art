@@ -21,6 +21,16 @@ class ArtworsSnapshotTests: XCTestCase {
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .light, contentSize: .extraExtraExtraLarge)), named: "ARTWORKS_WITH_CONTENT_light_extraExtraExtraLarge")
     }
     
+    func test_artworksWithFailedImageLoading() {
+        let sut = makeSUT()
+        
+        sut.display(failedArtworksItems())
+        
+        assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORKS_WITH_FAILED_IMAGE_LOADING_light")
+        assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORKS_WITH_FAILED_IMAGE_LOADING_dark")
+    }
+
+    
     private func makeSUT() -> ListViewController {
         let viewController = ArtworksController()
         viewController.loadViewIfNeeded()
@@ -37,6 +47,26 @@ class ArtworsSnapshotTests: XCTestCase {
             ImageStub(title: "Second art",
                       artist: "Another artist",
                       image: .make(withColor: .red))
+        ]
+        
+        return imageStubs.map { stub in
+            let cellController = ArtworksItemCellController(
+                viewModel: stub.viewModel,
+                delegate: stub,
+                selection: {})
+            stub.controller = cellController
+            return CellController(id: UUID(), cellController)
+        }
+    }
+    
+    private func failedArtworksItems() -> [CellController] {
+        let imageStubs = [
+            ImageStub(title: "First art",
+                      artist: "Apple",
+                      image: nil),
+            ImageStub(title: "Second art",
+                      artist: "Another artist",
+                      image: nil)
         ]
         
         return imageStubs.map { stub in

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Essential_Art
 
 public class ArworkItemCell: UITableViewCell, Reusable {
     
@@ -45,6 +46,8 @@ public class ArworkItemCell: UITableViewCell, Reusable {
     lazy var artworkImageRetryButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "arrow.triangle.2.circlepath"), for: .normal)
+        button.setTitle(ArtworkPresenter.retryButtonTitle, for: .normal)
         return button
     }()
     
@@ -67,6 +70,7 @@ public class ArworkItemCell: UITableViewCell, Reusable {
         addSubviewsToStackView(stackViewContainer)
                 
         addImageView(artworkImageView, inContainer: artworkImageViewContainer)
+        addImageRetryView(artworkImageRetryButton, inContainer: artworkImageViewContainer)
     }
         
     required init?(coder: NSCoder) {
@@ -80,8 +84,6 @@ private extension ArworkItemCell {
     func addStackView(_ stackView: UIStackView) {
         addSubview(stackViewContainer)
         stackViewContainer.pinToSuperView(top: Constants.verticalCellSpacing,
-                                          bottom: -Constants.verticalCellSpacing)
-        
                                           left: Constants.horizontalCellSpacing,
                                           bottom: -Constants.verticalCellSpacing,
                                           right: -Constants.horizontalCellSpacing)
@@ -100,4 +102,13 @@ private extension ArworkItemCell {
         artworkImageView.pinTo(view: artworkImageViewContainer)
     }
     
+    func addImageRetryView(_ view: UIView, inContainer container: UIView) {
+        container.addSubview(view)
+        view.prepareForAutoLayout()
+        NSLayoutConstraint.activate([
+            view.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            view.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+        ])
+    }
+
 }
