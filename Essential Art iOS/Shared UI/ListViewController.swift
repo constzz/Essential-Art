@@ -61,6 +61,7 @@ public class ListViewController: UITableViewController, ResourceLoadingView, Res
     private func configureTableView() {
         dataSource.defaultRowAnimation = .fade
         tableView.dataSource = dataSource
+        tableView.separatorStyle = .none
     }
     
     public func display(_ sections: [CellController]...) {
