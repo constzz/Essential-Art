@@ -382,6 +382,7 @@
 		BB0492B02924CA5C00B136AB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BB0492D2292543C700B136AB /* UIImageView+TestHelpers.swift */,
 				BB0492B12924CA6900B136AB /* UIView+Extensions.swift */,
 			);
 			path = Helpers;
@@ -430,7 +431,6 @@
 			children = (
 				BB0492C32924DC5000B136AB /* UIImageView+Animations.swift */,
 				BB0492C52924DC6900B136AB /* UIView+Shimmering.swift */,
-				BB0492D2292543C700B136AB /* UIImageView+TestHelpers.swift */,
 				BB0492DB2925679000B136AB /* UIStackView+Extensions.swift */,
 				BB04930E2926C0E900B136AB /* UITableView+Extensions.swift */,
 			);
