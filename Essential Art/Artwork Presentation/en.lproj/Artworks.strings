@@ -1,0 +1,9 @@
+/* 
+  Artworks.strings
+  Essential Art
+
+  Created by Konstantin Bezzemelnyi on 15.11.2022.
+  
+*/
+"ARTWORKS_VIEW_TITLE" = "Artworks";
+"ARTWORKS_VIEW_RETRY_BUTTON_TITLE" = "Retry";
