@@ -46,7 +46,6 @@ public class ArworkItemCell: UITableViewCell, Reusable {
     lazy var artworkImageRetryButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
-        button.setImage(UIImage(systemName: "arrow.triangle.2.circlepath"), for: .normal)
         button.setTitle(ArtworkPresenter.retryButtonTitle, for: .normal)
         return button
     }()
