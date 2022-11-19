@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1340"
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB5EDFD7291640B200D6A84C"
+               BuildableName = "Essential_Art.framework"
+               BlueprintName = "Essential Art"
+               ReferencedContainer = "container:Essential Art.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB5EE00A2916449600D6A84C"
+               BuildableName = "Essential Art Tests.xctest"
+               BlueprintName = "Essential Art Tests"
+               ReferencedContainer = "container:Essential Art.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB5EE04E291C37EB00D6A84C"
+               BuildableName = "Essential Art API EndToEnd Tests.xctest"
+               BlueprintName = "Essential Art API EndToEnd Tests"
+               ReferencedContainer = "container:Essential Art.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      enableThreadSanitizer = "YES"
+      systemAttachmentLifetime = "keepNever"
+      userAttachmentLifetime = "keepAlways"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "BB5EDFD7291640B200D6A84C"
+            BuildableName = "Essential_Art.framework"
+            BlueprintName = "Essential Art"
+            ReferencedContainer = "container:Essential Art.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "BB049279292401F000B136AB"
+            BuildableName = "Essential_Art_iOS.framework"
+            BlueprintName = "Essential Art iOS"
+            ReferencedContainer = "container:Essential Art.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB5EE00A2916449600D6A84C"
+               BuildableName = "Essential Art Tests.xctest"
+               BlueprintName = "Essential Art Tests"
+               ReferencedContainer = "container:Essential Art.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB5EE04E291C37EB00D6A84C"
+               BuildableName = "Essential Art API EndToEnd Tests.xctest"
+               BlueprintName = "Essential Art API EndToEnd Tests"
+               ReferencedContainer = "container:Essential Art.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB5EE08B2922966900D6A84C"
+               BuildableName = "Essential Art Cache Integration Tests.xctest"
+               BlueprintName = "Essential Art Cache Integration Tests"
+               ReferencedContainer = "container:Essential Art.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB0492852924033000B136AB"
+               BuildableName = "Essential Art iOS Tests.xctest"
+               BlueprintName = "Essential Art iOS Tests"
+               ReferencedContainer = "container:Essential Art.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "BB5EDFD7291640B200D6A84C"
+            BuildableName = "Essential_Art.framework"
+            BlueprintName = "Essential Art"
+            ReferencedContainer = "container:Essential Art.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>
