@@ -68,13 +68,6 @@
             BlueprintName = "Essential Art"
             ReferencedContainer = "container:Essential Art.xcodeproj">
          </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BB5EE00A2916449600D6A84C"
-            BuildableName = "Essential Art Tests.xctest"
-            BlueprintName = "Essential Art Tests"
-            ReferencedContainer = "container:Essential Art.xcodeproj">
-         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
