@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CI_iOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>CI_macOS.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
@@ -29,12 +34,12 @@
 		<key>Essential Art iOS Tests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>4</integer>
 		</dict>
 		<key>Essential Art iOS.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>5</integer>
 		</dict>
 		<key>Essential Art ios.xcscheme_^#shared#^_</key>
 		<dict>
@@ -60,6 +65,16 @@
 			<true/>
 		</dict>
 		<key>BB5EE00A2916449600D6A84C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BB5EE04E291C37EB00D6A84C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BB5EE08B2922966900D6A84C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
