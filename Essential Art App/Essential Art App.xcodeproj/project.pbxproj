@@ -17,6 +17,9 @@
 		BB9AEAFB292AAD3A00294B3F /* Essential_Art_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB9AEAF8292AAD3A00294B3F /* Essential_Art_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB9AEAFC292AAD3A00294B3F /* Essential_Art.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB9AEAF9292AAD3A00294B3F /* Essential_Art.framework */; };
 		BB9AEAFD292AAD3A00294B3F /* Essential_Art.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB9AEAF9292AAD3A00294B3F /* Essential_Art.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BB9AEB00292AAE8C00294B3F /* ArtworksUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEAFF292AAE8C00294B3F /* ArtworksUIComposer.swift */; };
+		BB9AEB02292AAF0500294B3F /* ArtworksUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB01292AAF0500294B3F /* ArtworksUIIntegrationTests.swift */; };
+		BB9AEB04292AB44500294B3F /* LoadResourcePresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB03292AB44500294B3F /* LoadResourcePresentationAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,9 @@
 		BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateTests.swift; sourceTree = "<group>"; };
 		BB9AEAF8292AAD3A00294B3F /* Essential_Art_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Essential_Art_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB9AEAF9292AAD3A00294B3F /* Essential_Art.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Essential_Art.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB9AEAFF292AAE8C00294B3F /* ArtworksUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksUIComposer.swift; sourceTree = "<group>"; };
+		BB9AEB01292AAF0500294B3F /* ArtworksUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksUIIntegrationTests.swift; sourceTree = "<group>"; };
+		BB9AEB03292AB44500294B3F /* LoadResourcePresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadResourcePresentationAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,12 +106,14 @@
 		BB0ABE13292A7F4D00280336 /* Essential Art App */ = {
 			isa = PBXGroup;
 			children = (
+				BB9AEAFF292AAE8C00294B3F /* ArtworksUIComposer.swift */,
 				BB0ABE14292A7F4D00280336 /* AppDelegate.swift */,
 				BB0ABE16292A7F4D00280336 /* SceneDelegate.swift */,
 				BB0ABE18292A7F4D00280336 /* ViewController.swift */,
 				BB0ABE1D292A7F4E00280336 /* Assets.xcassets */,
 				BB0ABE1F292A7F4E00280336 /* LaunchScreen.storyboard */,
 				BB0ABE22292A7F4E00280336 /* Info.plist */,
+				BB9AEB03292AB44500294B3F /* LoadResourcePresentationAdapter.swift */,
 			);
 			path = "Essential Art App";
 			sourceTree = "<group>";
@@ -113,6 +121,7 @@
 		BB0ABE64292AA97E00280336 /* Essential Art AppTests */ = {
 			isa = PBXGroup;
 			children = (
+				BB9AEB01292AAF0500294B3F /* ArtworksUIIntegrationTests.swift */,
 				BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */,
 			);
 			path = "Essential Art AppTests";
@@ -231,6 +240,8 @@
 			files = (
 				BB0ABE19292A7F4D00280336 /* ViewController.swift in Sources */,
 				BB0ABE15292A7F4D00280336 /* AppDelegate.swift in Sources */,
+				BB9AEB04292AB44500294B3F /* LoadResourcePresentationAdapter.swift in Sources */,
+				BB9AEB00292AAE8C00294B3F /* ArtworksUIComposer.swift in Sources */,
 				BB0ABE17292A7F4D00280336 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB9AEB02292AAF0500294B3F /* ArtworksUIIntegrationTests.swift in Sources */,
 				BB9AEAF6292AAA0000294B3F /* SceneDelegateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
