@@ -12,7 +12,18 @@
 		BB0ABE19292A7F4D00280336 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0ABE18292A7F4D00280336 /* ViewController.swift */; };
 		BB0ABE1E292A7F4E00280336 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0ABE1D292A7F4E00280336 /* Assets.xcassets */; };
 		BB0ABE21292A7F4E00280336 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB0ABE1F292A7F4E00280336 /* LaunchScreen.storyboard */; };
+		BB9AEAF6292AAA0000294B3F /* SceneDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BB0ABE67292AA97E00280336 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB0ABE09292A7F4D00280336 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BB0ABE10292A7F4D00280336;
+			remoteInfo = "Essential Art App";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		BB0ABE11292A7F4D00280336 /* Essential Art App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Essential Art App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,10 +33,19 @@
 		BB0ABE1D292A7F4E00280336 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB0ABE20292A7F4E00280336 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB0ABE22292A7F4E00280336 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB0ABE63292AA97E00280336 /* Essential Art AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Essential Art AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BB0ABE0E292A7F4D00280336 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB0ABE60292AA97E00280336 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				BB0ABE13292A7F4D00280336 /* Essential Art App */,
+				BB0ABE64292AA97E00280336 /* Essential Art AppTests */,
 				BB0ABE12292A7F4D00280336 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				BB0ABE11292A7F4D00280336 /* Essential Art App.app */,
+				BB0ABE63292AA97E00280336 /* Essential Art AppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -62,6 +84,14 @@
 				BB0ABE22292A7F4E00280336 /* Info.plist */,
 			);
 			path = "Essential Art App";
+			sourceTree = "<group>";
+		};
+		BB0ABE64292AA97E00280336 /* Essential Art AppTests */ = {
+			isa = PBXGroup;
+			children = (
+				BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */,
+			);
+			path = "Essential Art AppTests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -84,6 +114,24 @@
 			productReference = BB0ABE11292A7F4D00280336 /* Essential Art App.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BB0ABE62292AA97E00280336 /* Essential Art AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB0ABE6B292AA97E00280336 /* Build configuration list for PBXNativeTarget "Essential Art AppTests" */;
+			buildPhases = (
+				BB0ABE5F292AA97E00280336 /* Sources */,
+				BB0ABE60292AA97E00280336 /* Frameworks */,
+				BB0ABE61292AA97E00280336 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BB0ABE68292AA97E00280336 /* PBXTargetDependency */,
+			);
+			name = "Essential Art AppTests";
+			productName = "Essential Art AppTests";
+			productReference = BB0ABE63292AA97E00280336 /* Essential Art AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -96,6 +144,11 @@
 				TargetAttributes = {
 					BB0ABE10292A7F4D00280336 = {
 						CreatedOnToolsVersion = 13.4.1;
+					};
+					BB0ABE62292AA97E00280336 = {
+						CreatedOnToolsVersion = 13.4.1;
+						LastSwiftMigration = 1340;
+						TestTargetID = BB0ABE10292A7F4D00280336;
 					};
 				};
 			};
@@ -113,6 +166,7 @@
 			projectRoot = "";
 			targets = (
 				BB0ABE10292A7F4D00280336 /* Essential Art App */,
+				BB0ABE62292AA97E00280336 /* Essential Art AppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -124,6 +178,13 @@
 			files = (
 				BB0ABE21292A7F4E00280336 /* LaunchScreen.storyboard in Resources */,
 				BB0ABE1E292A7F4E00280336 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB0ABE61292AA97E00280336 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +201,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BB0ABE5F292AA97E00280336 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB9AEAF6292AAA0000294B3F /* SceneDelegateTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BB0ABE68292AA97E00280336 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BB0ABE10292A7F4D00280336 /* Essential Art App */;
+			targetProxy = BB0ABE67292AA97E00280336 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BB0ABE1F292A7F4E00280336 /* LaunchScreen.storyboard */ = {
@@ -322,6 +399,55 @@
 			};
 			name = Release;
 		};
+		BB0ABE69292AA97E00280336 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S7242VTUBZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.konstantin.bezzemelnyi.Essential-Art-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Essential Art App.app/Essential Art App";
+			};
+			name = Debug;
+		};
+		BB0ABE6A292AA97E00280336 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S7242VTUBZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.konstantin.bezzemelnyi.Essential-Art-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Essential Art App.app/Essential Art App";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -339,6 +465,15 @@
 			buildConfigurations = (
 				BB0ABE26292A7F4E00280336 /* Debug */,
 				BB0ABE27292A7F4E00280336 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB0ABE6B292AA97E00280336 /* Build configuration list for PBXNativeTarget "Essential Art AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB0ABE69292AA97E00280336 /* Debug */,
+				BB0ABE6A292AA97E00280336 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
