@@ -20,9 +20,10 @@ jobs:
     - name: Xcode version
       run: /usr/bin/xcodebuild -version
 
-    - uses: kishikawakatsumi/xcresulttool@v1
-        with:
-            path: TestResults.xcresult
             
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with: 
+          path: TestResults.xcresult
+          
     - name: Build and Test
       run: xcodebuild clean build test -project "Essential Art.xcodeproj" -scheme "CI_iOS" -resultBundlePath TestResults CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 13 mini,OS=15.4" ONLY_ACTIVE_ARCH=YES
