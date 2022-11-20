@@ -16,6 +16,19 @@ jobs:
 
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_13.3.app
+          - name: Install xcparse
+      run: brew install chargepoint/xcparse/xcparse
+
+    - name: Run xcparse
+      run: xcparse screenshots testResults.xcresult snapshots
+
+    # Upload files for tests job
+    - name: Upload snapshots
+      uses: actions/upload-artifact@v2
+      with:
+        name: snapshots
+        path: snapshots
 
     - name: Build and Test
-      run: xcodebuild clean build test -project "Essential Art.xcodeproj" -scheme "CI_iOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 13 mini,OS=15.4" ONLY_ACTIVE_ARCH=YES
+        run: xcodebuild test-without-building -xctestrun $(find . -type f -name "*.xctestrun") -resultBundlePath "testResults" -derivedDataPath 'derivedData' -destination 'platform=iOS Simulator,name=iPhone 13 mini,OS=15.4' -only-testing:Essential Art iOS Tests/ArtworsSnapshotTests | xcpretty
+    #  run: xcodebuild clean build test -project "Essential Art.xcodeproj" -scheme "CI_iOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 13 mini,OS=15.4" ONLY_ACTIVE_ARCH=YES
