@@ -22,13 +22,9 @@ jobs:
           
     - name: Build and Test
       run: xcodebuild clean build test -project "Essential Art.xcodeproj" -scheme "CI_iOS" -resultBundlePath TestResults CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 13,OS=15.5" ONLY_ACTIVE_ARCH=YES -resultBundlePath CIiOSResults -derivedDataPath /tmp/XcodeDerivedDataWithCoverage
+
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
-        path: TestResults.xcresult
-      if: success() || failure()
-      
-    - uses: kishikawakatsumi/xcresulttool@v1
-      with:
-          path: TestResults.xcresult
+          path: CIiOSResults.xcresult
       if: success() || failure()
           
