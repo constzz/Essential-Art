@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Artwork: Equatable {
+public struct Artwork: Hashable {
     public let title: String
     public let imageURL: URL
     public let artist: String

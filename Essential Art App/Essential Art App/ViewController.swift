@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Essential_Art_iOS
 
 class ViewController: UIViewController {
 

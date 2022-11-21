@@ -130,12 +130,12 @@ class ArtworsSnapshotTests: XCTestCase {
 }
  
 private class ImageStub: ArtworksItemCellControllerDelegate {
-    let viewModel: ArworkItemViewModel
+    let viewModel: ArtworkItemViewModel
     let image: UIImage?
     weak var controller: ArtworksItemCellController?
     
     init(title: String, artist: String, image: UIImage?) {
-        self.viewModel = ArworkItemViewModel(title: title, artist: artist)
+        self.viewModel = ArtworkItemViewModel(title: title, artist: artist)
         self.image = image
     }
     
