@@ -415,6 +415,21 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork1.imageURL, artwork0.imageURL, artwork1.imageURL], "Expected fourth imageURL request after second view retry action")
     }
 
+    func test_artworksImageView_preloadsImageURLWhenNearVisible() {
+        let artwork0 = makeArtwork(url: URL(string: "http://url-0.com")!)
+        let artwork1 = makeArtwork(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [artwork0, artwork1])
+        XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until image is near visible")
+        
+        sut.simulateArtworkViewNearVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL], "Expected first image URL request once first image is near visible")
+        
+        sut.simulateArtworkViewNearVisible(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork1.imageURL], "Expected second image URL request once second image is near visible")
+    }
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
         return Artwork(title: title, imageURL: url, artist: artist)
@@ -461,6 +476,12 @@ private extension ArworkItemCell {
 }
 
 private extension ListViewController {
+    
+    func simulateArtworkViewNearVisible(at row: Int) {
+        let ds = tableView.prefetchDataSource
+        let index = IndexPath(row: row, section: artworksSection)
+        ds?.tableView(tableView, prefetchRowsAt: [index])
+    }
     
     @discardableResult
     func simulateArtworkImageViewVisible(at index: Int) -> ArworkItemCell? {
