@@ -81,6 +81,34 @@ public extension LocalArtworksLoader {
 }
 
 extension Publisher {
+    func caching(to cache: ArtworksCache) -> AnyPublisher<Output, Failure> where Output == [Artwork] {
+        handleEvents(receiveOutput: cache.saveIgnoringResult).eraseToAnyPublisher()
+    }
+    
+    func caching(to cache: ArtworksCache) -> AnyPublisher<Output, Failure> where Output == Paginated<Artwork> {
+        handleEvents(receiveOutput: cache.saveIgnoringResult).eraseToAnyPublisher()
+    }
+}
+
+extension Publisher {
+    func fallback(to fallbackPublisher: @escaping () -> AnyPublisher<Output, Failure>) -> AnyPublisher<Output, Failure> {
+        self.catch { _ in fallbackPublisher() }.eraseToAnyPublisher()
+    }
+}
+
+
+private extension ArtworksCache {
+    func saveIgnoringResult(_ artworks: [Artwork]) {
+        try? save(artworks)
+    }
+    
+    func saveIgnoringResult(_ page: Paginated<Artwork>) {
+        saveIgnoringResult(page.items)
+    }
+}
+
+
+extension Publisher {
     func dispatchOnMainQueue() -> AnyPublisher<Output, Failure> {
         receive(on: DispatchQueue.immediateWhenOnMainQueueScheduler).eraseToAnyPublisher()
     }

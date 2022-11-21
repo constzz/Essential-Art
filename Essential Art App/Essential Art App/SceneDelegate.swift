@@ -30,6 +30,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private lazy var baseURL = URL(string: "https://api.artic.edu")!
     
+    private lazy var store: ArtworksStore = {
+        do {
+            return try CoreDataArtworksStore(
+                storeURL: NSPersistentContainer
+                    .defaultDirectoryURL()
+                    .appendingPathComponent("feed-store.sqlite"))
+        } catch {
+            assertionFailure("Failed to instantiate CoreData store with error: \(error.localizedDescription)")
+            logger.fault("Failed to instantiate CoreData store with error: \(error.localizedDescription)")
+            return NullStore()
+        }
+    }()
+    
+    private lazy var localArtworksLoader: LocalArtworksLoader = {
+        LocalArtworksLoader(store: store, currentDate: Date.init)
+    }()
+    
     private lazy var navigationController = UINavigationController(
         rootViewController: ArtworksUIComposer.artworksComposedWith(
             artworksLoader: makeRemoteFeedLoaderWithLocalFallback,
@@ -45,6 +62,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: scene)
         configureWindow()
+    }
+    
+    func sceneWillResignActive(_ scene: UIScene) {
+        do {
+            try localArtworksLoader.validateCache()
+        } catch {
+            logger.error("Failed to validate cache with error: \(error.localizedDescription)")
+        }
     }
     
     func configureWindow() {
@@ -63,6 +88,8 @@ private extension SceneDelegate {
 
     func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<Paginated<Artwork>, Error> {
         makeRemoteFeedLoader(page: Constants.firstPage)
+            .caching(to: localArtworksLoader)
+            .fallback(to: localArtworksLoader.loadPublisher)
             .map({ self.makePage(artworks: $0, page: Constants.firstPage) })
             .subscribe(on: scheduler)
             .eraseToAnyPublisher()
@@ -91,6 +118,7 @@ private extension SceneDelegate {
                 (previousArtworks + newItems, newPage)
             }
             .map(makePage)
+            .caching(to: localArtworksLoader)
             .subscribe(on: scheduler)
             .eraseToAnyPublisher()
     }
