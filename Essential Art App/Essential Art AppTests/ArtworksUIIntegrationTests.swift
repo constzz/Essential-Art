@@ -327,6 +327,29 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertEqual(view1?.isShowingImageLoadingIndicator, true, "Expected loading indicator state change for second view on retry action")
     }
 
+    func test_artworkImageView_rendersImageLoadedFromURL() {
+        let artwork0 = makeArtwork(url: URL(string: "http://url-0.com")!)
+        let artwork1 = makeArtwork(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [artwork0, artwork1])
+        
+        let view0 = sut.simulateArtworkImageViewVisible(at: 0)
+        let view1 = sut.simulateArtworkImageViewVisible(at: 1)
+        XCTAssertEqual(view0?.renderedImage, .none, "Expected no image for first view while loading first image")
+        XCTAssertEqual(view1?.renderedImage, .none, "Expected no image for second view while loading second image")
+        
+        let imageData0 = UIImage.make(withColor: .red).pngData()!
+        loader.completeArtworksImageLoading(with: imageData0, at: 0)
+        XCTAssertEqual(view0?.renderedImage, imageData0, "Expected image for first view once first image loading completes successfully")
+        XCTAssertEqual(view1?.renderedImage, .none, "Expected no image state change for second view once first image loading completes successfully")
+        
+        let imageData1 = UIImage.make(withColor: .green).pngData()!
+        loader.completeArtworksImageLoading(with: imageData1, at: 1)
+        XCTAssertEqual(view0?.renderedImage, imageData0, "Expected no image state change for first view once second image loading completes successfully")
+        XCTAssertEqual(view1?.renderedImage, imageData1, "Expected image for second view once second image loading completes successfully")
+    }
 
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
@@ -361,6 +384,10 @@ private extension ArworkItemCell {
     
     func simulateRetryAction() {
         artworkImageRetryButton.simulate(event: .touchUpInside)
+    }
+    
+    var renderedImage: Data? {
+        return artworkImageView.image?.pngData()
     }
 }
 
