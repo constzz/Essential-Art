@@ -139,6 +139,19 @@ class ArtworksUIIntegrationTests: XCTestCase {
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(sut.errorMessage, nil)
     }
+    
+    func test_tapOnErrorView_hidesErrorMessage() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(sut.errorMessage, nil)
+        
+        loader.completeArtworksLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, loadError)
+        
+        sut.simulateErrorViewTap()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
 
 
     private func makeArtwork(title: String, artist: String, url: URL = URL(string: "http://any-url.com")!) -> Artwork {
@@ -174,6 +187,10 @@ private extension ListViewController {
     
     var isShowingLoadingIndicator: Bool {
         refreshControl?.isRefreshing ?? false
+    }
+    
+    func simulateErrorViewTap() {
+        errorView.simulate(event: .touchUpInside)
     }
     
     func simulateLoadMoreArtworksAction() {
