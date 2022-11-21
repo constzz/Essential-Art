@@ -377,6 +377,20 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action state change for first view on  second image retry")
         XCTAssertEqual(view1?.isShowingRetryAction, false, "Expected no retry action for second view on retry")
     }
+    
+    func test_artworkImageViewRetryButton_isVisibleOnInvalidImageData() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [makeArtwork()])
+        
+        let view = sut.simulateArtworkImageViewVisible(at: 0)
+        XCTAssertEqual(view?.isShowingRetryAction, false, "Expected no retry action while loading image")
+        
+        let invalidImageData = Data("invalid image data".utf8)
+        loader.completeArtworksImageLoading(with: invalidImageData, at: 0)
+        XCTAssertEqual(view?.isShowingRetryAction, true, "Expected retry action once image loading completes with invalid image data")
+    }
 
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
