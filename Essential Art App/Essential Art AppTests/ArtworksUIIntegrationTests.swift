@@ -126,9 +126,31 @@ class ArtworksUIIntegrationTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
 
+    func test_loadArtworksCompletion_rendersErrorMessageOnErrorUntilNextReload() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(sut.errorMessage, nil)
+        
+        loader.completeArtworksLoadingWithError(at: 0)
+
+        XCTAssertEqual(sut.errorMessage, loadError)
+        
+        sut.simulateUserInitiatedReload()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
+
 
     private func makeArtwork(title: String, artist: String, url: URL = URL(string: "http://any-url.com")!) -> Artwork {
         return Artwork(title: title, imageURL: url, artist: artist)
+    }
+    
+    private class DummyView: ResourceView {
+        func display(_ viewModel: Any) {}
+    }
+    
+    var loadError: String {
+        LoadResourcePresenter<Any, DummyView>.loadError
     }
     
     private func makeSUT(
@@ -145,6 +167,10 @@ class ArtworksUIIntegrationTests: XCTestCase {
 }
 
 private extension ListViewController {
+    
+    var errorMessage: String? {
+        errorView.message
+    }
     
     var isShowingLoadingIndicator: Bool {
         refreshControl?.isRefreshing ?? false
