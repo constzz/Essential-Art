@@ -392,6 +392,29 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertEqual(view?.isShowingRetryAction, true, "Expected retry action once image loading completes with invalid image data")
     }
 
+    func test_artworkImageViewRetryAction_retriesImageLoad() {
+        let artwork0 = makeArtwork(url: URL(string: "http://url-0.com")!)
+        let artwork1 = makeArtwork(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [artwork0, artwork1])
+        
+        let view0 = sut.simulateArtworkImageViewVisible(at: 0)
+        let view1 = sut.simulateArtworkImageViewVisible(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork1.imageURL], "Expected two image URL request for the two visible views")
+        
+        loader.completeArtworksImageLoading(at: 0)
+        loader.completeArtworksImageLoading(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork1.imageURL], "Expected only two image URL requests before retry action")
+        
+        view0?.simulateRetryAction()
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork1.imageURL, artwork0.imageURL], "Expected third imageURL request after first view retry action")
+        
+        view1?.simulateRetryAction()
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork1.imageURL, artwork0.imageURL, artwork1.imageURL], "Expected fourth imageURL request after second view retry action")
+    }
+
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
         return Artwork(title: title, imageURL: url, artist: artist)
