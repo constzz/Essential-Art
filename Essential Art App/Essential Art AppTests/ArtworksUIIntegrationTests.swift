@@ -300,6 +300,33 @@ class ArtworksUIIntegrationTests: XCTestCase {
         
         XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork0.imageURL, artwork1.imageURL, artwork1.imageURL], "Expected two new image URL request after second view becomes visible again")
     }
+    
+    func test_artworkImageViewLoadingIndicator_isVisibleWhileLoadingImage() {
+        let artwork0 = makeArtwork(url: URL(string: "http://url-0.com")!)
+        let artwork1 = makeArtwork(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [artwork0, artwork1])
+        
+        let view0 = sut.simulateArtworkImageViewVisible(at: 0)
+        let view1 = sut.simulateArtworkImageViewVisible(at: 1)
+        XCTAssertEqual(view0?.isShowingImageLoadingIndicator, true, "Expected loading indicator for first view while loading first image")
+        XCTAssertEqual(view1?.isShowingImageLoadingIndicator, true, "Expected loading indicator for second view while loading second image")
+        
+        loader.completeArtworksImageLoading(at: 0)
+        XCTAssertEqual(view0?.isShowingImageLoadingIndicator, false, "Expected no loading indicator for first view once first image loading completes successfully")
+        XCTAssertEqual(view1?.isShowingImageLoadingIndicator, true, "Expected no loading indicator state change for second view once first image loading completes successfully")
+        
+        loader.completeArtworksImageLoading(at: 1)
+        XCTAssertEqual(view0?.isShowingImageLoadingIndicator, false, "Expected no loading indicator state change for first view once second image loading completes with error")
+        XCTAssertEqual(view1?.isShowingImageLoadingIndicator, false, "Expected no loading indicator for second view once second image loading completes with error")
+
+        view1?.simulateRetryAction()
+        XCTAssertEqual(view0?.isShowingImageLoadingIndicator, false, "Expected no loading indicator state change for first view once second image loading completes with error")
+        XCTAssertEqual(view1?.isShowingImageLoadingIndicator, true, "Expected loading indicator state change for second view on retry action")
+    }
+
 
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
@@ -324,6 +351,16 @@ class ArtworksUIIntegrationTests: XCTestCase {
             imageLoader: loader.loadImageDataPublisher)
         
         return (sut, loader)
+    }
+}
+
+private extension ArworkItemCell {
+    var isShowingImageLoadingIndicator: Bool {
+        artworkImageView.isShimmering
+    }
+    
+    func simulateRetryAction() {
+        artworkImageRetryButton.simulate(event: .touchUpInside)
     }
 }
 
@@ -522,6 +559,12 @@ private extension ArtworksUIIntegrationTests {
                 self?.cancelledImageURLs.append(url)
             }).eraseToAnyPublisher()
         }
+        
+        func completeArtworksImageLoading(with imageData: Data = Data(), at index: Int = 0) {
+            imageRequests[index].publisher.send(imageData)
+            imageRequests[index].publisher.send(completion: .finished)
+        }
+
 
     }
 }
