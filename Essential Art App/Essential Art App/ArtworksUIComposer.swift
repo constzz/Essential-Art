@@ -44,22 +44,3 @@ public final class ArtworksUIComposer {
     }
     
 }
-
-public protocol ArtworkImageDataLoader {
-    func loadImageData(from url: URL) throws -> Data
-}
-
-extension ArtworkImageDataLoader {
-    public typealias Publisher = AnyPublisher<Data, Error>
-    
-    func loadImageDataPublisher(from url: URL) -> Publisher {
-        return Deferred {
-            Future { completion in
-                completion(Result {
-                    try self.loadImageData(from: url)
-                })
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-}
