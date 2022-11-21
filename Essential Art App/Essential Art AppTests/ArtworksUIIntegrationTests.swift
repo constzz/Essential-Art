@@ -248,8 +248,28 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertEqual(loader.loadMoreCallCount, 2)
     }
 
+    // MARK: - Image View Tests
+    
+    func test_artworksImageView_loadsImageURLWhenVisible() {
+        let artwork0 = makeArtwork(url: URL(string: "http://url-0.com")!)
+        let artwork1 = makeArtwork(url: URL(string: "http://url-1.com")!)
+        
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [artwork0, artwork1])
+        
+        XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until views become visible")
+        
+        sut.simulateArtworkImageViewVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL], "Expected first image URL request once first view becomes visible")
+        
+        sut.simulateArtworkImageViewVisible(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork1.imageURL], "Expected second image URL request once second view also becomes visible")
+    }
 
-    private func makeArtwork(title: String, artist: String, url: URL = URL(string: "http://any-url.com")!) -> Artwork {
+
+    private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
         return Artwork(title: title, imageURL: url, artist: artist)
     }
     
@@ -275,6 +295,11 @@ class ArtworksUIIntegrationTests: XCTestCase {
 }
 
 private extension ListViewController {
+    
+    @discardableResult
+    func simulateArtworkImageViewVisible(at index: Int) -> ArworkItemCell? {
+        cell(row: index, section: artworksSection) as? ArworkItemCell
+    }
     
     var loadMoreArtworksErrorMessage: String? {
         return loadMoreFeedCell()?.message
@@ -314,6 +339,7 @@ private extension ListViewController {
         cell(row: 0, section: loadMoreSection) as? LoadMoreCell
     }
     
+    var artworksSection: Int { 0 }
     var loadMoreSection: Int { 1 }
     
     func simulateUserInitiatedReload() {
@@ -426,6 +452,10 @@ private extension ArtworksUIIntegrationTests {
 
         
         // MARK: Image helpers
+        var loadedImageURLs: [URL] {
+            imageRequests.map { $0.url }
+        }
+        
         private var imageRequests = [(url: URL, publisher: PassthroughSubject<Data, Error>)]()
         
         private(set) var cancelledImageURLs = [URL]()
