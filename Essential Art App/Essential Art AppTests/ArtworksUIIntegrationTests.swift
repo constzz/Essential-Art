@@ -231,6 +231,22 @@ class ArtworksUIIntegrationTests: XCTestCase {
         sut.simulateLoadMoreArtworksAction()
         XCTAssertEqual(sut.loadMoreArtworksErrorMessage, nil)
     }
+    
+    func test_tapOnLoadMoreErrorView_loadsMore() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading()
+        
+        sut.simulateLoadMoreArtworksAction()
+        XCTAssertEqual(loader.loadMoreCallCount, 1)
+        
+        sut.simulateTapOnLoadMoreArtworksError()
+        XCTAssertEqual(loader.loadMoreCallCount, 1)
+        
+        loader.completeArtworksLoadingMoreWithError()
+        sut.simulateTapOnLoadMoreArtworksError()
+        XCTAssertEqual(loader.loadMoreCallCount, 2)
+    }
 
 
     private func makeArtwork(title: String, artist: String, url: URL = URL(string: "http://any-url.com")!) -> Artwork {
@@ -270,6 +286,12 @@ private extension ListViewController {
     
     var isShowingLoadingIndicator: Bool {
         refreshControl?.isRefreshing ?? false
+    }
+    
+    func simulateTapOnLoadMoreArtworksError() {
+        let delegate = tableView.delegate
+        let index = IndexPath(row: 0, section: loadMoreSection)
+        delegate?.tableView?(tableView, didSelectRowAt: index)
     }
     
     func simulateErrorViewTap() {
