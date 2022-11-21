@@ -180,6 +180,29 @@ class ArtworksUIIntegrationTests: XCTestCase {
         sut.simulateLoadMoreArtworksAction()
         XCTAssertEqual(loader.loadMoreCallCount, 3, "Expected no request after loading all pages")
     }
+    
+    func test_loadingMoreIndicator_isVisibleWhileLoadingMore() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        XCTAssertFalse(sut.isShowingLoadMoreArtworksIndicator, "Expected no loading indicator once view is loaded")
+        
+        loader.completeArtworksLoading(at: 0)
+        XCTAssertFalse(sut.isShowingLoadMoreArtworksIndicator, "Expected no loading indicator once loading completes successfully")
+        
+        sut.simulateLoadMoreArtworksAction()
+        XCTAssertTrue(sut.isShowingLoadMoreArtworksIndicator, "Expected loading indicator on load more action")
+        
+        loader.completeLoadMore(at: 0)
+        XCTAssertFalse(sut.isShowingLoadMoreArtworksIndicator, "Expected no loading indicator once user initiated loading completes successfully")
+        
+        sut.simulateLoadMoreArtworksAction()
+        XCTAssertTrue(sut.isShowingLoadMoreArtworksIndicator, "Expected loading indicator on second load more action")
+        
+        loader.completeArtworksLoadingMoreWithError(at: 1)
+        XCTAssertFalse(sut.isShowingLoadMoreArtworksIndicator, "Expected no loading indicator once user initiated loading completes with error")
+    }
+
 
 
     private func makeArtwork(title: String, artist: String, url: URL = URL(string: "http://any-url.com")!) -> Artwork {
@@ -227,6 +250,10 @@ private extension ListViewController {
         let delegate = tableView.delegate
         let index = IndexPath(row: 0, section: loadMoreSection)
         delegate?.tableView?(tableView, willDisplay: view, forRowAt: index)
+    }
+    
+    var isShowingLoadMoreArtworksIndicator: Bool {
+        loadMoreFeedCell()?.isLoading ?? false
     }
     
     func loadMoreFeedCell() -> LoadMoreCell? {
