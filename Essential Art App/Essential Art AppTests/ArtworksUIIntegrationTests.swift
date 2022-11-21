@@ -216,6 +216,21 @@ class ArtworksUIIntegrationTests: XCTestCase {
         }
         wait(for: [exp], timeout: 1.0)
     }
+    
+    func test_loadMoreCompletion_rendersErrorMessageOnError() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading()
+        
+        sut.simulateLoadMoreArtworksAction()
+        XCTAssertEqual(sut.loadMoreArtworksErrorMessage, nil)
+        
+        loader.completeArtworksLoadingMoreWithError()
+        XCTAssertEqual(sut.loadMoreArtworksErrorMessage, loadError)
+        
+        sut.simulateLoadMoreArtworksAction()
+        XCTAssertEqual(sut.loadMoreArtworksErrorMessage, nil)
+    }
 
 
     private func makeArtwork(title: String, artist: String, url: URL = URL(string: "http://any-url.com")!) -> Artwork {
@@ -244,6 +259,10 @@ class ArtworksUIIntegrationTests: XCTestCase {
 }
 
 private extension ListViewController {
+    
+    var loadMoreArtworksErrorMessage: String? {
+        return loadMoreFeedCell()?.message
+    }
     
     var errorMessage: String? {
         errorView.message
