@@ -94,7 +94,7 @@ public class ListViewController: UITableViewController, ResourceLoadingView, Res
     }
     
     public func display(_ viewModel: ResourceLoadingViewModel) {
-        
+        refreshControl?.update(isRefreshing: viewModel.isLoading)
     }
     
     public func display(_ viewModel: ResourceErrorViewModel) {

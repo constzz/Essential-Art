@@ -89,6 +89,7 @@
 		BB5EE09A2923EAA800D6A84C /* LoadResourcePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE0992923EAA800D6A84C /* LoadResourcePresenterTests.swift */; };
 		BB9AEB0B292ABBB000294B3F /* Paginated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB0A292ABBB000294B3F /* Paginated.swift */; };
 		BB9AEB0D292ACB1600294B3F /* ArtworkImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB0C292ACB1600294B3F /* ArtworkImagePresenter.swift */; };
+		BB9AEB17292B8D6E00294B3F /* UIRefreshControl+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB16292B8D6E00294B3F /* UIRefreshControl+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +227,7 @@
 		BB5EE0992923EAA800D6A84C /* LoadResourcePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadResourcePresenterTests.swift; sourceTree = "<group>"; };
 		BB9AEB0A292ABBB000294B3F /* Paginated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paginated.swift; sourceTree = "<group>"; };
 		BB9AEB0C292ACB1600294B3F /* ArtworkImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkImagePresenter.swift; sourceTree = "<group>"; };
+		BB9AEB16292B8D6E00294B3F /* UIRefreshControl+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,6 +391,7 @@
 			children = (
 				BB0492D2292543C700B136AB /* UIImageView+TestHelpers.swift */,
 				BB0492B12924CA6900B136AB /* UIView+Extensions.swift */,
+				BB9AEB16292B8D6E00294B3F /* UIRefreshControl+Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				BB0492D3292543C700B136AB /* UIImageView+TestHelpers.swift in Sources */,
 				BB0492C42924DC5000B136AB /* UIImageView+Animations.swift in Sources */,
 				BB0492C62924DC6900B136AB /* UIView+Shimmering.swift in Sources */,
+				BB9AEB17292B8D6E00294B3F /* UIRefreshControl+Helpers.swift in Sources */,
 				BB0492BD2924D7F400B136AB /* ArworkItemCell.swift in Sources */,
 				BB0492BF2924D82400B136AB /* ArtworkItemCellController.swift in Sources */,
 				BB0492B92924D15F00B136AB /* ArtworksController.swift in Sources */,

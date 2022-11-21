@@ -40,6 +40,22 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertEqual(loader.loadArtworksCount, 3, "Expected yet another loading request once user initiates another reload")
     }
     
+    func test_loadingFeedIndicator_isVisibleWhileLoadingArtworks() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
+        
+        loader.completeArtworksLoading(at: 0)
+        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
+        
+        sut.simulateUserInitiatedReload()
+        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
+        
+        loader.completeArtworksLoadingWithError(at: 1)
+        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
+    }
+    
     private func makeSUT(
         file: StaticString = #file,
         line: UInt = #line
@@ -54,6 +70,11 @@ class ArtworksUIIntegrationTests: XCTestCase {
 }
 
 private extension ListViewController {
+    
+    var isShowingLoadingIndicator: Bool {
+        refreshControl?.isRefreshing ?? false
+    }
+    
     func simulateUserInitiatedReload() {
         refreshControl?.simulatePullToRefresh()
     }
@@ -82,6 +103,10 @@ private extension ArtworksUIIntegrationTests {
                 self?.loadMorePublisher() ?? Empty().eraseToAnyPublisher()
             }))
             artworksRequests[index].send(completion: .finished)
+        }
+        
+        func completeArtworksLoadingWithError(at index: Int = 0) {
+            artworksRequests[index].send(completion: .failure(NSError(domain: "any-error", code: 0)))
         }
         
         private var loadMoreRequests = [PassthroughSubject<Paginated<Artwork>, Error>]()
