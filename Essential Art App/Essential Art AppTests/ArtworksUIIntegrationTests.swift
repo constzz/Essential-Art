@@ -96,6 +96,23 @@ class ArtworksUIIntegrationTests: XCTestCase {
         loader.completeArtworksLoading(with: [], at: 1)
         assertThat(sut, isRendering: [])
     }
+    
+    func test_loadArtworksCompletion_doesNotAlterCurrentRenderingStateOnError() {
+        let artwork0 = makeArtwork(title: "some title", artist: "any artiss")
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [artwork0], at: 0)
+        assertThat(sut, isRendering: [artwork0])
+        
+        sut.simulateUserInitiatedReload()
+        loader.completeArtworksLoadingWithError(at: 1)
+        assertThat(sut, isRendering: [artwork0])
+        
+        sut.simulateLoadMoreArtworksAction()
+        loader.completeArtworksLoadingWithError(at: 0)
+        assertThat(sut, isRendering: [artwork0])
+    }
 
 
     private func makeArtwork(title: String, artist: String, url: URL = URL(string: "http://any-url.com")!) -> Artwork {
@@ -165,7 +182,7 @@ private extension ArtworksUIIntegrationTests {
         sut.view.enforceLayoutCycle()
         
         guard sut.numberOfRows(in: artworksSection) == artworks.count else {
-            return XCTFail("Expected \(artworks.count) images, got \(sut.numberOfRows(in: artworksSection)) instead.", file: file, line: line)
+            return XCTFail("Expected \(artworks.count) artworks, got \(sut.numberOfRows(in: artworksSection)) instead.", file: file, line: line)
         }
         
         artworks.enumerated().forEach { index, image in
