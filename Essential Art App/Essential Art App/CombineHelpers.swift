@@ -36,6 +36,50 @@ public extension Paginated {
     }
 }
 
+public extension HTTPClient {
+    typealias Publisher = AnyPublisher<(Data, HTTPURLResponse), Error>
+    
+    func getPublisher(url: URL) -> Publisher {
+        var task: HTTPClientTask?
+        
+        return Deferred {
+            Future { completion in
+                task = self.get(from: url, completion: completion)
+            }
+        }
+        .handleEvents(receiveCancel: { task?.cancel() })
+        .eraseToAnyPublisher()
+    }
+}
+
+public extension ArtworkImageDataLoader {
+    typealias Publisher = AnyPublisher<Data, Error>
+    
+    func loadImageDataPublisher(from url: URL) -> Publisher {
+        return Deferred {
+            Future { completion in
+                completion(Result {
+                    try self.loadImageData(from: url)
+                })
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+}
+
+public extension LocalArtworksLoader {
+    typealias Publisher = AnyPublisher<[Artwork], Error>
+    
+    func loadPublisher() -> Publisher {
+        Deferred {
+            Future { completion in
+                completion(Result{ try self.load() })
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+}
+
 extension Publisher {
     func dispatchOnMainQueue() -> AnyPublisher<Output, Failure> {
         receive(on: DispatchQueue.immediateWhenOnMainQueueScheduler).eraseToAnyPublisher()
