@@ -268,6 +268,22 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork1.imageURL], "Expected second image URL request once second view also becomes visible")
     }
 
+    func test_artworkView_cancelsImageLoadingWhenNotVisibleAnymore() {
+        let artwork0 = makeArtwork(url: URL(string: "http://url-0.com")!)
+        let artwork1 = makeArtwork(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [artwork0, artwork1])
+        XCTAssertEqual(loader.cancelledImageURLs, [], "Expected no cancelled image URL requests until image is not visible")
+        
+        sut.simulateArtworkImageViewIsNotVisible(at: 0)
+        XCTAssertEqual(loader.cancelledImageURLs, [artwork0.imageURL], "Expected one cancelled image URL request once first image is not visible anymore")
+        
+        sut.simulateArtworkImageViewIsNotVisible(at: 1)
+        XCTAssertEqual(loader.cancelledImageURLs, [artwork0.imageURL, artwork1.imageURL], "Expected two cancelled image URL requests once second image is also not visible anymore")
+    }
+
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
         return Artwork(title: title, imageURL: url, artist: artist)
@@ -299,6 +315,18 @@ private extension ListViewController {
     @discardableResult
     func simulateArtworkImageViewVisible(at index: Int) -> ArworkItemCell? {
         cell(row: index, section: artworksSection) as? ArworkItemCell
+    }
+    
+    @discardableResult
+    func simulateArtworkImageViewIsNotVisible(at row: Int) -> ArworkItemCell? {
+        let view = simulateArtworkImageViewVisible(at: row)
+        
+        let delegate = tableView.delegate
+        let index = IndexPath(row: row, section: artworksSection)
+        delegate?.tableView?(tableView, didEndDisplaying: view!, forRowAt: index)
+        
+        return view
+
     }
     
     var loadMoreArtworksErrorMessage: String? {
