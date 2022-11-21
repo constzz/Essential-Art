@@ -47,6 +47,8 @@ public class ListViewController: UITableViewController, ResourceLoadingView, Res
     
     private(set) lazy var errorView = ErrorView()
     
+    public var onRefresh: (() -> Void)?
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -56,12 +58,25 @@ public class ListViewController: UITableViewController, ResourceLoadingView, Res
         ])
         
         configureTableView()
+        
+        refreshControl = makeRefreshControl()
+        refresh()
     }
     
     private func configureTableView() {
         dataSource.defaultRowAnimation = .fade
         tableView.dataSource = dataSource
         tableView.separatorStyle = .none
+    }
+    
+    @objc private func refresh() {
+        onRefresh?()
+    }
+    
+    private func makeRefreshControl() -> UIRefreshControl {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
     }
     
     public func display(_ sections: [CellController]...) {
