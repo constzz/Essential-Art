@@ -26,6 +26,7 @@
 		BB9AEB13292ACC6100294B3F /* ArtworksViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB12292ACC6100294B3F /* ArtworksViewAdapter.swift */; };
 		BB9AEB15292ACC7400294B3F /* CombineHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB14292ACC7400294B3F /* CombineHelpers.swift */; };
 		BB9AEB19292B90E500294B3F /* UIView+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB18292B90E500294B3F /* UIView+TestHelpers.swift */; };
+		BB9AEB1B292BEE4A00294B3F /* XCTestCase+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB1A292BEE4A00294B3F /* XCTestCase+TestHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		BB9AEB12292ACC6100294B3F /* ArtworksViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksViewAdapter.swift; sourceTree = "<group>"; };
 		BB9AEB14292ACC7400294B3F /* CombineHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineHelpers.swift; sourceTree = "<group>"; };
 		BB9AEB18292B90E500294B3F /* UIView+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TestHelpers.swift"; sourceTree = "<group>"; };
+		BB9AEB1A292BEE4A00294B3F /* XCTestCase+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+TestHelpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 				BB9AEB06292ABA7100294B3F /* UIRefreshControler+TestHelpers.swift */,
 				BB9AEB08292ABA9000294B3F /* UIControl+TestHelpers.swift */,
 				BB9AEB18292B90E500294B3F /* UIView+TestHelpers.swift */,
+				BB9AEB1A292BEE4A00294B3F /* XCTestCase+TestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB9AEB1B292BEE4A00294B3F /* XCTestCase+TestHelpers.swift in Sources */,
 				BB9AEB02292AAF0500294B3F /* ArtworksUIIntegrationTests.swift in Sources */,
 				BB9AEAF6292AAA0000294B3F /* SceneDelegateTests.swift in Sources */,
 				BB9AEB07292ABA7100294B3F /* UIRefreshControler+TestHelpers.swift in Sources */,
