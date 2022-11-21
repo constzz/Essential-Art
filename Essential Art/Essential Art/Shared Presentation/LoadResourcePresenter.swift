@@ -33,6 +33,17 @@ public final class LoadResourcePresenter<Resource, View: ResourceView> {
         self.mapper = mapper
     }
     
+    public init(
+        loadingView: ResourceLoadingView,
+        errorView: ResourceErrorView,
+        resourceView: View
+    ) where Resource == View.ResourceViewModel {
+        self.loadingView = loadingView
+        self.errorView = errorView
+        self.resourceView = resourceView
+        self.mapper = { $0 }
+    }
+    
     public static var loadError: String {
         NSLocalizedString("GENERIC_CONNECTION_ERROR",
                           tableName: "Shared",
