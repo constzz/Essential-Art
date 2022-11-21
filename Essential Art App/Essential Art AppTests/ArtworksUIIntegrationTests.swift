@@ -152,6 +152,34 @@ class ArtworksUIIntegrationTests: XCTestCase {
         sut.simulateErrorViewTap()
         XCTAssertEqual(sut.errorMessage, nil)
     }
+    
+    // MARK: - Load More Tests
+    
+    func test_loadMoreActions_requestMoreFromLoader() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading()
+        
+        XCTAssertEqual(loader.loadMoreCallCount, 0, "Expected no requests before until load more action")
+        
+        sut.simulateLoadMoreArtworksAction()
+        XCTAssertEqual(loader.loadMoreCallCount, 1, "Expected load more request")
+        
+        sut.simulateLoadMoreArtworksAction()
+        XCTAssertEqual(loader.loadMoreCallCount, 1, "Expected no request while loading more")
+        
+        loader.completeLoadMore(lastPage: false, at: 0)
+        sut.simulateLoadMoreArtworksAction()
+        XCTAssertEqual(loader.loadMoreCallCount, 2, "Expected request after load more completed with more pages")
+        
+        loader.completeArtworksLoadingMoreWithError(at: 1)
+        sut.simulateLoadMoreArtworksAction()
+        XCTAssertEqual(loader.loadMoreCallCount, 3, "Expected request after load more failure")
+        
+        loader.completeLoadMore(lastPage: true, at: 2)
+        sut.simulateLoadMoreArtworksAction()
+        XCTAssertEqual(loader.loadMoreCallCount, 3, "Expected no request after loading all pages")
+    }
 
 
     private func makeArtwork(title: String, artist: String, url: URL = URL(string: "http://any-url.com")!) -> Artwork {
@@ -194,10 +222,7 @@ private extension ListViewController {
     }
     
     func simulateLoadMoreArtworksAction() {
-        guard let view = loadMoreFeedCell() else {
-            assertionFailure("Expected load more cell non-nil")
-            return
-        }
+        guard let view = loadMoreFeedCell() else { return }
         
         let delegate = tableView.delegate
         let index = IndexPath(row: 0, section: loadMoreSection)
@@ -277,6 +302,10 @@ private extension ArtworksUIIntegrationTests {
             return artworksRequests.count
         }
         
+        var loadMoreCallCount: Int {
+            loadMoreRequests.count
+        }
+        
         func loadPublisher() -> AnyPublisher<Paginated<Artwork>, Error> {
             let publisher = PassthroughSubject<Paginated<Artwork>, Error>()
             artworksRequests.append(publisher)
@@ -296,6 +325,10 @@ private extension ArtworksUIIntegrationTests {
                 loadMorePublisher: lastPage ? nil : { [weak self] in
                     self?.loadMorePublisher() ?? Empty().eraseToAnyPublisher()
                 }))
+        }
+        
+        func completeArtworksLoadingMoreWithError(at index: Int = 0) {
+            loadMoreRequests[index].send(completion: .failure(NSError(domain: "any-error", code: 0)))
         }
         
         func completeArtworksLoadingWithError(at index: Int = 0) {
