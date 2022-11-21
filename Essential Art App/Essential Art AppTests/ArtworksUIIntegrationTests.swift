@@ -487,10 +487,25 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry when image loads successfully after view becomes visible again")
         XCTAssertEqual(view0?.isShowingImageLoadingIndicator, false, "Expected no loading indicator when image loads successfully after view becomes visible again")
     }
+    
+    func test_artworkImageView_doesNotRenderLoadedImageWhenNotVisibleAnymore() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [makeArtwork()])
+        
+        let view = sut.simulateArtworkImageViewIsNotVisible(at: 0)
+        loader.completeArtworksImageLoading(with: anyImageData())
+        
+        XCTAssertNil(view?.renderedImage, "Expected no rendered image when an image load finishes after the view is not visible anymore")
+    }
 
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
         return Artwork(title: title, imageURL: url, artist: artist)
+    }
+    
+    private func anyImageData() -> Data {
+        return UIImage.make(withColor: .red).pngData()!
     }
     
     private class DummyView: ResourceView {
