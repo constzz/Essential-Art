@@ -203,6 +203,19 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertFalse(sut.isShowingLoadMoreArtworksIndicator, "Expected no loading indicator once user initiated loading completes with error")
     }
 
+    func test_loadMoreCompletion_dispatchesFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(at: 0)
+        sut.simulateLoadMoreArtworksAction()
+        
+        let exp = expectation(description: "Wait for background queue")
+        DispatchQueue.global().async {
+            loader.completeLoadMore()
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
 
 
     private func makeArtwork(title: String, artist: String, url: URL = URL(string: "http://any-url.com")!) -> Artwork {
