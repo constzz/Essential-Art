@@ -284,6 +284,23 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertEqual(loader.cancelledImageURLs, [artwork0.imageURL, artwork1.imageURL], "Expected two cancelled image URL requests once second image is also not visible anymore")
     }
 
+    func test_artworkImageView_reloadsImageURLWhenBecomingVisibleAgain() {
+        let artwork0 = makeArtwork(url: URL(string: "http://url-0.com")!)
+        let artwork1 = makeArtwork(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [artwork0, artwork1])
+        
+        sut.simulateFeedImageBecomingVisibleAgain(at: 0)
+        
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork0.imageURL], "Expected two image URL request after first view becomes visible again")
+        
+        sut.simulateFeedImageBecomingVisibleAgain(at: 1)
+        
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork0.imageURL, artwork1.imageURL, artwork1.imageURL], "Expected two new image URL request after second view becomes visible again")
+    }
+
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
         return Artwork(title: title, imageURL: url, artist: artist)
@@ -326,7 +343,17 @@ private extension ListViewController {
         delegate?.tableView?(tableView, didEndDisplaying: view!, forRowAt: index)
         
         return view
-
+    }
+    
+    @discardableResult
+    func simulateFeedImageBecomingVisibleAgain(at row: Int) -> ArworkItemCell? {
+        let view = simulateArtworkImageViewIsNotVisible(at: row)
+        
+        let delegate = tableView.delegate
+        let index = IndexPath(row: row, section: artworksSection)
+        delegate?.tableView?(tableView, willDisplay: view!, forRowAt: index)
+        
+        return view
     }
     
     var loadMoreArtworksErrorMessage: String? {
