@@ -64,6 +64,7 @@ extension ArtworksItemCellController: UITableViewDataSource, UITableViewDelegate
     }
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.cell = cell as? ArworkItemCell
         delegate.didRequestImage()
     }
     
