@@ -351,6 +351,33 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertEqual(view1?.renderedImage, imageData1, "Expected image for second view once second image loading completes successfully")
     }
 
+    func test_artworkImageViewRetryButton_isVisibleOnImageURLLoadError() {
+        let artwork0 = makeArtwork(url: URL(string: "http://url-0.com")!)
+        let artwork1 = makeArtwork(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [artwork0, artwork1])
+
+        let view0 = sut.simulateArtworkImageViewVisible(at: 0)
+        let view1 = sut.simulateArtworkImageViewVisible(at: 1)
+        XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action for first view while loading first image")
+        XCTAssertEqual(view1?.isShowingRetryAction, false, "Expected no retry action for second view while loading second image")
+        
+        let imageData = UIImage.make(withColor: .red).pngData()!
+        loader.completeArtworksImageLoading(with: imageData, at: 0)
+        XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action for first view once first image loading completes successfully")
+        XCTAssertEqual(view1?.isShowingRetryAction, false, "Expected no retry action state change for second view once first image loading completes successfully")
+        
+        loader.completeArtworksImageLoadingWithError(at: 1)
+        XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action state change for first view once second image loading completes with error")
+        XCTAssertEqual(view1?.isShowingRetryAction, true, "Expected retry action for second view once second image loading completes with error")
+        
+        view1?.simulateRetryAction()
+        XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action state change for first view on  second image retry")
+        XCTAssertEqual(view1?.isShowingRetryAction, false, "Expected no retry action for second view on retry")
+    }
+
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
         return Artwork(title: title, imageURL: url, artist: artist)
@@ -378,6 +405,11 @@ class ArtworksUIIntegrationTests: XCTestCase {
 }
 
 private extension ArworkItemCell {
+    
+    var isShowingRetryAction: Bool {
+        artworkImageRetryButton.isHidden == false
+    }
+    
     var isShowingImageLoadingIndicator: Bool {
         artworkImageView.isShimmering
     }
@@ -592,6 +624,10 @@ private extension ArtworksUIIntegrationTests {
             imageRequests[index].publisher.send(completion: .finished)
         }
 
+
+        func completeArtworksImageLoadingWithError(at index: Int = 0) {
+            imageRequests[index].publisher.send(completion: .failure(NSError(domain: "any-error", code: 0)))
+        }
 
     }
 }
