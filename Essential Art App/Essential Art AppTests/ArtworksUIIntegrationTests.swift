@@ -77,6 +77,26 @@ class ArtworksUIIntegrationTests: XCTestCase {
         loader.completeArtworksLoading(with: [artwork0, artwork1], at: 1)
         assertThat(sut, isRendering: [artwork0, artwork1])
     }
+    
+    func test_loadArtworksCompletion_rendersSuccessfullyLoadedEmptArtworksAfterNonEmptyArtworks() {
+        let artwork0 = makeArtwork(title: "some title", artist: "any artiss")
+        let artwork1 = makeArtwork(title: "The best", artist: "All-star")
+
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [artwork0], at: 0)
+        assertThat(sut, isRendering: [artwork0])
+        
+        sut.simulateLoadMoreArtworksAction()
+        loader.completeLoadMore(with: [artwork0, artwork1], at: 0)
+        assertThat(sut, isRendering: [artwork0, artwork1])
+        
+        sut.simulateUserInitiatedReload()
+        loader.completeArtworksLoading(with: [], at: 1)
+        assertThat(sut, isRendering: [])
+    }
+
 
     private func makeArtwork(title: String, artist: String, url: URL = URL(string: "http://any-url.com")!) -> Artwork {
         return Artwork(title: title, imageURL: url, artist: artist)
