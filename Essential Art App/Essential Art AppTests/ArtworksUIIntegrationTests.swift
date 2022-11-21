@@ -499,6 +499,21 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertNil(view?.renderedImage, "Expected no rendered image when an image load finishes after the view is not visible anymore")
     }
 
+    func test_loadImageDataCompletion_dispatchesFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [makeArtwork()])
+        sut.simulateArtworkImageViewVisible(at: 0)
+        
+        let exp = expectation(description: "Wait for background queue")
+        let anyImageData = anyImageData()
+        DispatchQueue.global().async {
+            loader.completeArtworksImageLoading(with: anyImageData, at: 0)
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
         return Artwork(title: title, imageURL: url, artist: artist)
