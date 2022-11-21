@@ -62,7 +62,7 @@ class Essential_Art_API_EndToEnd_Tests: XCTestCase {
     private var baseURL = URL(string:"https://api.artic.edu")!
     
     private func getArtworks(limit: Int) -> Swift.Result<[Artwork], Error> {
-        let url = ArticEndpoint.get.url(baseURL: baseURL)
+        let url = ArticEndpoint.get(page: 0, limit: limit).url(baseURL: baseURL)
             .appendingPathComponent("/search")
             .appending([
                 URLQueryItem(name: "limit", value: String(limit)),
