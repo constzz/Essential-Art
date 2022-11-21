@@ -16,7 +16,7 @@ public protocol ArtworksItemCellControllerDelegate {
 public final class ArtworksItemCellController: NSObject {
     public typealias ResourceViewModel = UIImage
     
-    private let viewModel: ArworkItemViewModel
+    private let viewModel: ArtworkItemViewModel
     private let delegate: ArtworksItemCellControllerDelegate
     private let selection: () -> Void
     private var cell: ArworkItemCell? {
@@ -27,13 +27,13 @@ public final class ArtworksItemCellController: NSObject {
         }
     }
         
-    public init(viewModel: ArworkItemViewModel, delegate: ArtworksItemCellControllerDelegate, selection: @escaping () -> Void) {
+    public init(viewModel: ArtworkItemViewModel, delegate: ArtworksItemCellControllerDelegate, selection: @escaping () -> Void) {
         self.viewModel = viewModel
         self.delegate = delegate
         self.selection = selection
     }
     
-    private func updateCell(_ cell: ArworkItemCell, withViewModel viewModel: ArworkItemViewModel) {
+    private func updateCell(_ cell: ArworkItemCell, withViewModel viewModel: ArtworkItemViewModel) {
         cell.artistLabel.text = viewModel.artist
         cell.titleLabel.text = viewModel.title
         

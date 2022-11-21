@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ArworkItemViewModel {
+public struct ArtworkItemViewModel {
     public let title: String
     public let artist: String
     
