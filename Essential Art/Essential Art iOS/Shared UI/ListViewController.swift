@@ -38,7 +38,6 @@ extension CellController: Hashable {
 
 
 public class ListViewController: UITableViewController, UITableViewDataSourcePrefetching, ResourceLoadingView, ResourceErrorView {
-    
     private lazy var dataSource: UITableViewDiffableDataSource<Int, CellController> = {
         .init(tableView: tableView) { (tableView, index, controller) in
             controller.dataSource.tableView(tableView, cellForRowAt: index)
@@ -79,7 +78,7 @@ public class ListViewController: UITableViewController, UITableViewDataSourcePre
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return refreshControl
     }
-    
+
     public func display(_ sections: [CellController]...) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, CellController>()
         sections.enumerated().forEach { section, cellControllers in
