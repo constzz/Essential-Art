@@ -514,6 +514,33 @@ class ArtworksUIIntegrationTests: XCTestCase {
         }
         wait(for: [exp], timeout: 1.0)
     }
+    
+    func test_artworkImageView_doesNotLoadImageAgainUntilPreviousRequestCompletes() {
+        let artwork = makeArtwork(url: URL(string: "http://url-0.com")!)
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [artwork])
+        
+        sut.simulateArtworkViewNearVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork.imageURL], "Expected first request when near visible")
+        
+        sut.simulateArtworkImageViewVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork.imageURL], "Expected no request until previous completes")
+        
+        loader.completeArtworksImageLoading(at: 0)
+        sut.simulateArtworkImageViewVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork.imageURL, artwork.imageURL], "Expected second request when visible after previous complete")
+        
+        sut.simulateArtworkImageViewIsNotVisible(at: 0)
+        sut.simulateArtworkImageViewVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork.imageURL, artwork.imageURL, artwork.imageURL], "Expected third request when visible after canceling previous complete")
+        
+        sut.simulateLoadMoreArtworksAction()
+        loader.completeLoadMore(with: [artwork, makeArtwork()])
+        sut.simulateArtworkImageViewVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork.imageURL, artwork.imageURL, artwork.imageURL], "Expected no request until previous completes")
+    }
+
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
         return Artwork(title: title, imageURL: url, artist: artist)
