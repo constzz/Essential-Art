@@ -113,6 +113,18 @@ class ArtworksUIIntegrationTests: XCTestCase {
         loader.completeArtworksLoadingWithError(at: 0)
         assertThat(sut, isRendering: [artwork0])
     }
+    
+    func test_loadArtworksCompletion_dispatchesFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        let exp = expectation(description: "Wait for background queue")
+        DispatchQueue.global().async {
+            loader.completeArtworksLoading(at: 0)
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
 
 
     private func makeArtwork(title: String, artist: String, url: URL = URL(string: "http://any-url.com")!) -> Artwork {
