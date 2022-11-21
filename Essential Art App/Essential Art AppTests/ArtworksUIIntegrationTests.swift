@@ -292,11 +292,11 @@ class ArtworksUIIntegrationTests: XCTestCase {
         sut.loadViewIfNeeded()
         loader.completeArtworksLoading(with: [artwork0, artwork1])
         
-        sut.simulateFeedImageBecomingVisibleAgain(at: 0)
+        sut.simulateArtworkImageBecomingVisibleAgain(at: 0)
         
         XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork0.imageURL], "Expected two image URL request after first view becomes visible again")
         
-        sut.simulateFeedImageBecomingVisibleAgain(at: 1)
+        sut.simulateArtworkImageBecomingVisibleAgain(at: 1)
         
         XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork0.imageURL, artwork1.imageURL, artwork1.imageURL], "Expected two new image URL request after second view becomes visible again")
     }
@@ -467,6 +467,26 @@ class ArtworksUIIntegrationTests: XCTestCase {
         XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action after image preloads successfully")
         XCTAssertEqual(view0?.isShowingImageLoadingIndicator, false, "Expected no loading indicator after image preloads successfully")
     }
+    
+    func test_artworkImageView_configuresViewCorrectlyWhenCellBecomingVisibleAgain() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: [makeArtwork()])
+        
+        let view0 = sut.simulateArtworkImageBecomingVisibleAgain(at: 0)
+        
+        XCTAssertEqual(view0?.renderedImage, nil, "Expected no rendered image when view becomes visible again")
+        XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action when view becomes visible again")
+        XCTAssertEqual(view0?.isShowingImageLoadingIndicator, true, "Expected loading indicator when view becomes visible again")
+        
+        let imageData = UIImage.make(withColor: .red).pngData()!
+        loader.completeArtworksImageLoading(with: imageData, at: 1)
+        
+        XCTAssertEqual(view0?.renderedImage, imageData, "Expected rendered image when image loads successfully after view becomes visible again")
+        XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry when image loads successfully after view becomes visible again")
+        XCTAssertEqual(view0?.isShowingImageLoadingIndicator, false, "Expected no loading indicator when image loads successfully after view becomes visible again")
+    }
 
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
@@ -546,7 +566,7 @@ private extension ListViewController {
     }
     
     @discardableResult
-    func simulateFeedImageBecomingVisibleAgain(at row: Int) -> ArworkItemCell? {
+    func simulateArtworkImageBecomingVisibleAgain(at row: Int) -> ArworkItemCell? {
         let view = simulateArtworkImageViewIsNotVisible(at: row)
         
         let delegate = tableView.delegate
