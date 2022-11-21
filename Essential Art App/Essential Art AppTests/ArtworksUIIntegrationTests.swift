@@ -8,7 +8,7 @@
 import Foundation
 import XCTest
 import Combine
-import Essential_Art_iOS
+@testable import Essential_Art_iOS
 import Essential_Art_App
 import Essential_Art
 
@@ -55,6 +55,32 @@ class ArtworksUIIntegrationTests: XCTestCase {
         loader.completeArtworksLoadingWithError(at: 1)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
     }
+        
+    func test_loadArtworksCompletion_rendersSuccessfullyLoadedArtworks() {
+        let artwork0 = makeArtwork(title: "some title", artist: "any artiss")
+        let artwork1 = makeArtwork(title: "The best", artist: "All-star")
+        let artwork2 = makeArtwork(title: "Another one", artist: "Leonardo")
+        
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        assertThat(sut, isRendering: [])
+        
+        loader.completeArtworksLoading(with: [artwork0, artwork1], at: 0)
+        assertThat(sut, isRendering: [artwork0, artwork1])
+        
+        sut.simulateLoadMoreArtworksAction()
+        loader.completeLoadMore(with: [artwork2, artwork0, artwork1], at: 0)
+        assertThat(sut, isRendering: [artwork2, artwork0, artwork1])
+        
+        sut.simulateUserInitiatedReload()
+        loader.completeArtworksLoading(with: [artwork0, artwork1], at: 1)
+        assertThat(sut, isRendering: [artwork0, artwork1])
+    }
+
+    private func makeArtwork(title: String, artist: String, url: URL = URL(string: "http://any-url.com")!) -> Artwork {
+        return Artwork(title: title, imageURL: url, artist: artist)
+    }
     
     private func makeSUT(
         file: StaticString = #file,
@@ -75,11 +101,78 @@ private extension ListViewController {
         refreshControl?.isRefreshing ?? false
     }
     
+    func simulateLoadMoreArtworksAction() {
+        guard let view = loadMoreFeedCell() else {
+            assertionFailure("Expected load more cell non-nil")
+            return
+        }
+        
+        let delegate = tableView.delegate
+        let index = IndexPath(row: 0, section: loadMoreSection)
+        delegate?.tableView?(tableView, willDisplay: view, forRowAt: index)
+    }
+    
+    func loadMoreFeedCell() -> LoadMoreCell? {
+        cell(row: 0, section: loadMoreSection) as? LoadMoreCell
+    }
+    
+    var loadMoreSection: Int { 1 }
+    
     func simulateUserInitiatedReload() {
         refreshControl?.simulatePullToRefresh()
     }
+    
+    func numberOfRows(in section: Int) -> Int {
+        tableView.numberOfSections > section ? tableView.numberOfRows(inSection: section) : 0
+    }
+    
+    func cell(row: Int, section: Int) -> UITableViewCell? {
+        guard numberOfRows(in: section) > row else {
+            return nil
+        }
+        let ds = tableView.dataSource
+        let index = IndexPath(row: row, section: section)
+        return ds?.tableView(tableView, cellForRowAt: index)
+    }
 }
 
+// MARK: - ArtworksUIIntegrationTests + Assertions
+private extension ArtworksUIIntegrationTests {
+    
+    var artworksSection: Int { 0 }
+    
+    func assertThat(_ sut: ListViewController, isRendering artworks: [Artwork], file: StaticString = #filePath, line: UInt = #line) {
+        sut.view.enforceLayoutCycle()
+        
+        guard sut.numberOfRows(in: artworksSection) == artworks.count else {
+            return XCTFail("Expected \(artworks.count) images, got \(sut.numberOfRows(in: artworksSection)) instead.", file: file, line: line)
+        }
+        
+        artworks.enumerated().forEach { index, image in
+            assertThat(sut, hasViewConfiguredFor: image, at: index, file: file, line: line)
+        }
+        
+        executeRunLoopToCleanUpReferences()
+    }
+    
+    func assertThat(_ sut: ListViewController, hasViewConfiguredFor artwork: Artwork, at index: Int, file: StaticString = #filePath, line: UInt = #line) {
+        let view = sut.cell(row: index, section: artworksSection)
+        
+        guard let cell = view as? ArworkItemCell else {
+            return XCTFail("Expected \(ArworkItemCell.self) instance, got \(String(describing: view)) instead", file: file, line: line)
+        }
+        
+        XCTAssertEqual(cell.artistLabel.text, artwork.artist, file: file, line: line)
+        XCTAssertEqual(cell.titleLabel.text, artwork.title, file: file, line: line)
+    }
+    
+    private func executeRunLoopToCleanUpReferences() {
+        RunLoop.current.run(until: Date())
+    }
+
+}
+
+// MARK: - ArtworksUIIntegrationTests + LoaderSy
 private extension ArtworksUIIntegrationTests {
     
     class LoaderSpy {
@@ -103,6 +196,14 @@ private extension ArtworksUIIntegrationTests {
                 self?.loadMorePublisher() ?? Empty().eraseToAnyPublisher()
             }))
             artworksRequests[index].send(completion: .finished)
+        }
+        
+        func completeLoadMore(with artworks: [Artwork] = [], lastPage: Bool = false, at index: Int = 0) {
+            loadMoreRequests[index].send(Paginated(
+                items: artworks,
+                loadMorePublisher: lastPage ? nil : { [weak self] in
+                    self?.loadMorePublisher() ?? Empty().eraseToAnyPublisher()
+                }))
         }
         
         func completeArtworksLoadingWithError(at index: Int = 0) {
