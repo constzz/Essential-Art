@@ -20,6 +20,11 @@
 		BB9AEB00292AAE8C00294B3F /* ArtworksUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEAFF292AAE8C00294B3F /* ArtworksUIComposer.swift */; };
 		BB9AEB02292AAF0500294B3F /* ArtworksUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB01292AAF0500294B3F /* ArtworksUIIntegrationTests.swift */; };
 		BB9AEB04292AB44500294B3F /* LoadResourcePresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB03292AB44500294B3F /* LoadResourcePresentationAdapter.swift */; };
+		BB9AEB07292ABA7100294B3F /* UIRefreshControler+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB06292ABA7100294B3F /* UIRefreshControler+TestHelpers.swift */; };
+		BB9AEB09292ABA9000294B3F /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB08292ABA9000294B3F /* UIControl+TestHelpers.swift */; };
+		BB9AEB11292ACC4800294B3F /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB10292ACC4800294B3F /* WeakRefVirtualProxy.swift */; };
+		BB9AEB13292ACC6100294B3F /* ArtworksViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB12292ACC6100294B3F /* ArtworksViewAdapter.swift */; };
+		BB9AEB15292ACC7400294B3F /* CombineHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB14292ACC7400294B3F /* CombineHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +67,11 @@
 		BB9AEAFF292AAE8C00294B3F /* ArtworksUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksUIComposer.swift; sourceTree = "<group>"; };
 		BB9AEB01292AAF0500294B3F /* ArtworksUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksUIIntegrationTests.swift; sourceTree = "<group>"; };
 		BB9AEB03292AB44500294B3F /* LoadResourcePresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadResourcePresentationAdapter.swift; sourceTree = "<group>"; };
+		BB9AEB06292ABA7100294B3F /* UIRefreshControler+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControler+TestHelpers.swift"; sourceTree = "<group>"; };
+		BB9AEB08292ABA9000294B3F /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
+		BB9AEB10292ACC4800294B3F /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
+		BB9AEB12292ACC6100294B3F /* ArtworksViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksViewAdapter.swift; sourceTree = "<group>"; };
+		BB9AEB14292ACC7400294B3F /* CombineHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,13 +117,16 @@
 			isa = PBXGroup;
 			children = (
 				BB9AEAFF292AAE8C00294B3F /* ArtworksUIComposer.swift */,
+				BB9AEB12292ACC6100294B3F /* ArtworksViewAdapter.swift */,
 				BB0ABE14292A7F4D00280336 /* AppDelegate.swift */,
+				BB9AEB14292ACC7400294B3F /* CombineHelpers.swift */,
 				BB0ABE16292A7F4D00280336 /* SceneDelegate.swift */,
 				BB0ABE18292A7F4D00280336 /* ViewController.swift */,
 				BB0ABE1D292A7F4E00280336 /* Assets.xcassets */,
 				BB0ABE1F292A7F4E00280336 /* LaunchScreen.storyboard */,
 				BB0ABE22292A7F4E00280336 /* Info.plist */,
 				BB9AEB03292AB44500294B3F /* LoadResourcePresentationAdapter.swift */,
+				BB9AEB10292ACC4800294B3F /* WeakRefVirtualProxy.swift */,
 			);
 			path = "Essential Art App";
 			sourceTree = "<group>";
@@ -121,6 +134,7 @@
 		BB0ABE64292AA97E00280336 /* Essential Art AppTests */ = {
 			isa = PBXGroup;
 			children = (
+				BB9AEB05292ABA5F00294B3F /* Helpers */,
 				BB9AEB01292AAF0500294B3F /* ArtworksUIIntegrationTests.swift */,
 				BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */,
 			);
@@ -134,6 +148,15 @@
 				BB9AEAF9292AAD3A00294B3F /* Essential_Art.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BB9AEB05292ABA5F00294B3F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BB9AEB06292ABA7100294B3F /* UIRefreshControler+TestHelpers.swift */,
+				BB9AEB08292ABA9000294B3F /* UIControl+TestHelpers.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,7 +265,10 @@
 				BB0ABE15292A7F4D00280336 /* AppDelegate.swift in Sources */,
 				BB9AEB04292AB44500294B3F /* LoadResourcePresentationAdapter.swift in Sources */,
 				BB9AEB00292AAE8C00294B3F /* ArtworksUIComposer.swift in Sources */,
+				BB9AEB13292ACC6100294B3F /* ArtworksViewAdapter.swift in Sources */,
+				BB9AEB11292ACC4800294B3F /* WeakRefVirtualProxy.swift in Sources */,
 				BB0ABE17292A7F4D00280336 /* SceneDelegate.swift in Sources */,
+				BB9AEB15292ACC7400294B3F /* CombineHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +278,8 @@
 			files = (
 				BB9AEB02292AAF0500294B3F /* ArtworksUIIntegrationTests.swift in Sources */,
 				BB9AEAF6292AAA0000294B3F /* SceneDelegateTests.swift in Sources */,
+				BB9AEB07292ABA7100294B3F /* UIRefreshControler+TestHelpers.swift in Sources */,
+				BB9AEB09292ABA9000294B3F /* UIControl+TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
