@@ -18,6 +18,8 @@ public final class ArtworkDetailImageController: UIViewController, ResourceView,
         super.viewDidLoad()
         view.addSubview(header)
         header.pinToSuperView()
+        
+        header.onRetry = delegate?.didRequestImage
     }
     
     deinit {
@@ -35,11 +37,18 @@ public final class ArtworkDetailImageController: UIViewController, ResourceView,
     }
     
     public func display(_ viewModel: ResourceErrorViewModel) {
-        print(viewModel.errorMessage)
+        header.retryButton.isHidden = viewModel.errorMessage == nil
     }
 }
 
 final class ArtworkDetailHeaderView: StretchyTableHeaderView {
+    
+    lazy var retryButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
+        button.setTitle(ArtworkPresenter.retryButtonTitle, for: .normal)
+        return button
+    }()
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -50,6 +59,12 @@ final class ArtworkDetailHeaderView: StretchyTableHeaderView {
         imageView.backgroundColor = .systemGray
         return imageView
     }()
+    
+    @objc private func retryButtonTapped() {
+        onRetry?()
+    }
+    
+    var onRetry: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,6 +78,10 @@ final class ArtworkDetailHeaderView: StretchyTableHeaderView {
     
     private func configureUI() {
         contentView.addSubview(imageView)
+        contentView.add(view: retryButton, constraints: [
+            retryButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            retryButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+        ])
         
         imageView.pinToSuperView()
     }
