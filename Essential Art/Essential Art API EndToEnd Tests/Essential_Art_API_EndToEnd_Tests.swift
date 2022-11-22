@@ -102,6 +102,11 @@ class Essential_Art_API_EndToEnd_Tests: XCTestCase {
 
 }
 
+private extension Artwork {
+    init(title: String, imageURL: URL, artist: String) {
+        self.init(title: title, imageURL: imageURL, artist: artist, id: UUID().hashValue)
+    }
+}
 
 private extension URL {
     /// Returns a new URL by adding the query items, or nil if the URL doesn't support it.

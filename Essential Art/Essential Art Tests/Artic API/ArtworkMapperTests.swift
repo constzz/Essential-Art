@@ -71,17 +71,20 @@ class ArtworkMapperTests: XCTestCase {
         urlSuffix: String,
         artist: String
     ) -> (model: Artwork, json: [String: Any]) {
+        let id = UUID().hashValue
         
         let json = [
             "image_id": imageID,
             "artist_display": artist,
-            "title": title
+            "title": title,
+            "id": id
         ].compactMapValues({$0})
         
         let artwork = Artwork(
             title: title,
             imageURL: baseURL.appendingPathComponent(imageID).appendingPathComponent(urlSuffix),
-            artist: artist)
+            artist: artist,
+            id: id)
         
         return (artwork, json)
     }

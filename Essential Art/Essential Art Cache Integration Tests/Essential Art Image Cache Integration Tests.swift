@@ -82,7 +82,7 @@ class Essential_Art_ImageCacheIntegrationTests: XCTestCase, ArtworksCacheIntegra
     }
     
     private func artwork(withImageURL imageURL: URL) -> Artwork {
-        Artwork(title: "", imageURL: imageURL, artist: "")
+        Artwork(title: "", imageURL: imageURL, artist: "", id: UUID().hashValue)
     }
     
     private func expect(

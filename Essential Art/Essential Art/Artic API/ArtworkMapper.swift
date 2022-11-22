@@ -30,6 +30,7 @@ public final class ArtworkMapper {
     }
     
     private struct ArtworkModel: Decodable {
+        let id: Int
         let imageID: String
         let title: String
         let artist: String
@@ -40,11 +41,11 @@ public final class ArtworkMapper {
                 .appendingPathComponent("/\(imageID)")
                 .appendingPathComponent("/full/843,/0/default.jpg")
 
-            return Artwork(title: title, imageURL: imageURL, artist: artist)
+            return Artwork(title: title, imageURL: imageURL, artist: artist, id: id)
         }
         
         private enum CodingKeys: String, CodingKey {
-            case imageID = "image_id", title, artist = "artist_display"
+            case imageID = "image_id", title, artist = "artist_display", id
         }
     }
     

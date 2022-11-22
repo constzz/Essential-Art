@@ -12,7 +12,7 @@ import Essential_Art
 class ArtworkDetailEndpointTests: XCTestCase {
     func test_artworkDetail_endpointURL() {
         let baseURL = URL(string: "http://base-url.com")!
-        let imageID = "39393"
+        let imageID = 39393
         
         let sut = ArtworkDetailEndpoint.get(id: imageID).url(baseURL: baseURL)
         

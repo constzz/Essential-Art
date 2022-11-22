@@ -13,4 +13,5 @@ class ManagedArtwork: NSManagedObject {
     @NSManaged var artist: String
     @NSManaged var imageURL: URL
     @NSManaged var title: String
+    @NSManaged var id: Int
 }

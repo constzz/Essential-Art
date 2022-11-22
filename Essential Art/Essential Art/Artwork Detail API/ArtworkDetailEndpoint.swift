@@ -8,7 +8,7 @@
 import Foundation
 
 public enum ArtworkDetailEndpoint {
-    case get(id: String)
+    case get(id: Int)
     
     public func url(baseURL: URL) -> URL {
         switch self {
