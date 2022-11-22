@@ -6,18 +6,19 @@
 //
 
 import Foundation
+import UIKit
 
 public final class ArticImageDataMapper {
     public enum Error: Swift.Error {
         case invalidData
     }
     
-    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> Data {
-        guard response.statusCode == 200, !data.isEmpty else {
+    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> (image: UIImage, response: HTTPURLResponse) {
+        guard response.statusCode == 200, !data.isEmpty, let image = UIImage(data: data) else {
             throw Error.invalidData
         }
         
-        return data
+        return (image, response)
     }
 }
 
