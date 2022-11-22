@@ -97,6 +97,17 @@
 		BB6DCE0D292CE0DF00D2AB06 /* ArtworkDetailMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE0C292CE0DF00D2AB06 /* ArtworkDetailMapperTests.swift */; };
 		BB6DCE11292CE5B100D2AB06 /* ArtworkDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE10292CE5B100D2AB06 /* ArtworkDetailViewModel.swift */; };
 		BB6DCE13292CE5D800D2AB06 /* ArtworkDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE12292CE5D800D2AB06 /* ArtworkDetailPresenter.swift */; };
+		BB6DCE22292CE77B00D2AB06 /* ArtworkDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE21292CE77B00D2AB06 /* ArtworkDetailController.swift */; };
+		BB6DCE25292CECD600D2AB06 /* ArtworkDetailSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE24292CECD600D2AB06 /* ArtworkDetailSnapshotTests.swift */; };
+		BB6DCE2E292D007500D2AB06 /* ViewControllerWithStackInScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE2D292D007500D2AB06 /* ViewControllerWithStackInScroll.swift */; };
+		BB6DCE31292D00CC00D2AB06 /* StretchyTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE30292D00CC00D2AB06 /* StretchyTableHeaderView.swift */; };
+		BB6DCE33292D00F700D2AB06 /* ArtworkDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE32292D00F700D2AB06 /* ArtworkDetailHeaderView.swift */; };
+		BB6DCE3B292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6DCE35292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light_extraExtraExtraLarge.png */; };
+		BB6DCE3C292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6DCE36292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_dark.png */; };
+		BB6DCE3D292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6DCE37292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light.png */; };
+		BB6DCE3E292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6DCE38292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_dark.png */; };
+		BB6DCE3F292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_light_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6DCE39292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_light_extraExtraExtraLarge.png */; };
+		BB6DCE40292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6DCE3A292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_light.png */; };
 		BB9AEB0B292ABBB000294B3F /* Paginated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB0A292ABBB000294B3F /* Paginated.swift */; };
 		BB9AEB0D292ACB1600294B3F /* ArtworkImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB0C292ACB1600294B3F /* ArtworkImagePresenter.swift */; };
 		BB9AEB17292B8D6E00294B3F /* UIRefreshControl+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB16292B8D6E00294B3F /* UIRefreshControl+Helpers.swift */; };
@@ -248,6 +259,17 @@
 		BB6DCE0C292CE0DF00D2AB06 /* ArtworkDetailMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailMapperTests.swift; sourceTree = "<group>"; };
 		BB6DCE10292CE5B100D2AB06 /* ArtworkDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailViewModel.swift; sourceTree = "<group>"; };
 		BB6DCE12292CE5D800D2AB06 /* ArtworkDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailPresenter.swift; sourceTree = "<group>"; };
+		BB6DCE21292CE77B00D2AB06 /* ArtworkDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailController.swift; sourceTree = "<group>"; };
+		BB6DCE24292CECD600D2AB06 /* ArtworkDetailSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailSnapshotTests.swift; sourceTree = "<group>"; };
+		BB6DCE2D292D007500D2AB06 /* ViewControllerWithStackInScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWithStackInScroll.swift; sourceTree = "<group>"; };
+		BB6DCE30292D00CC00D2AB06 /* StretchyTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyTableHeaderView.swift; sourceTree = "<group>"; };
+		BB6DCE32292D00F700D2AB06 /* ArtworkDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailHeaderView.swift; sourceTree = "<group>"; };
+		BB6DCE35292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light_extraExtraExtraLarge.png; sourceTree = "<group>"; };
+		BB6DCE36292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_dark.png; sourceTree = "<group>"; };
+		BB6DCE37292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light.png; sourceTree = "<group>"; };
+		BB6DCE38292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARTWORK_DETAIL_WITH_CONTENT_dark.png; sourceTree = "<group>"; };
+		BB6DCE39292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_light_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARTWORK_DETAIL_WITH_CONTENT_light_extraExtraExtraLarge.png; sourceTree = "<group>"; };
+		BB6DCE3A292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARTWORK_DETAIL_WITH_CONTENT_light.png; sourceTree = "<group>"; };
 		BB9AEB0A292ABBB000294B3F /* Paginated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paginated.swift; sourceTree = "<group>"; };
 		BB9AEB0C292ACB1600294B3F /* ArtworkImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkImagePresenter.swift; sourceTree = "<group>"; };
 		BB9AEB16292B8D6E00294B3F /* UIRefreshControl+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Helpers.swift"; sourceTree = "<group>"; };
@@ -340,6 +362,7 @@
 		BB04927B292401F000B136AB /* Essential Art iOS */ = {
 			isa = PBXGroup;
 			children = (
+				BB6DCE1F292CE75F00D2AB06 /* Artwork Detail UI */,
 				BB0492B32924D0BA00B136AB /* Artworks UI */,
 				BB0492812924031400B136AB /* Shared UI */,
 			);
@@ -352,6 +375,7 @@
 				BB0492B02924CA5C00B136AB /* Helpers */,
 				BB0492AD29241B9200B136AB /* Views */,
 				BB0492A0292418BF00B136AB /* ListViewController.swift */,
+				BB6DCE2D292D007500D2AB06 /* ViewControllerWithStackInScroll.swift */,
 			);
 			path = "Shared UI";
 			sourceTree = "<group>";
@@ -359,6 +383,7 @@
 		BB0492872924033000B136AB /* Essential Art iOS Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BB6DCE23292CECBC00D2AB06 /* Artwork Detail UI */,
 				BB0492B62924D11E00B136AB /* Artworks UI */,
 				BB0492902924033900B136AB /* Shared UI */,
 			);
@@ -743,6 +768,54 @@
 			path = "Artwork Detail Presentation";
 			sourceTree = "<group>";
 		};
+		BB6DCE1F292CE75F00D2AB06 /* Artwork Detail UI */ = {
+			isa = PBXGroup;
+			children = (
+				BB6DCE2F292D00BC00D2AB06 /* Views */,
+				BB6DCE20292CE76C00D2AB06 /* Controllers */,
+			);
+			path = "Artwork Detail UI";
+			sourceTree = "<group>";
+		};
+		BB6DCE20292CE76C00D2AB06 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BB6DCE21292CE77B00D2AB06 /* ArtworkDetailController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		BB6DCE23292CECBC00D2AB06 /* Artwork Detail UI */ = {
+			isa = PBXGroup;
+			children = (
+				BB6DCE34292D018F00D2AB06 /* snapshots */,
+				BB6DCE24292CECD600D2AB06 /* ArtworkDetailSnapshotTests.swift */,
+			);
+			path = "Artwork Detail UI";
+			sourceTree = "<group>";
+		};
+		BB6DCE2F292D00BC00D2AB06 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB6DCE30292D00CC00D2AB06 /* StretchyTableHeaderView.swift */,
+				BB6DCE32292D00F700D2AB06 /* ArtworkDetailHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BB6DCE34292D018F00D2AB06 /* snapshots */ = {
+			isa = PBXGroup;
+			children = (
+				BB6DCE35292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light_extraExtraExtraLarge.png */,
+				BB6DCE36292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_dark.png */,
+				BB6DCE37292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light.png */,
+				BB6DCE38292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_dark.png */,
+				BB6DCE39292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_light_extraExtraExtraLarge.png */,
+				BB6DCE3A292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_light.png */,
+			);
+			path = snapshots;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -953,13 +1026,19 @@
 				BB0492ED2925792C00B136AB /* ARTWORKS_WITH_LOAD_MORE_ERROR_extraExtraExtraLarge.png in Resources */,
 				BB0492EE2925792C00B136AB /* ARTWORKS_WITH_LOAD_MORE_ERROR_light.png in Resources */,
 				BB0492AB29241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png in Resources */,
+				BB6DCE3C292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_dark.png in Resources */,
+				BB6DCE3F292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_light_extraExtraExtraLarge.png in Resources */,
 				BB0492DF29256A1900B136AB /* ARTWORKS_WITH_FAILED_IMAGE_LOADING_light.png in Resources */,
 				BB0492AC29241B2100B136AB /* LIST_WITH_ERROR_MESSAGE_light.png in Resources */,
 				BB0492A529241A5800B136AB /* EMPTY_LIST_dark.png in Resources */,
+				BB6DCE3B292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light_extraExtraExtraLarge.png in Resources */,
 				BB0492D92925447400B136AB /* ARTWORKS_WITH_CONTENT_dark.png in Resources */,
 				BB0492EC2925792C00B136AB /* ARTWORKS_WITH_LOAD_MORE_ERROR_dark.png in Resources */,
 				BB0492E72925785D00B136AB /* ARTWORKS_WITH_LOAD_MORE_INDICATOR_dark.png in Resources */,
+				BB6DCE3D292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light.png in Resources */,
+				BB6DCE3E292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_dark.png in Resources */,
 				BB0492DA2925447400B136AB /* ARTWORKS_WITH_CONTENT_light_extraExtraExtraLarge.png in Resources */,
+				BB6DCE40292D018F00D2AB06 /* ARTWORK_DETAIL_WITH_CONTENT_light.png in Resources */,
 				BB0492E82925785D00B136AB /* ARTWORKS_WITH_LOAD_MORE_INDICATOR_light.png in Resources */,
 				BB0492D82925447400B136AB /* ARTWORKS_WITH_CONTENT_light.png in Resources */,
 			);
@@ -1004,13 +1083,17 @@
 			files = (
 				BB0492D3292543C700B136AB /* UIImageView+TestHelpers.swift in Sources */,
 				BB0492C42924DC5000B136AB /* UIImageView+Animations.swift in Sources */,
+				BB6DCE22292CE77B00D2AB06 /* ArtworkDetailController.swift in Sources */,
 				BB0492C62924DC6900B136AB /* UIView+Shimmering.swift in Sources */,
 				BB9AEB17292B8D6E00294B3F /* UIRefreshControl+Helpers.swift in Sources */,
 				BB0492BD2924D7F400B136AB /* ArworkItemCell.swift in Sources */,
 				BB0492BF2924D82400B136AB /* ArtworkItemCellController.swift in Sources */,
+				BB6DCE33292D00F700D2AB06 /* ArtworkDetailHeaderView.swift in Sources */,
+				BB6DCE2E292D007500D2AB06 /* ViewControllerWithStackInScroll.swift in Sources */,
 				BB0492B92924D15F00B136AB /* ArtworksController.swift in Sources */,
 				BB0492E4292576A400B136AB /* LoadMoreCellController.swift in Sources */,
 				BB0492B22924CA6900B136AB /* UIView+Extensions.swift in Sources */,
+				BB6DCE31292D00CC00D2AB06 /* StretchyTableHeaderView.swift in Sources */,
 				BB04930F2926C0E900B136AB /* UITableView+Extensions.swift in Sources */,
 				BB0492DC2925679000B136AB /* UIStackView+Extensions.swift in Sources */,
 				BB0492A1292418BF00B136AB /* ListViewController.swift in Sources */,
@@ -1027,6 +1110,7 @@
 				BB0492972924039D00B136AB /* UIViewController+Snapshot.swift in Sources */,
 				BB049299292403AE00B136AB /* XCTestCase+Snapshot.swift in Sources */,
 				BB0492B72924D13A00B136AB /* ArtworsSnapshotTests.swift in Sources */,
+				BB6DCE25292CECD600D2AB06 /* ArtworkDetailSnapshotTests.swift in Sources */,
 				BB0492952924038400B136AB /* UIImage+TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
