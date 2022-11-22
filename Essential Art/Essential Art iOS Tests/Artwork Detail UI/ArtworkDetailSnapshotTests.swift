@@ -37,9 +37,9 @@ class ArtworkDetailSnapshotTests: XCTestCase {
         
         sut.display(ResourceLoadingViewModel(isLoading: true))
         
-        record(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORK_DETAIL_LOADING_IMAGE_light")
-        record(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORK_DETAIL_LOADING_IMAGE_dark")
-        record(snapshot: sut.snapshot(for: .iPhone13(style: .light, contentSize: .extraExtraExtraLarge)), named: "ARTWORK_DETAIL_LOADING_IMAGE_light_extraExtraExtraLarge")
+        assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORK_DETAIL_LOADING_IMAGE_light")
+        assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORK_DETAIL_LOADING_IMAGE_dark")
+        assert(snapshot: sut.snapshot(for: .iPhone13(style: .light, contentSize: .extraExtraExtraLarge)), named: "ARTWORK_DETAIL_LOADING_IMAGE_light_extraExtraExtraLarge")
     }
 
     // MARK: - Helpers
