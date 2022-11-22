@@ -45,6 +45,7 @@ final class ArtworkDetailHeaderView: StretchyTableHeaderView {
     
     lazy var retryButton: UIButton = {
         let button = UIButton()
+        button.isHidden = true
         button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
         button.setTitle(ArtworkPresenter.retryButtonTitle, for: .normal)
         return button
