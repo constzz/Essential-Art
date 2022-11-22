@@ -31,11 +31,14 @@ public final class ArtworkMapper {
     
     private struct ArtworkModel: Decodable {
         let id: Int
-        let imageID: String
+        let imageID: String?
         let title: String
         let artist: String
         
         func artwork(withBaseURL baseURL: URL) throws -> Artwork {
+            guard let imageID = imageID else {
+                throw Error.invalidData
+            }
             
             let imageURL = baseURL
                 .appendingPathComponent("/\(imageID)")
