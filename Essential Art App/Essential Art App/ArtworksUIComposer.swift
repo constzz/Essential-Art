@@ -17,7 +17,7 @@ public final class ArtworksUIComposer {
     
     public static func artworksComposedWith(
         artworksLoader: @escaping () -> AnyPublisher<Paginated<Artwork>, Error>,
-        imageLoader: @escaping (URL) -> ArtworkImageDataLoader.Publisher,
+        imageLoader: @escaping (URL) -> ArtworkImageStore.Publisher,
         selection: @escaping (Artwork) -> Void = { _ in }
     ) -> ListViewController {
         let viewController = makeArtworksViewController(title: ArtworkPresenter.title)
@@ -43,23 +43,4 @@ public final class ArtworksUIComposer {
         return viewController
     }
     
-}
-
-public protocol ArtworkImageDataLoader {
-    func loadImageData(from url: URL) throws -> Data
-}
-
-extension ArtworkImageDataLoader {
-    public typealias Publisher = AnyPublisher<Data, Error>
-    
-    func loadImageDataPublisher(from url: URL) -> Publisher {
-        return Deferred {
-            Future { completion in
-                completion(Result {
-                    try self.loadImageData(from: url)
-                })
-            }
-        }
-        .eraseToAnyPublisher()
-    }
 }

@@ -8,7 +8,7 @@
 import XCTest
 import Essential_Art
 
-class Essential_Art_Cache_Integration_Tests: XCTestCase {
+class Essential_Art_Cache_Integration_Tests: XCTestCase, ArtworksCacheIntegrationTests {
     override func setUp() {
         super.setUp()
         deleteStoreArtifacts()
@@ -87,15 +87,7 @@ class Essential_Art_Cache_Integration_Tests: XCTestCase {
             XCTFail("Expected to load artworks, but recieved \(error) instead.")
         }
     }
-    
-    private func save(_ artworks: [Artwork], with loader: LocalArtworksLoader, file: StaticString = #file, line: UInt = #line) {
-        do {
-            try loader.save(artworks)
-        } catch {
-            XCTFail("Expected to save artworks successfully, got error: \(error)", file: file, line: line)
-        }
-    }
-    
+        
     private func validateCache(_ sut: LocalArtworksLoader, file: StaticString = #file, line: UInt = #line) {
         let result = Swift.Result { try sut.validateCache() }
         switch result {
@@ -106,15 +98,8 @@ class Essential_Art_Cache_Integration_Tests: XCTestCase {
         }
     }
     
-    private var testSpecificStoreURL: URL {
+    var testSpecificStoreURL: URL {
         return cacheDirectory.appendingPathComponent("\(type(of: self)).store")
     }
     
-    private var cacheDirectory: URL {
-        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
-    }
-    
-    private func deleteStoreArtifacts() {
-        try? FileManager.default.removeItem(at: testSpecificStoreURL)
-    }
 }

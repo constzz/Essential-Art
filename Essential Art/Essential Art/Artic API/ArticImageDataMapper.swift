@@ -12,12 +12,12 @@ public final class ArticImageDataMapper {
         case invalidData
     }
     
-    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> Data {
+    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> (data: Data, response: HTTPURLResponse) {
         guard response.statusCode == 200, !data.isEmpty else {
             throw Error.invalidData
         }
         
-        return data
+        return (data, response)
     }
 }
 

@@ -797,9 +797,11 @@ private extension ArtworksUIIntegrationTests {
         func loadImageDataPublisher(from url: URL) -> AnyPublisher<Data, Error> {
             let publisher = PassthroughSubject<Data, Error>()
             imageRequests.append((url, publisher))
-            return publisher.handleEvents(receiveCancel: { [weak self] in
-                self?.cancelledImageURLs.append(url)
-            }).eraseToAnyPublisher()
+            return publisher
+                .handleEvents(receiveCancel: { [weak self] in
+                    self?.cancelledImageURLs.append(url)
+                })
+                .eraseToAnyPublisher()
         }
         
         func completeArtworksImageLoading(with imageData: Data = Data(), at index: Int = 0) {

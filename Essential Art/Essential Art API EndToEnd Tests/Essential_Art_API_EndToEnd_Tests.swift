@@ -62,7 +62,7 @@ class Essential_Art_API_EndToEnd_Tests: XCTestCase {
     private var baseURL = URL(string:"https://api.artic.edu")!
     
     private func getArtworks(limit: Int) -> Swift.Result<[Artwork], Error> {
-        let url = ArticEndpoint.get.url(baseURL: baseURL)
+        let url = ArticEndpoint.get(page: 0, limit: limit).url(baseURL: baseURL)
             .appendingPathComponent("/search")
             .appending([
                 URLQueryItem(name: "limit", value: String(limit)),
@@ -76,7 +76,7 @@ class Essential_Art_API_EndToEnd_Tests: XCTestCase {
     func getArtowkImageData() -> Swift.Result<Data, Error> {
         let url = imageURLForID("25c31d8d-21a4-9ea1-1d73-6a2eca4dda7e")
         
-        return request(fromURL: url, mappingWith: ArticImageDataMapper.map)
+        return request(fromURL: url, mappingWith: { try ArticImageDataMapper.map($0, from: $1).data })
     }
     
     private func request<T>(fromURL url: URL, mappingWith mapper: @escaping (Data, HTTPURLResponse) throws -> T) -> Swift.Result<T, Error> {

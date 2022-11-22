@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class LocalArtworksLoader {
+public class LocalArtworksLoader: ArtworksCache {
     private let store: ArtworksStore
     private let currentDate:  () -> Date
     

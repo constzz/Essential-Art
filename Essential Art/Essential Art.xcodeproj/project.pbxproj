@@ -87,9 +87,15 @@
 		BB5EE0962922992800D6A84C /* ArtworksCacheHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE065291EB3F400D6A84C /* ArtworksCacheHelpers.swift */; };
 		BB5EE097292299C000D6A84C /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE062291E9C4300D6A84C /* SharedTestHelpers.swift */; };
 		BB5EE09A2923EAA800D6A84C /* LoadResourcePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EE0992923EAA800D6A84C /* LoadResourcePresenterTests.swift */; };
+		BB6DCDF9292CB90B00D2AB06 /* Essential Art Image Cache Integration Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCDF8292CB90B00D2AB06 /* Essential Art Image Cache Integration Tests.swift */; };
+		BB6DCDFB292CC34D00D2AB06 /* XCTestCase+ArtworkIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCDFA292CC34D00D2AB06 /* XCTestCase+ArtworkIntegrationTests.swift */; };
+		BB6DCDFE292CCE4600D2AB06 /* ArtworkImageMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCDFD292CCE4600D2AB06 /* ArtworkImageMapperTests.swift */; };
 		BB9AEB0B292ABBB000294B3F /* Paginated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB0A292ABBB000294B3F /* Paginated.swift */; };
 		BB9AEB0D292ACB1600294B3F /* ArtworkImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB0C292ACB1600294B3F /* ArtworkImagePresenter.swift */; };
 		BB9AEB17292B8D6E00294B3F /* UIRefreshControl+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB16292B8D6E00294B3F /* UIRefreshControl+Helpers.swift */; };
+		BB9AEB23292C0A1B00294B3F /* ArtworksCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB22292C0A1B00294B3F /* ArtworksCache.swift */; };
+		BB9AEB31292C180E00294B3F /* URLCache+ArtworkImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB30292C180E00294B3F /* URLCache+ArtworkImageStore.swift */; };
+		BB9AEB37292C1F0E00294B3F /* ArtworkImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB36292C1F0E00294B3F /* ArtworkImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -225,9 +231,15 @@
 		BB5EE08C2922966900D6A84C /* Essential Art Cache Integration Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Essential Art Cache Integration Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5EE08E2922966900D6A84C /* Essential_Art_Cache_Integration_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Essential_Art_Cache_Integration_Tests.swift; sourceTree = "<group>"; };
 		BB5EE0992923EAA800D6A84C /* LoadResourcePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadResourcePresenterTests.swift; sourceTree = "<group>"; };
+		BB6DCDF8292CB90B00D2AB06 /* Essential Art Image Cache Integration Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Essential Art Image Cache Integration Tests.swift"; sourceTree = "<group>"; };
+		BB6DCDFA292CC34D00D2AB06 /* XCTestCase+ArtworkIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+ArtworkIntegrationTests.swift"; sourceTree = "<group>"; };
+		BB6DCDFD292CCE4600D2AB06 /* ArtworkImageMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkImageMapperTests.swift; sourceTree = "<group>"; };
 		BB9AEB0A292ABBB000294B3F /* Paginated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paginated.swift; sourceTree = "<group>"; };
 		BB9AEB0C292ACB1600294B3F /* ArtworkImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkImagePresenter.swift; sourceTree = "<group>"; };
 		BB9AEB16292B8D6E00294B3F /* UIRefreshControl+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Helpers.swift"; sourceTree = "<group>"; };
+		BB9AEB22292C0A1B00294B3F /* ArtworksCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksCache.swift; sourceTree = "<group>"; };
+		BB9AEB30292C180E00294B3F /* URLCache+ArtworkImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLCache+ArtworkImageStore.swift"; sourceTree = "<group>"; };
+		BB9AEB36292C1F0E00294B3F /* ArtworkImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -564,6 +576,8 @@
 			isa = PBXGroup;
 			children = (
 				BB5EE02129183F7D00D6A84C /* Artwork.swift */,
+				BB9AEB22292C0A1B00294B3F /* ArtworksCache.swift */,
+				BB9AEB36292C1F0E00294B3F /* ArtworkImageCache.swift */,
 			);
 			path = "Artwork Feature";
 			sourceTree = "<group>";
@@ -573,6 +587,7 @@
 			children = (
 				BB5EE02429183FF800D6A84C /* ArticEndpointTests.swift */,
 				BB5EE028291843E600D6A84C /* ArtworkMapperTests.swift */,
+				BB6DCDFD292CCE4600D2AB06 /* ArtworkImageMapperTests.swift */,
 			);
 			path = "Artic API";
 			sourceTree = "<group>";
@@ -631,6 +646,7 @@
 			isa = PBXGroup;
 			children = (
 				BB5EE077291FC66F00D6A84C /* Core Data */,
+				BB9AEB30292C180E00294B3F /* URLCache+ArtworkImageStore.swift */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -651,7 +667,9 @@
 		BB5EE08D2922966900D6A84C /* Essential Art Cache Integration Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BB6DCDFC292CC36C00D2AB06 /* Helpers */,
 				BB5EE08E2922966900D6A84C /* Essential_Art_Cache_Integration_Tests.swift */,
+				BB6DCDF8292CB90B00D2AB06 /* Essential Art Image Cache Integration Tests.swift */,
 			);
 			path = "Essential Art Cache Integration Tests";
 			sourceTree = "<group>";
@@ -662,6 +680,14 @@
 				BB5EE0992923EAA800D6A84C /* LoadResourcePresenterTests.swift */,
 			);
 			path = "Shared  Presentation";
+			sourceTree = "<group>";
+		};
+		BB6DCDFC292CC36C00D2AB06 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BB6DCDFA292CC34D00D2AB06 /* XCTestCase+ArtworkIntegrationTests.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -736,6 +762,8 @@
 			dependencies = (
 			);
 			name = "Essential Art";
+			packageProductDependencies = (
+			);
 			productName = "Essential Art";
 			productReference = BB5EDFD8291640B200D6A84C /* Essential_Art.framework */;
 			productType = "com.apple.product-type.framework";
@@ -838,6 +866,8 @@
 				uk,
 			);
 			mainGroup = BB5EDFCE291640B200D6A84C;
+			packageReferences = (
+			);
 			productRefGroup = BB5EDFD9291640B200D6A84C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -953,6 +983,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB0492502923F60D00B136AB /* LoadResourcePresenter.swift in Sources */,
+				BB9AEB31292C180E00294B3F /* URLCache+ArtworkImageStore.swift in Sources */,
 				BB5EE082292012C000D6A84C /* CoreDataHelpers.swift in Sources */,
 				BB5EE07C291FC70700D6A84C /* ArtworksStore.xcdatamodeld in Sources */,
 				BB0492522923F63400B136AB /* ResourceLoadingView.swift in Sources */,
@@ -965,6 +996,8 @@
 				BB5EE07E2920122A00D6A84C /* CoreDataArtworksStore.swift in Sources */,
 				BB9AEB0D292ACB1600294B3F /* ArtworkImagePresenter.swift in Sources */,
 				BB5EE06D291EDDCE00D6A84C /* LocalArtworksLoader.swift in Sources */,
+				BB9AEB37292C1F0E00294B3F /* ArtworkImageCache.swift in Sources */,
+				BB9AEB23292C0A1B00294B3F /* ArtworksCache.swift in Sources */,
 				BB5EE02229183F7D00D6A84C /* Artwork.swift in Sources */,
 				BB9AEB0B292ABBB000294B3F /* Paginated.swift in Sources */,
 				BB5EE0802920128E00D6A84C /* ManagedArtwork.swift in Sources */,
@@ -987,6 +1020,7 @@
 				BB5EE075291FA4F800D6A84C /* CoreDataArtworksStoreTests.swift in Sources */,
 				BB5EE066291EB3F400D6A84C /* ArtworksCacheHelpers.swift in Sources */,
 				BB5EE061291E98A000D6A84C /* LoadArtworksFromCacheUseCaseTests.swift in Sources */,
+				BB6DCDFE292CCE4600D2AB06 /* ArtworkImageMapperTests.swift in Sources */,
 				BB5EE029291843E600D6A84C /* ArtworkMapperTests.swift in Sources */,
 				BB5EE073291F9ACD00D6A84C /* ValidateArtworksCacheUseCaseTests.swift in Sources */,
 				BB5EE063291E9C4300D6A84C /* SharedTestHelpers.swift in Sources */,
@@ -1012,7 +1046,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB5EE08F2922966900D6A84C /* Essential_Art_Cache_Integration_Tests.swift in Sources */,
+				BB6DCDF9292CB90B00D2AB06 /* Essential Art Image Cache Integration Tests.swift in Sources */,
 				BB5EE0962922992800D6A84C /* ArtworksCacheHelpers.swift in Sources */,
+				BB6DCDFB292CC34D00D2AB06 /* XCTestCase+ArtworkIntegrationTests.swift in Sources */,
 				BB5EE097292299C000D6A84C /* SharedTestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

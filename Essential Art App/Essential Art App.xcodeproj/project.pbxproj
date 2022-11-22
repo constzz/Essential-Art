@@ -27,6 +27,7 @@
 		BB9AEB15292ACC7400294B3F /* CombineHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB14292ACC7400294B3F /* CombineHelpers.swift */; };
 		BB9AEB19292B90E500294B3F /* UIView+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB18292B90E500294B3F /* UIView+TestHelpers.swift */; };
 		BB9AEB1B292BEE4A00294B3F /* XCTestCase+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB1A292BEE4A00294B3F /* XCTestCase+TestHelpers.swift */; };
+		BB9AEB21292C098800294B3F /* NullStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB20292C098800294B3F /* NullStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		BB9AEB14292ACC7400294B3F /* CombineHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineHelpers.swift; sourceTree = "<group>"; };
 		BB9AEB18292B90E500294B3F /* UIView+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TestHelpers.swift"; sourceTree = "<group>"; };
 		BB9AEB1A292BEE4A00294B3F /* XCTestCase+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+TestHelpers.swift"; sourceTree = "<group>"; };
+		BB9AEB20292C098800294B3F /* NullStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				BB0ABE22292A7F4E00280336 /* Info.plist */,
 				BB9AEB03292AB44500294B3F /* LoadResourcePresentationAdapter.swift */,
 				BB9AEB10292ACC4800294B3F /* WeakRefVirtualProxy.swift */,
+				BB9AEB20292C098800294B3F /* NullStore.swift */,
 			);
 			path = "Essential Art App";
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				BB0ABE19292A7F4D00280336 /* ViewController.swift in Sources */,
 				BB0ABE15292A7F4D00280336 /* AppDelegate.swift in Sources */,
 				BB9AEB04292AB44500294B3F /* LoadResourcePresentationAdapter.swift in Sources */,
+				BB9AEB21292C098800294B3F /* NullStore.swift in Sources */,
 				BB9AEB00292AAE8C00294B3F /* ArtworksUIComposer.swift in Sources */,
 				BB9AEB13292ACC6100294B3F /* ArtworksViewAdapter.swift in Sources */,
 				BB9AEB11292ACC4800294B3F /* WeakRefVirtualProxy.swift in Sources */,

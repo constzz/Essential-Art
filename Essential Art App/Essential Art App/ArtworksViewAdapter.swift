@@ -11,7 +11,7 @@ import Essential_Art_iOS
 
 final class ArtworksViewAdapter: ResourceView {
     private weak var controller: ListViewController?
-    private let imageLoader: (URL) -> ArtworkImageDataLoader.Publisher
+    private let imageLoader: (URL) -> ArtworkImageStore.Publisher
     private let selection: (Artwork) -> Void
     private let currentArtworks: [Artwork: CellController]
     
@@ -21,7 +21,7 @@ final class ArtworksViewAdapter: ResourceView {
     init(
         currentArtworks: [Artwork: CellController] = [:],
         controller: ListViewController,
-        imageLoader: @escaping (URL) -> ArtworkImageDataLoader.Publisher,
+        imageLoader: @escaping (URL) -> ArtworkImageStore.Publisher,
         selection: @escaping (Artwork) -> Void
     ) {
         self.currentArtworks = currentArtworks
