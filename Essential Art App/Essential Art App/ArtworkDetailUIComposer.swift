@@ -18,7 +18,7 @@ public final class ArtworkDetailUIComposer {
     public static func artworkDetailComposedWith(
         artworkDetailLoader: @escaping () -> AnyPublisher<ArtworkDetail, Error>,
         imageLoader: @escaping (URL) -> ArtworkImageStore.Publisher
-    ) -> UIViewController {
+    ) -> ArtworkDetailController {
         let viewController = makeArtworkDetailController()
         
         let presentationAdapter = PresentationAdapter(loader: artworkDetailLoader)
