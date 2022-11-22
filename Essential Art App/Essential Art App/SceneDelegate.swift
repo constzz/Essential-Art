@@ -43,6 +43,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }()
     
+    private lazy var localImageStore: ArtworkImageStore = {
+        let cachesURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        let diskCacheURL = cachesURL.appendingPathComponent("DownloadCache")
+        let cache = URLCache(memoryCapacity: 100_000_000, diskCapacity: 1_000_000_000, directory: diskCacheURL)
+        logger.info("Cache path: \(diskCacheURL.path)")
+
+        return URLCacheArtworkImageStore(cache: cache)
+    }()
+    
     private lazy var localArtworksLoader: LocalArtworksLoader = {
         LocalArtworksLoader(store: store, currentDate: Date.init)
     }()
@@ -50,12 +59,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private lazy var navigationController = UINavigationController(
         rootViewController: ArtworksUIComposer.artworksComposedWith(
             artworksLoader: makeRemoteFeedLoaderWithLocalFallback,
-            imageLoader: {_ in
-                let subj = PassthroughSubject<Data, Error>()
-                subj.send(completion: .failure(NSError(domain: "", code: 3)))
-                return subj.eraseToAnyPublisher()
-            }))
-
+            imageLoader: makeLocalImageLoaderWithRemoteFallback))
+    
+    private func makeLocalImageLoaderWithRemoteFallback(url: URL) -> AnyPublisher<UIImage, Error> {
+        localImageStore
+            .loadImageDataPublisher(from: url)
+            .fallback(to: { [httpClient, scheduler] in
+                httpClient
+                    .getPublisher(url: url)
+                    .tryMap(ArticImageDataMapper.map)
+                    .caching(to: self.localImageStore)
+                    .map { $0.image }
+                    .subscribe(on: scheduler)
+                    .eraseToAnyPublisher()
+            })
+            .subscribe(on: scheduler)
+            .eraseToAnyPublisher()
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }

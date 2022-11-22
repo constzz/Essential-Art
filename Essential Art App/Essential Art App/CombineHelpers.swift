@@ -9,6 +9,8 @@ import Foundation
 import Combine
 import Essential_Art
 import Essential_Art_iOS
+import UIKit
+import os
 
 public extension Paginated {
     init(items: [Item], loadMorePublisher: (() -> AnyPublisher<Self, Error>)?) {
@@ -52,18 +54,38 @@ public extension HTTPClient {
     }
 }
 
-public extension ArtworkImageDataLoader {
-    typealias Publisher = AnyPublisher<Data, Error>
+public extension ArtworkImageStore {
+    typealias Publisher = AnyPublisher<UIImage, Error>
     
     func loadImageDataPublisher(from url: URL) -> Publisher {
         return Deferred {
             Future { completion in
                 completion(Result {
-                    try self.loadImageData(from: url)
+                    try self.retrieve(dataForURL: url)
                 })
             }
         }
         .eraseToAnyPublisher()
+    }
+}
+
+extension Publisher {
+    func logging(to logger: os.Logger, imageURL: URL, storageName: String) -> AnyPublisher<Output, Failure> where Output == UIImage {
+        handleEvents(receiveOutput: { image in
+            logger.debug("Recieved image from \(storageName) for \(imageURL)")
+        }, receiveCompletion: { completion in
+            if case let .failure(error) = completion {
+                logger.debug("Recieved error – \(error.localizedDescription), from \(storageName) for \(imageURL)")
+            }
+        }).eraseToAnyPublisher()
+    }
+}
+
+extension Publisher where Output == (image: UIImage, response: HTTPURLResponse) {
+    func caching(to cache: ArtworkImageStore) -> AnyPublisher<Output, Failure> {
+        handleEvents(receiveOutput: { (image, response) in
+            try? cache.save(image, for: response)
+        }).eraseToAnyPublisher()
     }
 }
 
@@ -106,7 +128,6 @@ private extension ArtworksCache {
         saveIgnoringResult(page.items)
     }
 }
-
 
 extension Publisher {
     func dispatchOnMainQueue() -> AnyPublisher<Output, Failure> {
