@@ -44,15 +44,11 @@ class ArtworkDetailSnapshotTests: XCTestCase {
 
     
     // MARK: - Image loading
-    func test_artworkDetailWithImageLoading() {
     func test_artworkDetailWithFailedImageLoading() {
         let sut = makeSUT(viewModel: fullContent())
         
-        sut.display(ResourceLoadingViewModel(isLoading: true))
         sut.imageController.display(ResourceErrorViewModel(errorMessage: "Any image failing message"))
         
-        assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORK_DETAIL_LOADING_IMAGE_light")
-        assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORK_DETAIL_LOADING_IMAGE_dark")
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORK_DETAIL_FAILED_IMAGE_light")
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORK_DETAIL_FAILED_IMAGE_dark")
     }
