@@ -17,7 +17,7 @@ public final class ArtworksUIComposer {
     
     public static func artworksComposedWith(
         artworksLoader: @escaping () -> AnyPublisher<Paginated<Artwork>, Error>,
-        imageLoader: @escaping (URL) -> ArtworkImageDataLoader.Publisher,
+        imageLoader: @escaping (URL) -> ArtworkImageStore.Publisher,
         selection: @escaping (Artwork) -> Void = { _ in }
     ) -> ListViewController {
         let viewController = makeArtworksViewController(title: ArtworkPresenter.title)
