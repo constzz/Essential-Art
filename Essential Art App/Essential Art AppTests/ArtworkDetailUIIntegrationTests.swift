@@ -65,6 +65,20 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         assertThat(sut, isRendering: artwork1)
     }
     
+    func test_loadCompletion_doesNotAlterCurrentRenderingStateOnError() {
+        let artwork0 = makeArtworkDetail(title: "some title", artist: "any artist", description: "some description")
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: artwork0, at: 0)
+        assertThat(sut, isRendering: artwork0)
+
+        sut.simulateUserInitiatedReload()
+        loader.completeArtworksLoadingWithError(at: 1)
+        assertThat(sut, isRendering: artwork0)
+    }
+
+    
     private func makeSUT(
         file: StaticString = #file,
         line: UInt = #line
