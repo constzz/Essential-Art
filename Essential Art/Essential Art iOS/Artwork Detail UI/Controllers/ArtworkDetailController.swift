@@ -35,16 +35,17 @@ public final class ArtworkDetailController: ViewControllerWithStackInScroll {
         return label
     }()
     
-    private lazy var header: ArtworkDetailHeaderView = {
-        let header = ArtworkDetailHeaderView(frame: .zero)
-        header.constraint(height: 400)
-        return header
+    public lazy var imageController: ArtworkDetailImageController = {
+        let controller = ArtworkDetailImageController()
+        addChild(controller)
+        controller.didMove(toParent: self)
+        controller.view.constraint(height: 400)
+        return controller
     }()
     
-    private let viewModel: ArtworkDetailViewModel
+    public var load: (() -> Void)?
     
-    public init(viewModel: ArtworkDetailViewModel) {
-        self.viewModel = viewModel
+    public override init() {
         super.init()
     }
     
@@ -54,18 +55,17 @@ public final class ArtworkDetailController: ViewControllerWithStackInScroll {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        updateView(viewModel: viewModel)
-        
+        configureView()
         addSubviews()
+        load?()
     }
     
-    private func updateView(viewModel: ArtworkDetailViewModel) {
-        titleLabel.text = "\(viewModel.title) – \(viewModel.artist)"
-        descrpitionLabel.text = viewModel.description
+    private func configureView() {
+        view.backgroundColor = .systemBackground
     }
     
     private func addSubviews() {
-        stackView.addArrangedSubview(header)
+        stackView.addArrangedSubview(imageController.view)
         stackView.addSpace(size: Constants.stackViewSpacing, axis: .vertical)
         stackView.addArrangedSubview(titleLabel)
         stackView.addSpace(size: Constants.stackViewSpacing, axis: .vertical)
@@ -75,10 +75,11 @@ public final class ArtworkDetailController: ViewControllerWithStackInScroll {
 }
 
 extension ArtworkDetailController: ResourceView, ResourceErrorView, ResourceLoadingView {
-    public typealias ResourceViewModel = UIImage
+    public typealias ResourceViewModel = ArtworkDetailViewModel
     
     public func display(_ viewModel: ResourceViewModel) {
-        header.imageView.setImageAnimated(viewModel)
+        titleLabel.text = "\(viewModel.title) – \(viewModel.artist)"
+        descrpitionLabel.text = viewModel.description
     }
     
     public func display(_ viewModel: ResourceLoadingViewModel) {
@@ -87,5 +88,6 @@ extension ArtworkDetailController: ResourceView, ResourceErrorView, ResourceLoad
     public func display(_ viewModel: ResourceErrorViewModel) {
     }
 }
+
 
 

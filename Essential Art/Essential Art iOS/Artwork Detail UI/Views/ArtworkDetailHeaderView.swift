@@ -6,6 +6,38 @@
 //
 
 import UIKit
+import Essential_Art
+
+public final class ArtworkDetailImageController: UIViewController, ResourceView, ResourceErrorView, ResourceLoadingView {
+    
+    private var header = ArtworkDetailHeaderView()
+    
+    public var delegate: ArtworksItemCellControllerDelegate?
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(header)
+        header.pinToSuperView()
+    }
+    
+    deinit {
+        delegate?.didCancelImageRequest()
+    }
+
+    public typealias ResourceViewModel = UIImage
+    
+    public func display(_ viewModel: ResourceViewModel) {
+        header.imageView.setImageAnimated(viewModel)
+    }
+    
+    public func display(_ viewModel: ResourceLoadingViewModel) {
+        header.isShimmering = viewModel.isLoading
+    }
+    
+    public func display(_ viewModel: ResourceErrorViewModel) {
+        print(viewModel.errorMessage)
+    }
+}
 
 final class ArtworkDetailHeaderView: StretchyTableHeaderView {
     

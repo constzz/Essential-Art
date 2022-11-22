@@ -15,7 +15,7 @@ class ArtworkDetailSnapshotTests: XCTestCase {
     func test_artworkDetailWithContent() {
         let sut = makeSUT(viewModel: fullContent())
         
-        sut.display(.make(withColor: .red))
+        sut.imageController.display(.make(withColor: .red))
         
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORK_DETAIL_WITH_CONTENT_light")
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORK_DETAIL_WITH_CONTENT_dark")
@@ -25,7 +25,7 @@ class ArtworkDetailSnapshotTests: XCTestCase {
     func test_artworkDetailWithContentNoDescription() {
         let sut = makeSUT(viewModel: noDescription())
         
-        sut.display(.make(withColor: .red))
+        sut.imageController.display(.make(withColor: .red))
         
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light")
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_dark")
@@ -43,8 +43,9 @@ class ArtworkDetailSnapshotTests: XCTestCase {
     // MARK: - Helpers
     
     private func makeSUT(viewModel: ArtworkDetailViewModel) -> ArtworkDetailController {
-        let viewController = ArtworkDetailController(viewModel: viewModel)
+        let viewController = ArtworkDetailController()
         viewController.loadViewIfNeeded()
+        viewController.display(viewModel)
         return viewController
     }
     
