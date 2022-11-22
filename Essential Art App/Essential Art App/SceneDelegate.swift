@@ -61,7 +61,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             artworksLoader: makeRemoteFeedLoaderWithLocalFallback,
             imageLoader: makeLocalImageLoaderWithRemoteFallback))
     
-    private func makeLocalImageLoaderWithRemoteFallback(url: URL) -> AnyPublisher<UIImage, Error> {
+    private func makeLocalImageLoaderWithRemoteFallback(url: URL) -> AnyPublisher<Data, Swift.Error> {
         localImageStore
             .loadImageDataPublisher(from: url)
             .fallback(to: { [httpClient, scheduler] in
@@ -69,14 +69,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     .getPublisher(url: url)
                     .tryMap(ArticImageDataMapper.map)
                     .caching(to: self.localImageStore)
-                    .map { $0.image }
+                    .map { $0.data }
                     .subscribe(on: scheduler)
                     .eraseToAnyPublisher()
             })
             .subscribe(on: scheduler)
             .eraseToAnyPublisher()
     }
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
 

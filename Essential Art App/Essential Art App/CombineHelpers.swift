@@ -55,7 +55,7 @@ public extension HTTPClient {
 }
 
 public extension ArtworkImageStore {
-    typealias Publisher = AnyPublisher<UIImage, Error>
+    typealias Publisher = AnyPublisher<Data, Error>
     
     func loadImageDataPublisher(from url: URL) -> Publisher {
         return Deferred {
@@ -81,7 +81,7 @@ extension Publisher {
     }
 }
 
-extension Publisher where Output == (image: UIImage, response: HTTPURLResponse) {
+extension Publisher where Output == (data: Data, response: HTTPURLResponse) {
     func caching(to cache: ArtworkImageStore) -> AnyPublisher<Output, Failure> {
         handleEvents(receiveOutput: { (image, response) in
             try? cache.save(image, for: response)

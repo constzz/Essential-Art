@@ -6,13 +6,11 @@
 //
 
 import Foundation
-import UIKit
 
 public class URLCacheArtworkImageStore: ArtworkImageStore {
     
     private enum Error: Swift.Error {
         case incorrectResponse(String)
-        case invalidImageRepresentation
         case emptyCache
     }
     
@@ -22,29 +20,22 @@ public class URLCacheArtworkImageStore: ArtworkImageStore {
         self.cache = cache
     }
     
-    public func save(_ image: UIImage, for response: HTTPURLResponse) throws {
+    public func save(_ imageData: Data, for response: HTTPURLResponse) throws {
         guard let url = response.url else {
             throw Error.incorrectResponse("Url must not be nil.")
         }
-        guard let data = image.pngData() else {
-            throw Error.invalidImageRepresentation
-        }
         
-        let cachedResponse = CachedURLResponse(response: response, data: data)
+        let cachedResponse = CachedURLResponse(response: response, data: imageData)
         
         cache.storeCachedResponse(cachedResponse, for: URLRequest(url: url))
     }
     
-    public func retrieve(dataForURL url: URL) throws -> UIImage {
+    public func retrieve(dataForURL url: URL) throws -> Data {
         guard let cachedResponse = cache.cachedResponse(for: URLRequest(url: url)) else {
             throw Error.emptyCache
         }
         
-        guard let image = UIImage(data: cachedResponse.data) else {
-            throw Error.invalidImageRepresentation
-        }
-        
-        return image
+        return cachedResponse.data
     }
 }
     

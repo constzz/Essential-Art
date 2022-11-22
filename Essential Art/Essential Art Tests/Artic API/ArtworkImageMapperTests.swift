@@ -13,7 +13,7 @@ class ArtworkImageMapperTests: XCTestCase {
 
     private var anyData = Data("any data".utf8)
     private var invalidImageData = Data()
-    private var validImage = UIImage.make(withColor: .brown)
+    private var validImageData = Data("some data".utf8)
     
     func test_map_throwsErrorOnNon200ResponseStatusCode() throws {
         
@@ -38,9 +38,9 @@ class ArtworkImageMapperTests: XCTestCase {
     func test_map_deliversImageAndResponse_on200ResponseStatusCodeAndValidDataImage() throws {
         let response = HTTPURLResponse(statusCode: 200)
 
-        let (mappedImage, mappedResponse) = try ArticImageDataMapper.map(validImage.pngData()!, from: response)
+        let (mappedData, mappedResponse) = try ArticImageDataMapper.map(validImageData, from: response)
         
-        XCTAssertEqual(validImage.pngData(), mappedImage.pngData())
+        XCTAssertEqual(validImageData, mappedData)
         XCTAssertEqual(response, mappedResponse)
     }
     

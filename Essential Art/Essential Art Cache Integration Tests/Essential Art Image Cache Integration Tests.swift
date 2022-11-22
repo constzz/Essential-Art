@@ -29,14 +29,14 @@ class Essential_Art_ImageCacheIntegrationTests: XCTestCase, ArtworksCacheIntegra
         let imageURL = anyImageURL
         let artwork = artwork(withImageURL: imageURL)
         
-        let image = UIImage.make(withColor: .green)
-        let expectedImageData = image.pngData()
+        let imageData = Data("green image".utf8)
+        
         let imageResponse = succcessfulResponse(forURL: imageURL)
         
         try artworksLoader.save([artwork])
-        try imageLoader.save(image, for: imageResponse)
+        try imageLoader.save(imageData, for: imageResponse)
         
-        expect(imageLoader, toRecieveImageData: expectedImageData, forImageURL: artwork.imageURL)
+        expect(imageLoader, toRecieveImageData: imageData, forImageURL: artwork.imageURL)
     }
         
     func test_saveImageData_overridesSavedImageDataOnASeparateInstance() throws {
@@ -47,16 +47,16 @@ class Essential_Art_ImageCacheIntegrationTests: XCTestCase, ArtworksCacheIntegra
         let imageURL = anyImageURL
         let artwork = artwork(withImageURL: imageURL)
         
-        let oldImage = UIImage.make(withColor: .green)
-        let newImage = UIImage.make(withColor: .blue)
+        let oldImageData = Data("green".utf8)
+        let newImageData = Data("blue".utf8)
         
         let imageResponse = succcessfulResponse(forURL: imageURL)
         
         try artworksLoader.save([artwork])
-        try imageLoader.save(oldImage, for: imageResponse)
-        try imageLoader.save(newImage, for: imageResponse)
+        try imageLoader.save(oldImageData, for: imageResponse)
+        try imageLoader.save(newImageData, for: imageResponse)
         
-        expect(imageLoader, toRecieveImageData: newImage.pngData(), forImageURL: artwork.imageURL)
+        expect(imageLoader, toRecieveImageData: newImageData, forImageURL: artwork.imageURL)
     }
     
     // MARK: - Helpers
@@ -95,7 +95,7 @@ class Essential_Art_ImageCacheIntegrationTests: XCTestCase, ArtworksCacheIntegra
         let result = Result { try sut.retrieve(dataForURL: imageURL) }
         switch result {
         case .success(let image):
-            XCTAssertEqual(image.pngData(), expectedImageData, file: file, line: line)
+            XCTAssertEqual(image, expectedImageData, file: file, line: line)
             
         case .failure(let error):
             XCTFail("Expected to retreive image, but recieved \(error) instead", file: file, line: line)
@@ -113,18 +113,5 @@ class Essential_Art_ImageCacheIntegrationTests: XCTestCase, ArtworksCacheIntegra
     
     private func deleteStoreArtifacts() {
         try? FileManager.default.removeItem(at: testSpecificStoreURL)
-    }
-}
-
-private extension UIImage {
-    static func make(withColor color: UIColor) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()!
-        context.setFillColor(color.cgColor)
-        context.fill(rect)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img!
     }
 }

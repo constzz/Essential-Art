@@ -76,7 +76,7 @@ class Essential_Art_API_EndToEnd_Tests: XCTestCase {
     func getArtowkImageData() -> Swift.Result<Data, Error> {
         let url = imageURLForID("25c31d8d-21a4-9ea1-1d73-6a2eca4dda7e")
         
-        return request(fromURL: url, mappingWith: { try ArticImageDataMapper.map($0, from: $1).image.pngData()! })
+        return request(fromURL: url, mappingWith: { try ArticImageDataMapper.map($0, from: $1).data })
     }
     
     private func request<T>(fromURL url: URL, mappingWith mapper: @escaping (Data, HTTPURLResponse) throws -> T) -> Swift.Result<T, Error> {

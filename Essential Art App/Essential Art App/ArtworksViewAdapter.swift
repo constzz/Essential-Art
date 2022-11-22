@@ -15,7 +15,7 @@ final class ArtworksViewAdapter: ResourceView {
     private let selection: (Artwork) -> Void
     private let currentArtworks: [Artwork: CellController]
     
-    private typealias ImageDataPresentationAdapter = LoadResourcePresentationAdapter<UIImage, WeakRefVirtualProxy<ArtworksItemCellController>>
+    private typealias ImageDataPresentationAdapter = LoadResourcePresentationAdapter<Data, WeakRefVirtualProxy<ArtworksItemCellController>>
     private typealias LoadMorePresentationAdapter = LoadResourcePresentationAdapter<Paginated<Artwork>, ArtworksViewAdapter>
     
     init(
@@ -53,7 +53,8 @@ final class ArtworksViewAdapter: ResourceView {
             adapter.presenter = LoadResourcePresenter(
                 loadingView: WeakRefVirtualProxy(view),
                 errorView: WeakRefVirtualProxy(view),
-                resourceView: WeakRefVirtualProxy(view))
+                resourceView: WeakRefVirtualProxy(view),
+                mapper: UIImage.tryMake)
             
             let controller = CellController(id: model, view)
             currentArtworks[model] = controller
@@ -81,5 +82,16 @@ final class ArtworksViewAdapter: ResourceView {
         let loadMoreSection = [CellController(id: UUID(), loadMore)]
         
         controller.display(feed, loadMoreSection)
+    }
+}
+
+extension UIImage {
+    struct InvalidImageData: Error {}
+    
+    static func tryMake(data: Data) throws -> UIImage {
+        guard let image = UIImage(data: data) else {
+            throw InvalidImageData()
+        }
+        return image
     }
 }
