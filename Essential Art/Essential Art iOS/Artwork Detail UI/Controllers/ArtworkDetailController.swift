@@ -43,7 +43,7 @@ public final class ArtworkDetailController: ViewControllerWithStackInScroll {
         return controller
     }()
     
-    public var load: (() -> Void)?
+    public var onRefresh: (() -> Void)?
     
     public override init() {
         super.init()
@@ -57,7 +57,12 @@ public final class ArtworkDetailController: ViewControllerWithStackInScroll {
         super.viewDidLoad()
         configureView()
         addSubviews()
-        load?()
+        scrollView.refreshControl = makeRefreshControl()
+        refresh()
+    }
+    
+    @objc private func refresh() {
+        onRefresh?()
     }
     
     private func configureView() {
@@ -71,6 +76,12 @@ public final class ArtworkDetailController: ViewControllerWithStackInScroll {
         stackView.addSpace(size: Constants.stackViewSpacing, axis: .vertical)
         stackView.addArrangedSubview(descrpitionLabel)
     }
+    
+    private func makeRefreshControl() -> UIRefreshControl {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
+    }
         
 }
 
@@ -83,6 +94,7 @@ extension ArtworkDetailController: ResourceView, ResourceErrorView, ResourceLoad
     }
     
     public func display(_ viewModel: ResourceLoadingViewModel) {
+        scrollView.refreshControl?.update(isRefreshing: viewModel.isLoading)
     }
     
     public func display(_ viewModel: ResourceErrorViewModel) {

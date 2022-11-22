@@ -12,6 +12,8 @@ import UIKit
 import XCTest
 
 class ArtworkDetailSnapshotTests: XCTestCase {
+    
+    // MARK: - Content loading
     func test_artworkDetailWithContent() {
         let sut = makeSUT(viewModel: fullContent())
         
@@ -31,6 +33,17 @@ class ArtworkDetailSnapshotTests: XCTestCase {
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_dark")
     }
     
+    func test_artworkDetailWithContentLoading() {
+        let sut = makeSUT()
+        
+        sut.display(ResourceLoadingViewModel(isLoading: true))
+        
+        assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORK_DETAIL_LOADING_CONTENT_light")
+        assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORK_DETAIL_LOADING_CONTENT_dark")
+    }
+
+    
+    // MARK: - Image loading
     func test_artworkDetailWithImageLoading() {
         let sut = makeSUT(viewModel: fullContent())
         
@@ -39,13 +52,16 @@ class ArtworkDetailSnapshotTests: XCTestCase {
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORK_DETAIL_LOADING_IMAGE_light")
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORK_DETAIL_LOADING_IMAGE_dark")
     }
+    
 
     // MARK: - Helpers
     
-    private func makeSUT(viewModel: ArtworkDetailViewModel) -> ArtworkDetailController {
+    private func makeSUT(viewModel: ArtworkDetailViewModel? = nil) -> ArtworkDetailController {
         let viewController = ArtworkDetailController()
         viewController.loadViewIfNeeded()
-        viewController.display(viewModel)
+        if let viewModel = viewModel {
+            viewController.display(viewModel)
+        }
         return viewController
     }
     

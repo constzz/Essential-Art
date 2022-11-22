@@ -23,7 +23,7 @@ public final class ArtworkDetailUIComposer {
         
         let presentationAdapter = PresentationAdapter(loader: artworkDetailLoader)
         
-        viewController.load = presentationAdapter.loadResource
+        viewController.onRefresh = presentationAdapter.loadResource
         
         presentationAdapter.presenter = LoadResourcePresenter(
             loadingView: WeakRefVirtualProxy(viewController),
