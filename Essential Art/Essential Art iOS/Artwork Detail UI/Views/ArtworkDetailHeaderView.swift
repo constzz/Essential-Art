@@ -15,6 +15,7 @@ final class ArtworkDetailHeaderView: StretchyTableHeaderView {
         imageView.heightAnchor.constraint(equalToConstant: 320).isActive = true
         imageView.layer.cornerRadius = 8
         imageView.layer.masksToBounds = true
+        imageView.backgroundColor = .systemGray
         return imageView
     }()
     

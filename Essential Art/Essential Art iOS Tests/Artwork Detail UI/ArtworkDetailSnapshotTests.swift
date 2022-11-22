@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Essential_Art
+@testable import Essential_Art
 import Essential_Art_iOS
 import UIKit
 import XCTest
@@ -31,6 +31,18 @@ class ArtworkDetailSnapshotTests: XCTestCase {
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_dark")
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .light, contentSize: .extraExtraExtraLarge)), named: "ARTWORK_DETAIL_WITH_CONTENT_NO_DESCRIPTION_light_extraExtraExtraLarge")
     }
+    
+    func test_artworkDetailWithImageLoading() {
+        let sut = makeSUT(viewModel: fullContent())
+        
+        sut.display(ResourceLoadingViewModel(isLoading: true))
+        
+        record(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORK_DETAIL_LOADING_IMAGE_light")
+        record(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORK_DETAIL_LOADING_IMAGE_dark")
+        record(snapshot: sut.snapshot(for: .iPhone13(style: .light, contentSize: .extraExtraExtraLarge)), named: "ARTWORK_DETAIL_LOADING_IMAGE_light_extraExtraExtraLarge")
+    }
+
+    // MARK: - Helpers
     
     private func makeSUT(viewModel: ArtworkDetailViewModel) -> ArtworkDetailController {
         let viewController = ArtworkDetailController(viewModel: viewModel)
