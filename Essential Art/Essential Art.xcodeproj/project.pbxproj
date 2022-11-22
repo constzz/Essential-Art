@@ -91,6 +91,8 @@
 		BB6DCDFB292CC34D00D2AB06 /* XCTestCase+ArtworkIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCDFA292CC34D00D2AB06 /* XCTestCase+ArtworkIntegrationTests.swift */; };
 		BB6DCDFE292CCE4600D2AB06 /* ArtworkImageMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCDFD292CCE4600D2AB06 /* ArtworkImageMapperTests.swift */; };
 		BB6DCE03292CDA8E00D2AB06 /* ArtworkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE02292CDA8E00D2AB06 /* ArtworkDetail.swift */; };
+		BB6DCE06292CDC3A00D2AB06 /* ArtworkDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE05292CDC3A00D2AB06 /* ArtworkDetailEndpoint.swift */; };
+		BB6DCE09292CDE0800D2AB06 /* ArtworkDeatilEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE08292CDE0800D2AB06 /* ArtworkDeatilEndpointTests.swift */; };
 		BB9AEB0B292ABBB000294B3F /* Paginated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB0A292ABBB000294B3F /* Paginated.swift */; };
 		BB9AEB0D292ACB1600294B3F /* ArtworkImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB0C292ACB1600294B3F /* ArtworkImagePresenter.swift */; };
 		BB9AEB17292B8D6E00294B3F /* UIRefreshControl+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB16292B8D6E00294B3F /* UIRefreshControl+Helpers.swift */; };
@@ -236,6 +238,8 @@
 		BB6DCDFA292CC34D00D2AB06 /* XCTestCase+ArtworkIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+ArtworkIntegrationTests.swift"; sourceTree = "<group>"; };
 		BB6DCDFD292CCE4600D2AB06 /* ArtworkImageMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkImageMapperTests.swift; sourceTree = "<group>"; };
 		BB6DCE02292CDA8E00D2AB06 /* ArtworkDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetail.swift; sourceTree = "<group>"; };
+		BB6DCE05292CDC3A00D2AB06 /* ArtworkDetailEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailEndpoint.swift; sourceTree = "<group>"; };
+		BB6DCE08292CDE0800D2AB06 /* ArtworkDeatilEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDeatilEndpointTests.swift; sourceTree = "<group>"; };
 		BB9AEB0A292ABBB000294B3F /* Paginated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paginated.swift; sourceTree = "<group>"; };
 		BB9AEB0C292ACB1600294B3F /* ArtworkImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkImagePresenter.swift; sourceTree = "<group>"; };
 		BB9AEB16292B8D6E00294B3F /* UIRefreshControl+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Helpers.swift"; sourceTree = "<group>"; };
@@ -510,6 +514,7 @@
 				BB04924E2923F5FB00B136AB /* Shared Presentation */,
 				BB5EE067291EDD4300D6A84C /* Artwork Cache */,
 				BB5EE02029183F7200D6A84C /* Artwork Feature */,
+				BB6DCE04292CDC1F00D2AB06 /* Artwork Detail API */,
 				BB6DCE01292CDA7800D2AB06 /* Artwork Detail Feature */,
 				BB5EE01D29183F3800D6A84C /* Artic API */,
 				BB5EDFE2291640CB00D6A84C /* Shared API */,
@@ -542,6 +547,7 @@
 				BB5EE0982923EA8500D6A84C /* Shared  Presentation */,
 				BB5EE05D291D9BD400D6A84C /* ArtworksCache */,
 				BB5EE02C2919A35D00D6A84C /* Helpers */,
+				BB6DCE07292CDDD800D2AB06 /* Artwork Detail API */,
 				BB5EE02329183FE900D6A84C /* Artic API */,
 				BB5EE015291644A700D6A84C /* Shared API Infra */,
 			);
@@ -699,6 +705,22 @@
 				BB6DCE02292CDA8E00D2AB06 /* ArtworkDetail.swift */,
 			);
 			path = "Artwork Detail Feature";
+			sourceTree = "<group>";
+		};
+		BB6DCE04292CDC1F00D2AB06 /* Artwork Detail API */ = {
+			isa = PBXGroup;
+			children = (
+				BB6DCE05292CDC3A00D2AB06 /* ArtworkDetailEndpoint.swift */,
+			);
+			path = "Artwork Detail API";
+			sourceTree = "<group>";
+		};
+		BB6DCE07292CDDD800D2AB06 /* Artwork Detail API */ = {
+			isa = PBXGroup;
+			children = (
+				BB6DCE08292CDE0800D2AB06 /* ArtworkDeatilEndpointTests.swift */,
+			);
+			path = "Artwork Detail API";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1005,6 +1027,7 @@
 				BB5EDFE4291640D800D6A84C /* HTTPClient.swift in Sources */,
 				BB5EE084292012F000D6A84C /* CoreDataArtworksStore+ArtworksStore.swift in Sources */,
 				BB5EE07E2920122A00D6A84C /* CoreDataArtworksStore.swift in Sources */,
+				BB6DCE06292CDC3A00D2AB06 /* ArtworkDetailEndpoint.swift in Sources */,
 				BB9AEB0D292ACB1600294B3F /* ArtworkImagePresenter.swift in Sources */,
 				BB5EE06D291EDDCE00D6A84C /* LocalArtworksLoader.swift in Sources */,
 				BB9AEB37292C1F0E00294B3F /* ArtworkImageCache.swift in Sources */,
@@ -1035,6 +1058,7 @@
 				BB6DCDFE292CCE4600D2AB06 /* ArtworkImageMapperTests.swift in Sources */,
 				BB5EE029291843E600D6A84C /* ArtworkMapperTests.swift in Sources */,
 				BB5EE073291F9ACD00D6A84C /* ValidateArtworksCacheUseCaseTests.swift in Sources */,
+				BB6DCE09292CDE0800D2AB06 /* ArtworkDeatilEndpointTests.swift in Sources */,
 				BB5EE063291E9C4300D6A84C /* SharedTestHelpers.swift in Sources */,
 				BB5EE01A2916629400D6A84C /* URLProtocolStub.swift in Sources */,
 				BB5EE09A2923EAA800D6A84C /* LoadResourcePresenterTests.swift in Sources */,
