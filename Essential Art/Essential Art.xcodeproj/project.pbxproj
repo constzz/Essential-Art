@@ -93,6 +93,8 @@
 		BB6DCE03292CDA8E00D2AB06 /* ArtworkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE02292CDA8E00D2AB06 /* ArtworkDetail.swift */; };
 		BB6DCE06292CDC3A00D2AB06 /* ArtworkDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE05292CDC3A00D2AB06 /* ArtworkDetailEndpoint.swift */; };
 		BB6DCE09292CDE0800D2AB06 /* ArtworkDeatilEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE08292CDE0800D2AB06 /* ArtworkDeatilEndpointTests.swift */; };
+		BB6DCE0B292CDEDE00D2AB06 /* ArtworkDetailMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE0A292CDEDE00D2AB06 /* ArtworkDetailMapper.swift */; };
+		BB6DCE0D292CE0DF00D2AB06 /* ArtworkDetailMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE0C292CE0DF00D2AB06 /* ArtworkDetailMapperTests.swift */; };
 		BB9AEB0B292ABBB000294B3F /* Paginated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB0A292ABBB000294B3F /* Paginated.swift */; };
 		BB9AEB0D292ACB1600294B3F /* ArtworkImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB0C292ACB1600294B3F /* ArtworkImagePresenter.swift */; };
 		BB9AEB17292B8D6E00294B3F /* UIRefreshControl+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEB16292B8D6E00294B3F /* UIRefreshControl+Helpers.swift */; };
@@ -240,6 +242,8 @@
 		BB6DCE02292CDA8E00D2AB06 /* ArtworkDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetail.swift; sourceTree = "<group>"; };
 		BB6DCE05292CDC3A00D2AB06 /* ArtworkDetailEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailEndpoint.swift; sourceTree = "<group>"; };
 		BB6DCE08292CDE0800D2AB06 /* ArtworkDeatilEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDeatilEndpointTests.swift; sourceTree = "<group>"; };
+		BB6DCE0A292CDEDE00D2AB06 /* ArtworkDetailMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailMapper.swift; sourceTree = "<group>"; };
+		BB6DCE0C292CE0DF00D2AB06 /* ArtworkDetailMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailMapperTests.swift; sourceTree = "<group>"; };
 		BB9AEB0A292ABBB000294B3F /* Paginated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paginated.swift; sourceTree = "<group>"; };
 		BB9AEB0C292ACB1600294B3F /* ArtworkImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkImagePresenter.swift; sourceTree = "<group>"; };
 		BB9AEB16292B8D6E00294B3F /* UIRefreshControl+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Helpers.swift"; sourceTree = "<group>"; };
@@ -711,6 +715,7 @@
 			isa = PBXGroup;
 			children = (
 				BB6DCE05292CDC3A00D2AB06 /* ArtworkDetailEndpoint.swift */,
+				BB6DCE0A292CDEDE00D2AB06 /* ArtworkDetailMapper.swift */,
 			);
 			path = "Artwork Detail API";
 			sourceTree = "<group>";
@@ -719,6 +724,7 @@
 			isa = PBXGroup;
 			children = (
 				BB6DCE08292CDE0800D2AB06 /* ArtworkDeatilEndpointTests.swift */,
+				BB6DCE0C292CE0DF00D2AB06 /* ArtworkDetailMapperTests.swift */,
 			);
 			path = "Artwork Detail API";
 			sourceTree = "<group>";
@@ -1043,6 +1049,7 @@
 				BB0492542923F65E00B136AB /* ResourceErrorView.swift in Sources */,
 				BB0492C12924D87400B136AB /* ArworkItemViewModel.swift in Sources */,
 				BB5EE069291EDD6D00D6A84C /* LocalArtwork.swift in Sources */,
+				BB6DCE0B292CDEDE00D2AB06 /* ArtworkDetailMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1061,6 +1068,7 @@
 				BB6DCE09292CDE0800D2AB06 /* ArtworkDeatilEndpointTests.swift in Sources */,
 				BB5EE063291E9C4300D6A84C /* SharedTestHelpers.swift in Sources */,
 				BB5EE01A2916629400D6A84C /* URLProtocolStub.swift in Sources */,
+				BB6DCE0D292CE0DF00D2AB06 /* ArtworkDetailMapperTests.swift in Sources */,
 				BB5EE09A2923EAA800D6A84C /* LoadResourcePresenterTests.swift in Sources */,
 				BB5EE02529183FF800D6A84C /* ArticEndpointTests.swift in Sources */,
 				BB5EE02E2919A36F00D6A84C /* XCTestCase+MemoryLeakTracking.swift in Sources */,
