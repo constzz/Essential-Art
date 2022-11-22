@@ -794,12 +794,19 @@ private extension ArtworksUIIntegrationTests {
         
         private(set) var cancelledImageURLs = [URL]()
         
-        func loadImageDataPublisher(from url: URL) -> AnyPublisher<Data, Error> {
+        func loadImageDataPublisher(from url: URL) -> AnyPublisher<UIImage, Error> {
             let publisher = PassthroughSubject<Data, Error>()
             imageRequests.append((url, publisher))
-            return publisher.handleEvents(receiveCancel: { [weak self] in
-                self?.cancelledImageURLs.append(url)
-            }).eraseToAnyPublisher()
+            return publisher
+                .handleEvents(receiveCancel: { [weak self] in
+                    self?.cancelledImageURLs.append(url)
+                })
+                .tryMap {
+                    if let image = UIImage(data: $0) {
+                        return image
+                    } else { throw NSError(domain: "any-error", code: 30) }
+                }
+                .eraseToAnyPublisher()
         }
         
         func completeArtworksImageLoading(with imageData: Data = Data(), at index: Int = 0) {
