@@ -34,6 +34,7 @@ public final class ArtworksItemCellController: NSObject {
     }
     
     private func updateCell(_ cell: ArworkItemCell, withViewModel viewModel: ArtworkItemViewModel) {
+        cell.selectionStyle = .none
         cell.artistLabel.text = viewModel.artist
         cell.titleLabel.text = viewModel.title
         
