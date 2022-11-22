@@ -78,6 +78,18 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         assertThat(sut, isRendering: artwork0)
     }
 
+    func test_loadCompletion_dispatchesFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        let exp = expectation(description: "Wait for background queue")
+        DispatchQueue.global().async {
+            loader.completeArtworksLoading(at: 0)
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
+    
     
     private func makeSUT(
         file: StaticString = #file,
