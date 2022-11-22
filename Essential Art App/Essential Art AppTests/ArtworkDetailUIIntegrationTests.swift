@@ -47,6 +47,23 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         loader.completeArtworksLoadingWithError(at: 1)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
     }
+        
+    func test_loadCompletion_rendersSuccessfullyLoadedData() {
+        let artwork0 = makeArtworkDetail(title: "some title", artist: "any artist", description: "some description")
+        let artwork1 = makeArtworkDetail(title: "The best", artist: "All-star")
+        
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        assertThat(sut, isRendering: .none)
+        
+        loader.completeArtworksLoading(with: artwork0, at: 0)
+        assertThat(sut, isRendering: artwork0)
+        
+        sut.simulateUserInitiatedReload()
+        loader.completeArtworksLoading(with: artwork1, at: 1)
+        assertThat(sut, isRendering: artwork1)
+    }
     
     private func makeSUT(
         file: StaticString = #file,
@@ -60,6 +77,22 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
+    }
+    
+    private func makeArtworkDetail(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!, description: String? = nil) -> ArtworkDetail {
+        return ArtworkDetail(title: title, artist: artist, description: description, imageURL: url)
+    }
+    
+    func assertThat(_ sut: ArtworkDetailController, isRendering artworkDetail: ArtworkDetail?, file: StaticString = #filePath, line: UInt = #line) {
+        
+        let expectedTitle: String? = {
+            if let artworkDetail = artworkDetail {
+                return artworkDetail.title + " – " + artworkDetail.artist
+            } else { return nil }
+        }()
+        
+        XCTAssertEqual(sut.titleLabel.text, expectedTitle, file: file, line: line)
+        XCTAssertEqual(sut.descrpitionLabel.text, artworkDetail?.description, file: file, line: line)
     }
 
 }

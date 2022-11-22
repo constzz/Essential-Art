@@ -21,14 +21,14 @@ public final class ArtworkDetailController: ViewControllerWithStackInScroll {
         static let stackViewSpacing: CGFloat = 6
     }
     
-    private lazy var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = .preferredFont(forTextStyle: .title1)
         return label
     }()
     
-    private lazy var descrpitionLabel: UILabel = {
+    lazy var descrpitionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = .preferredFont(forTextStyle: .body)
