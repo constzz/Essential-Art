@@ -19,7 +19,7 @@ public class ViewControllerWithStackInScroll: UIViewController {
     
     private(set) var scrollView = UIScrollView()
     
-    init() {
+    public init() {
         super.init(nibName: nil, bundle: nil)
     }
     
