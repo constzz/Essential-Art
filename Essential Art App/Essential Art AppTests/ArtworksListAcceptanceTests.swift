@@ -87,6 +87,14 @@ class ArtworksListAcceptanceTests: XCTestCase {
         XCTAssertNil(store.artworksCache, "Expected to delete expired cache")
     }
     
+    func test_onEnteringBackground_keepsNonExpiredFeedCache() {
+        let store = InMemoryArtworksStore.withNonExpiredFeedCache
+        
+        enterBackground(with: store)
+        
+        XCTAssertNotNil(store.artworksCache, "Expected to keep non-expired cache")
+    }
+    
     // MARK: - Helpers
     
     private func enterBackground(with store: InMemoryArtworksStore) {
