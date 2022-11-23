@@ -14,6 +14,7 @@
 		BB0ABE21292A7F4E00280336 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB0ABE1F292A7F4E00280336 /* LaunchScreen.storyboard */; };
 		BB6DCE48292D22AC00D2AB06 /* ArtworkDetailUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE47292D22AC00D2AB06 /* ArtworkDetailUIComposer.swift */; };
 		BB6DCE52292D61E500D2AB06 /* ArtworkDetailUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE51292D61E500D2AB06 /* ArtworkDetailUIIntegrationTests.swift */; };
+		BB6DCE55292E085400D2AB06 /* UIIntegrationTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE54292E085400D2AB06 /* UIIntegrationTestHelpers.swift */; };
 		BB9AEAF6292AAA0000294B3F /* SceneDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */; };
 		BB9AEAFA292AAD3A00294B3F /* Essential_Art_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB9AEAF8292AAD3A00294B3F /* Essential_Art_iOS.framework */; };
 		BB9AEAFB292AAD3A00294B3F /* Essential_Art_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB9AEAF8292AAD3A00294B3F /* Essential_Art_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -68,6 +69,7 @@
 		BB0ABE63292AA97E00280336 /* Essential Art AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Essential Art AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB6DCE47292D22AC00D2AB06 /* ArtworkDetailUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailUIComposer.swift; sourceTree = "<group>"; };
 		BB6DCE51292D61E500D2AB06 /* ArtworkDetailUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailUIIntegrationTests.swift; sourceTree = "<group>"; };
+		BB6DCE54292E085400D2AB06 /* UIIntegrationTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIIntegrationTestHelpers.swift; sourceTree = "<group>"; };
 		BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateTests.swift; sourceTree = "<group>"; };
 		BB9AEAF8292AAD3A00294B3F /* Essential_Art_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Essential_Art_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB9AEAF9292AAD3A00294B3F /* Essential_Art.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Essential_Art.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +172,7 @@
 				BB9AEB08292ABA9000294B3F /* UIControl+TestHelpers.swift */,
 				BB9AEB18292B90E500294B3F /* UIView+TestHelpers.swift */,
 				BB9AEB1A292BEE4A00294B3F /* XCTestCase+TestHelpers.swift */,
+				BB6DCE54292E085400D2AB06 /* UIIntegrationTestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				BB9AEAF6292AAA0000294B3F /* SceneDelegateTests.swift in Sources */,
 				BB9AEB07292ABA7100294B3F /* UIRefreshControler+TestHelpers.swift in Sources */,
 				BB9AEB19292B90E500294B3F /* UIView+TestHelpers.swift in Sources */,
+				BB6DCE55292E085400D2AB06 /* UIIntegrationTestHelpers.swift in Sources */,
 				BB9AEB09292ABA9000294B3F /* UIControl+TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

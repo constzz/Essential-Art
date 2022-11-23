@@ -90,6 +90,19 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
+    func test_loadCompletion_rendersErrorMessageOnErrorUntilNextReload() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(sut.errorMessage, nil)
+        
+        loader.completeArtworksLoadingWithError(at: 0)
+        
+        XCTAssertEqual(sut.errorMessage, loadError)
+        
+        sut.simulateUserInitiatedReload()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
     
     private func makeSUT(
         file: StaticString = #file,
@@ -135,6 +148,10 @@ private extension ArtworkDetailController {
     
     var isShowingLoadingIndicator: Bool {
         refreshControl?.isRefreshing ?? false
+    }
+    
+    var errorMessage: String? {
+        errorView.message
     }
 }
 

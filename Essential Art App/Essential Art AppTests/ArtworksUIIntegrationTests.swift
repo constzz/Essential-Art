@@ -549,15 +549,7 @@ class ArtworksUIIntegrationTests: XCTestCase {
     private func anyImageData() -> Data {
         return UIImage.make(withColor: .red).pngData()!
     }
-    
-    private class DummyView: ResourceView {
-        func display(_ viewModel: Any) {}
-    }
-    
-    var loadError: String {
-        LoadResourcePresenter<Any, DummyView>.loadError
-    }
-    
+        
     private func makeSUT(
         file: StaticString = #file,
         line: UInt = #line
