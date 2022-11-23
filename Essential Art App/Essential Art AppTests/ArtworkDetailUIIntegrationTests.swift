@@ -154,6 +154,26 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         loader.completeArtworksLoading(with: artwork1, at: 1)
         XCTAssertEqual(sut.isLoadingImage, true, "Expected image loading, when content is loaded")
     }
+    
+    func test_imageView_rendersImageLoadedFromURL() {
+        let artwork0 = makeArtworkDetail(url: URL(string: "http://url-0.com")!)
+        let artwork0Image = UIImage.make(withColor: .red).pngData()!
+
+        let (sut, loader) = makeSUT()
+        
+        var renderedImage: Data? {
+            sut.imageController.header.imageView.image?.pngData()
+        }
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: artwork0, at: 0)
+
+        XCTAssertEqual(renderedImage, .none, "Expected no image in image view while still loading image")
+        
+        loader.completeArtworksImageLoading(with: artwork0Image, at: 0)
+        XCTAssertEqual(renderedImage, artwork0Image, "Expected artwork image in image view when image loaded from loader.")
+    }
+
 
     
     func test_deinit_cancelsRunningDetailInfoRequest() {
