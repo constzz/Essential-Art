@@ -135,6 +135,24 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         loader.completeArtworksLoading(with: artwork1, at: 1)
         XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork1.imageURL], "Expected second image URL request once screen data is loaded after reload")
     }
+    }
+    
+    func test_deinit_cancelsRunningImageRequest() {
+        let art = makeArtworkDetail()
+        
+        var sut: ArtworkDetailController?
+        var loader: LoaderSpy?
+        
+        autoreleasepool {
+            (sut, loader) = makeSUT()
+            sut?.loadViewIfNeeded()
+            loader?.completeArtworksLoading(with: art, at: 0)
+        }
+        
+        sut = nil
+        
+        XCTAssertEqual(loader?.cancelledImageURLs, [art.imageURL])
+    }
 
     
     // MARK: - Helpers
