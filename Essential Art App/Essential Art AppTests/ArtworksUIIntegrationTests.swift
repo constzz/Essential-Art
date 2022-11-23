@@ -584,7 +584,7 @@ private extension ArworkItemCell {
     }
 }
 
-private extension ListViewController {
+extension ListViewController {
     
     func simulateArtworkViewNotNearVisible(at row: Int) {
         simulateArtworkViewNearVisible(at: row)
