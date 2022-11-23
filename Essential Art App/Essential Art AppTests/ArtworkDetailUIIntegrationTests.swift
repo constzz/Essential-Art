@@ -197,6 +197,20 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         sut.imageController.header.retryButton.simulate(event: .touchUpInside)
         XCTAssertEqual(sut.isShowingImageRetryAction, false, "Expected no retry button action on retry")
     }
+    
+    func test_imageViewRetryButton_isVisibleOnInvalidImageData() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: makeArtworkDetail())
+        
+        XCTAssertEqual(sut.isShowingImageRetryAction, false, "Expected no retry action while loading image")
+        
+        let invalidImageData = Data("invalid image data".utf8)
+        loader.completeArtworksImageLoading(with: invalidImageData, at: 0)
+        XCTAssertEqual(sut.isShowingImageRetryAction, true, "Expected retry action once image loading completes with invalid image data")
+    }
+
 
     
     func test_deinit_cancelsRunningDetailInfoRequest() {
