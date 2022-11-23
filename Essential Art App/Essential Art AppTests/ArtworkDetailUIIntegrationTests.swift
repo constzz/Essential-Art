@@ -23,11 +23,11 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadArtworksCount, 1, "Expected no request until previous completes")
         
-        loader.completeArtworksLoading(at: 0)
+        loader.completeArtworkDetailLoading(at: 0)
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadArtworksCount, 2, "Expected another loading request once user initiates a reload")
         
-        loader.completeArtworksLoading(at: 1)
+        loader.completeArtworkDetailLoading(at: 1)
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadArtworksCount, 3, "Expected yet another loading request once user initiates another reload")
     }
@@ -38,7 +38,7 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         sut.loadViewIfNeeded()
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
         
-        loader.completeArtworksLoading(at: 0)
+        loader.completeArtworkDetailLoading(at: 0)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
         
         sut.simulateUserInitiatedReload()
@@ -57,11 +57,11 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         sut.loadViewIfNeeded()
         assertThat(sut, isRendering: .none)
         
-        loader.completeArtworksLoading(with: artwork0, at: 0)
+        loader.completeArtworkDetailLoading(with: artwork0, at: 0)
         assertThat(sut, isRendering: artwork0)
         
         sut.simulateUserInitiatedReload()
-        loader.completeArtworksLoading(with: artwork1, at: 1)
+        loader.completeArtworkDetailLoading(with: artwork1, at: 1)
         assertThat(sut, isRendering: artwork1)
     }
     
@@ -70,7 +70,7 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        loader.completeArtworksLoading(with: artwork0, at: 0)
+        loader.completeArtworkDetailLoading(with: artwork0, at: 0)
         assertThat(sut, isRendering: artwork0)
 
         sut.simulateUserInitiatedReload()
@@ -84,7 +84,7 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         
         let exp = expectation(description: "Wait for background queue")
         DispatchQueue.global().async {
-            loader.completeArtworksLoading(at: 0)
+            loader.completeArtworkDetailLoading(at: 0)
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
@@ -128,11 +128,11 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         
         XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until views become visible")
         
-        loader.completeArtworksLoading(with: artwork0, at: 0)
+        loader.completeArtworkDetailLoading(with: artwork0, at: 0)
         XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL], "Expected first image URL request once screen data is loaded")
         
         sut.simulateUserInitiatedReload()
-        loader.completeArtworksLoading(with: artwork1, at: 1)
+        loader.completeArtworkDetailLoading(with: artwork1, at: 1)
         XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork1.imageURL], "Expected second image URL request once screen data is loaded after reload")
     }
     
@@ -142,16 +142,16 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        loader.completeArtworksLoading(with: artwork0)
+        loader.completeArtworkDetailLoading(with: artwork0)
         
         XCTAssertEqual(sut.isLoadingImage, true, "Expected image loading, when detail screen content loaded. Image loading should be started")
         
-        loader.completeArtworksImageLoading(at: 0)
+        loader.completeArtworkDetailImageLoading(at: 0)
         XCTAssertEqual(sut.isLoadingImage, false, "Expected no image loading, when image loaded.")
         
         
         sut.simulateRetryAction()
-        loader.completeArtworksLoading(with: artwork1, at: 1)
+        loader.completeArtworkDetailLoading(with: artwork1, at: 1)
         XCTAssertEqual(sut.isLoadingImage, true, "Expected image loading, when content is loaded")
     }
     
@@ -166,11 +166,11 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         }
         
         sut.loadViewIfNeeded()
-        loader.completeArtworksLoading(with: artwork0, at: 0)
+        loader.completeArtworkDetailLoading(with: artwork0, at: 0)
 
         XCTAssertEqual(renderedImage, .none, "Expected no image in image view while still loading image")
         
-        loader.completeArtworksImageLoading(with: artwork0Image, at: 0)
+        loader.completeArtworkDetailImageLoading(with: artwork0Image, at: 0)
         XCTAssertEqual(renderedImage, artwork0Image, "Expected artwork image in image view when image loaded from loader.")
     }
 
@@ -181,16 +181,16 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         sut.imageController.loadViewIfNeeded()
-        loader.completeArtworksLoading(with: artwork0, at: 0)
+        loader.completeArtworkDetailLoading(with: artwork0, at: 0)
         
         XCTAssertEqual(sut.isShowingImageRetryAction, false, "Expected no retry action while loading image")
         
         let imageData = UIImage.make(withColor: .red).pngData()!
-        loader.completeArtworksImageLoading(with: imageData, at: 0)
+        loader.completeArtworkDetailImageLoading(with: imageData, at: 0)
         XCTAssertEqual(sut.isShowingImageRetryAction, false, "Expected no retry action when loaded image")
         
         sut.simulateRetryAction()
-        loader.completeArtworksLoading(with: artwork0, at: 1)
+        loader.completeArtworkDetailLoading(with: artwork0, at: 1)
         loader.completeArtworksImageLoadingWithError(at: 1)
         XCTAssertEqual(sut.isShowingImageRetryAction, true, "Expected retry action state on failed image loading")
         
@@ -202,12 +202,12 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        loader.completeArtworksLoading(with: makeArtworkDetail())
+        loader.completeArtworkDetailLoading(with: makeArtworkDetail())
         
         XCTAssertEqual(sut.isShowingImageRetryAction, false, "Expected no retry action while loading image")
         
         let invalidImageData = Data("invalid image data".utf8)
-        loader.completeArtworksImageLoading(with: invalidImageData, at: 0)
+        loader.completeArtworkDetailImageLoading(with: invalidImageData, at: 0)
         XCTAssertEqual(sut.isShowingImageRetryAction, true, "Expected retry action once image loading completes with invalid image data")
     }
 
@@ -217,14 +217,14 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        loader.completeArtworksLoading(with: artwork0, at: 0)
+        loader.completeArtworkDetailLoading(with: artwork0, at: 0)
         loader.completeArtworksImageLoadingWithError(at: 0)
         
         XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL], "Expected image URL request for the detail screen")
         
         sut.simulateImageRetryButtonClick()
 
-        loader.completeArtworksImageLoading(with: UIImage.make(withColor: .green).pngData()!, at: 1)
+        loader.completeArtworkDetailImageLoading(with: UIImage.make(withColor: .green).pngData()!, at: 1)
         
         XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork0.imageURL], "Expected two image URL requests for the detail screen after retry")
     }
@@ -233,12 +233,12 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        loader.completeArtworksLoading(with: makeArtworkDetail())
+        loader.completeArtworkDetailLoading(with: makeArtworkDetail())
         
         let exp = expectation(description: "Wait for background queue")
         let anyImageData = anyImageData()
         DispatchQueue.global().async {
-            loader.completeArtworksImageLoading(with: anyImageData, at: 0)
+            loader.completeArtworkDetailImageLoading(with: anyImageData, at: 0)
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
@@ -282,7 +282,7 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         autoreleasepool {
             (sut, loader) = makeSUT()
             sut?.loadViewIfNeeded()
-            loader?.completeArtworksLoading(with: art, at: 0)
+            loader?.completeArtworkDetailLoading(with: art, at: 0)
         }
         
         sut = nil
@@ -403,7 +403,7 @@ private extension ArtworkDetailUIIntegrationTests {
         private var anyArtworkDetail = ArtworkDetail(title: "any ttiel", artist: "artise", description: "some desc", imageURL: URL(string: "https://test-url.com/image1.jpg")!)
         
         
-        func completeArtworksLoading(with artworkDetail: ArtworkDetail? = nil, at index: Int = 0) {
+        func completeArtworkDetailLoading(with artworkDetail: ArtworkDetail? = nil, at index: Int = 0) {
             artworksRequests[index].send(artworkDetail ?? anyArtworkDetail)
             artworksRequests[index].send(completion: .finished)
         }
@@ -432,7 +432,7 @@ private extension ArtworkDetailUIIntegrationTests {
                 .eraseToAnyPublisher()
         }
         
-        func completeArtworksImageLoading(with imageData: Data = Data(), at index: Int = 0) {
+        func completeArtworkDetailImageLoading(with imageData: Data = Data(), at index: Int = 0) {
             imageRequests[index].publisher.send(imageData)
             imageRequests[index].publisher.send(completion: .finished)
         }
