@@ -30,8 +30,7 @@ class ArtworksListAcceptanceTests: XCTestCase {
     func test_onLaunch_displaysRemoteFeedWhenCustomerHasConnectivity() {
         let artworks = launch(
             httpClient: .online(response),
-            store: .empty,
-            artworksLimitPerPage: 1)
+            store: .empty)
         
         artworks.loadViewIfNeeded()
 
@@ -53,6 +52,25 @@ class ArtworksListAcceptanceTests: XCTestCase {
         XCTAssertEqual(artworks.renderedFeedImageData(at: 1), imageData1)
         XCTAssertEqual(artworks.renderedFeedImageData(at: 2), imageData2)
         XCTAssertFalse(artworks.canLoadMoreFeed)
+    }
+    
+    func test_onLaunch_displaysCachedRemoteFeedWhenCustomerHasNoConnectivity() {
+        let sharedStore = InMemoryArtworksStore.empty
+        
+        let onlineFeed = launch(httpClient: .online(response), store: sharedStore)
+        onlineFeed.simulateLoadMoreArtworksAction()
+        onlineFeed.simulateLoadMoreArtworksAction()
+        XCTAssertNotNil(onlineFeed.simulateArtworkImageViewVisible(at: 0))
+        XCTAssertNotNil(onlineFeed.simulateArtworkImageViewVisible(at: 1))
+        XCTAssertNotNil(onlineFeed.simulateArtworkImageViewVisible(at: 2))
+
+        let offlineFeed = launch(httpClient: .offline, store: sharedStore)
+        
+        XCTAssertEqual(offlineFeed.numberOfRenderedArtworks(), 3)
+        XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 0), imageData0)
+        XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 1), imageData1)
+        XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 2), imageData2)
+        XCTAssertFalse(offlineFeed.canLoadMoreFeed)
     }
     
     private var imageData0: Data = UIImage.make(withColor: .red).pngData()!
@@ -79,7 +97,7 @@ class ArtworksListAcceptanceTests: XCTestCase {
     private func artworksDataForPage(_ page: Int) -> [[String: Any]] {
         switch page {
         case 0:
-            return [artworkWithImageID("0123"), ]
+            return [artworkWithImageID("0123")]
         case 1:
             return [artworkWithImageID("3273")]
         case 2:
@@ -133,7 +151,7 @@ class ArtworksListAcceptanceTests: XCTestCase {
     private func launch(
         httpClient: HTTPClientStub = .offline,
         store: InMemoryArtworksStore = .empty,
-        artworksLimitPerPage: Int
+        artworksLimitPerPage: Int = 1
     ) -> ListViewController {
         let sut = SceneDelegate(
             httpClient: httpClient,

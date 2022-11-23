@@ -90,12 +90,15 @@ extension Publisher where Output == (data: Data, response: HTTPURLResponse) {
 }
 
 public extension LocalArtworksLoader {
-    typealias Publisher = AnyPublisher<[Artwork], Error>
+    typealias Publisher = AnyPublisher<([Artwork], Bool), Error>
     
-    func loadPublisher() -> Publisher {
+    func loadPublisher(hasNext: Bool) -> Publisher {
         Deferred {
             Future { completion in
-                completion(Result{ try self.load() })
+                completion(Result{
+                    let artworks = try self.load()
+                    return (artworks, hasNext: hasNext)
+                })
             }
         }
         .eraseToAnyPublisher()
@@ -103,8 +106,10 @@ public extension LocalArtworksLoader {
 }
 
 extension Publisher {
-    func caching(to cache: ArtworksCache) -> AnyPublisher<Output, Failure> where Output == [Artwork] {
-        handleEvents(receiveOutput: cache.saveIgnoringResult).eraseToAnyPublisher()
+    func caching(to cache: ArtworksCache) -> AnyPublisher<Output, Failure> where Output == ([Artwork], Bool) {
+        handleEvents(receiveOutput: {
+            cache.saveIgnoringResult($0.0)
+        }).eraseToAnyPublisher()
     }
     
     func caching(to cache: ArtworksCache) -> AnyPublisher<Output, Failure> where Output == Paginated<Artwork> {

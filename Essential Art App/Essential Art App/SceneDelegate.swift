@@ -124,10 +124,11 @@ private extension SceneDelegate {
 
     func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<Paginated<Artwork>, Error> {
         makeRemoteFeedLoader(page: Self.firstPage)
-//            .caching(to: localArtworksLoader)
-//            .fallback(to: { [localArtworksLoader] in
-//                return localArtworksLoader.loadPublisher(hasNext: false)
-//            })
+            .map { $0 }
+            .caching(to: localArtworksLoader)
+            .fallback(to: { [localArtworksLoader] in
+                return localArtworksLoader.loadPublisher(hasNext: false)
+            })
             .map { (artworks, hasNext) in
                 self.makePage(artworks: artworks, page: Self.firstPage, hasNext: hasNext)
             }
@@ -158,7 +159,7 @@ private extension SceneDelegate {
             .map { remoteItems in
                 return self.makePage(artworks: oldArtworks + remoteItems.artworks, page: page, hasNext: remoteItems.hasNext)
             }
-//            .caching(to: localArtworksLoader)
+            .caching(to: localArtworksLoader)
             .subscribe(on: scheduler)
             .eraseToAnyPublisher()
     }
