@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StretchyTableHeaderView: UIView {
+public class StretchyTableHeaderView: UIView {
     internal let contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear

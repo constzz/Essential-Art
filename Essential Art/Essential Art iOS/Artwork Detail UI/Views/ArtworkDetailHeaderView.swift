@@ -10,7 +10,7 @@ import Essential_Art
 
 public final class ArtworkDetailImageController: UIViewController, ResourceView, ResourceErrorView, ResourceLoadingView {
     
-    private var header = ArtworkDetailHeaderView()
+    public private(set) var header = ArtworkDetailHeaderView()
     
     public var delegate: ArtworksItemCellControllerDelegate?
     
@@ -41,9 +41,9 @@ public final class ArtworkDetailImageController: UIViewController, ResourceView,
     }
 }
 
-final class ArtworkDetailHeaderView: StretchyTableHeaderView {
+public final class ArtworkDetailHeaderView: StretchyTableHeaderView {
     
-    lazy var retryButton: UIButton = {
+    public private(set) lazy var retryButton: UIButton = {
         let button = UIButton()
         button.isHidden = true
         button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
@@ -51,7 +51,7 @@ final class ArtworkDetailHeaderView: StretchyTableHeaderView {
         return button
     }()
     
-    lazy var imageView: UIImageView = {
+    public private(set) lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.heightAnchor.constraint(equalToConstant: 320).isActive = true

@@ -136,6 +136,26 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork1.imageURL], "Expected second image URL request once screen data is loaded after reload")
     }
     
+    func test_imageViewLoadingIndicator_isVisibleWhileLoadingImage() {
+        let artwork0 = makeArtworkDetail(url: URL(string: "http://url-0.com")!)
+        let artwork1 = makeArtworkDetail(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: artwork0)
+        
+        XCTAssertEqual(sut.isLoadingImage, true, "Expected image loading, when detail screen content loaded. Image loading should be started")
+        
+        loader.completeArtworksImageLoading(at: 0)
+        XCTAssertEqual(sut.isLoadingImage, false, "Expected no image loading, when image loaded.")
+        
+        
+        sut.simulateRetryAction()
+        loader.completeArtworksLoading(with: artwork1, at: 1)
+        XCTAssertEqual(sut.isLoadingImage, true, "Expected image loading, when content is loaded")
+    }
+
+    
     func test_deinit_cancelsRunningDetailInfoRequest() {
         var cancelCallCount = 0
         
@@ -218,6 +238,14 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
 
 // MARK: - ArtworkDetailController test helpers
 private extension ArtworkDetailController {
+    
+    func simulateRetryAction() {
+        refreshControl?.simulatePullToRefresh()
+    }
+    
+    var isLoadingImage: Bool {
+        imageController.header.isShimmering
+    }
     
     func simulateDataLoaded(_ artworkDetail: ArtworkDetail) {
         display(ArtworkDetailPresenter.map(artworkDetail))
