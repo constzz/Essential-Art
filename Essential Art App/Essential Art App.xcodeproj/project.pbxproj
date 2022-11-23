@@ -18,6 +18,7 @@
 		BB6DCE57292E3F6000D2AB06 /* ArtworksListAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE56292E3F6000D2AB06 /* ArtworksListAcceptanceTests.swift */; };
 		BB6DCE59292E3F9F00D2AB06 /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE58292E3F9F00D2AB06 /* HTTPClientStub.swift */; };
 		BB6DCE5B292E3FF400D2AB06 /* InMemoryArtworksStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE5A292E3FF400D2AB06 /* InMemoryArtworksStore.swift */; };
+		BB6DCE5D292EA91A00D2AB06 /* ListViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE5C292EA91A00D2AB06 /* ListViewController+TestHelpers.swift */; };
 		BB9AEAF6292AAA0000294B3F /* SceneDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */; };
 		BB9AEAFA292AAD3A00294B3F /* Essential_Art_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB9AEAF8292AAD3A00294B3F /* Essential_Art_iOS.framework */; };
 		BB9AEAFB292AAD3A00294B3F /* Essential_Art_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB9AEAF8292AAD3A00294B3F /* Essential_Art_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -76,6 +77,7 @@
 		BB6DCE56292E3F6000D2AB06 /* ArtworksListAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworksListAcceptanceTests.swift; sourceTree = "<group>"; };
 		BB6DCE58292E3F9F00D2AB06 /* HTTPClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientStub.swift; sourceTree = "<group>"; };
 		BB6DCE5A292E3FF400D2AB06 /* InMemoryArtworksStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryArtworksStore.swift; sourceTree = "<group>"; };
+		BB6DCE5C292EA91A00D2AB06 /* ListViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListViewController+TestHelpers.swift"; sourceTree = "<group>"; };
 		BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateTests.swift; sourceTree = "<group>"; };
 		BB9AEAF8292AAD3A00294B3F /* Essential_Art_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Essential_Art_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB9AEAF9292AAD3A00294B3F /* Essential_Art.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Essential_Art.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +184,7 @@
 				BB6DCE54292E085400D2AB06 /* UIIntegrationTestHelpers.swift */,
 				BB6DCE58292E3F9F00D2AB06 /* HTTPClientStub.swift */,
 				BB6DCE5A292E3FF400D2AB06 /* InMemoryArtworksStore.swift */,
+				BB6DCE5C292EA91A00D2AB06 /* ListViewController+TestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB6DCE5D292EA91A00D2AB06 /* ListViewController+TestHelpers.swift in Sources */,
 				BB6DCE52292D61E500D2AB06 /* ArtworkDetailUIIntegrationTests.swift in Sources */,
 				BB6DCE5B292E3FF400D2AB06 /* InMemoryArtworksStore.swift in Sources */,
 				BB9AEB1B292BEE4A00294B3F /* XCTestCase+TestHelpers.swift in Sources */,

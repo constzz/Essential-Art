@@ -11,28 +11,6 @@ import Essential_Art
 @testable import Essential_Art_iOS
 import XCTest
 
-extension ListViewController {
-    private var artworkSection: Int { 0 }
-    
-    func simulateTapOnArtwork(at index: Int) {
-        let delegate = tableView.delegate
-        let index = IndexPath(row: index, section: artworksSection)
-        delegate?.tableView?(tableView, didSelectRowAt: index)
-    }
-    
-    func numberOfRenderedArtworks() -> Int {
-        numberOfRows(in: artworkSection)
-    }
-    
-    func renderedFeedImageData(at index: Int) -> Data? {
-        return simulateArtworkImageViewVisible(at: index)?.artworkImageView.image?.pngData()
-    }
-
-    var canLoadMoreFeed: Bool {
-        loadMoreFeedCell() != nil
-    }
-}
-
 class ArtworksListAcceptanceTests: XCTestCase {
     func test_onLaunch_displaysRemoteFeedWhenCustomerHasConnectivity() {
         let artworks = launch(
