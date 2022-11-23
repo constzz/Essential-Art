@@ -12,14 +12,14 @@ public final class ArtworkDetailImageController: UIViewController, ResourceView,
     
     public private(set) var header = ArtworkDetailHeaderView()
     
-    public var delegate: ArtworksItemCellControllerDelegate?
+    public var delegate: ArtworksItemCellControllerDelegate? {
+        didSet { header.onRetry = delegate?.didRequestImage }
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(header)
         header.pinToSuperView()
-        
-        header.onRetry = delegate?.didRequestImage
     }
     
     deinit {
