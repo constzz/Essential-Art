@@ -147,7 +147,6 @@ class ArtworksListAcceptanceTests: XCTestCase {
     }
     
     private func makeData(for url: URL) -> Data {
-        print(url)
         switch url.path {
         case _ where imageDataForURLPath[url.path] != nil:
             return imageDataForURLPath[url.path]!
