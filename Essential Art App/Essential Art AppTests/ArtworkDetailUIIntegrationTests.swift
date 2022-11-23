@@ -175,6 +175,29 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
     }
 
 
+    func test_imageViewRetryButton_isVisibleOnImageURLLoadError() {
+        let artwork0 = makeArtworkDetail(url: URL(string: "http://url-0.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        sut.imageController.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: artwork0, at: 0)
+        
+        XCTAssertEqual(sut.isShowingImageRetryAction, false, "Expected no retry action while loading image")
+        
+        let imageData = UIImage.make(withColor: .red).pngData()!
+        loader.completeArtworksImageLoading(with: imageData, at: 0)
+        XCTAssertEqual(sut.isShowingImageRetryAction, false, "Expected no retry action when loaded image")
+        
+        sut.simulateRetryAction()
+        loader.completeArtworksLoading(with: artwork0, at: 1)
+        loader.completeArtworksImageLoadingWithError(at: 1)
+        XCTAssertEqual(sut.isShowingImageRetryAction, true, "Expected retry action state on failed image loading")
+        
+        sut.imageController.header.retryButton.simulate(event: .touchUpInside)
+        XCTAssertEqual(sut.isShowingImageRetryAction, false, "Expected no retry button action on retry")
+    }
+
     
     func test_deinit_cancelsRunningDetailInfoRequest() {
         var cancelCallCount = 0
@@ -258,6 +281,18 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
 
 // MARK: - ArtworkDetailController test helpers
 private extension ArtworkDetailController {
+    
+    var imageRetryButton: UIButton {
+        imageController.header.retryButton
+    }
+    
+    func tapImageRetryButton() {
+        imageRetryButton.simulate(event: .touchUpInside)
+    }
+    
+    var isShowingImageRetryAction: Bool {
+        imageRetryButton.isHidden == false
+    }
     
     func simulateRetryAction() {
         refreshControl?.simulatePullToRefresh()
