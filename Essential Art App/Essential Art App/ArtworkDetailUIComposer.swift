@@ -47,9 +47,8 @@ final class ArtworkDetailViewAdapter: ResourceView {
     private weak var controller: ArtworkDetailController?
     private weak var imageController: ArtworkDetailImageController?
     private let imageLoader: (URL) -> ArtworkImageStore.Publisher
-    private var imageDataPresentationAdapter: ImageDataPresentationAdapter?
 
-    private typealias ImageDataPresentationAdapter = LoadResourcePresentationAdapter<Data, ArtworkDetailImageController>
+    private typealias ImageDataPresentationAdapter = LoadResourcePresentationAdapter<Data, WeakRefVirtualProxy<ArtworkDetailImageController>>
 
     init(
         controller: ArtworkDetailController,
@@ -68,17 +67,19 @@ final class ArtworkDetailViewAdapter: ResourceView {
         
         guard let imageController = imageController else { return }
         
-        self.imageDataPresentationAdapter = ImageDataPresentationAdapter(loader: { [imageLoader] in
+        let imageDataPresentationAdapter = ImageDataPresentationAdapter(loader: { [imageLoader] in
             imageLoader(viewModel.imageURL)
         })
         
-        imageDataPresentationAdapter?.presenter = .init(
-            loadingView: imageController,
-            errorView: imageController,
-            resourceView: imageController,
+        imageDataPresentationAdapter.presenter = .init(
+            loadingView: WeakRefVirtualProxy(imageController),
+            errorView: WeakRefVirtualProxy(imageController),
+            resourceView: WeakRefVirtualProxy(imageController),
             mapper: UIImage.tryMake)
         
-        imageDataPresentationAdapter?.didRequestImage()
+        imageDataPresentationAdapter.didRequestImage()
+        
+        imageController.delegate = imageDataPresentationAdapter
     }
 }
 
