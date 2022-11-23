@@ -79,6 +79,21 @@ class ArtworksListAcceptanceTests: XCTestCase {
         XCTAssertEqual(artworks.numberOfRenderedArtworks(), 0)
     }
     
+    func test_onEnteringBackground_deletesExpiredFeedCache() {
+        let store = InMemoryArtworksStore.withExpiredFeedCache
+        
+        enterBackground(with: store)
+        
+        XCTAssertNil(store.artworksCache, "Expected to delete expired cache")
+    }
+    
+    // MARK: - Helpers
+    
+    private func enterBackground(with store: InMemoryArtworksStore) {
+        let sut = SceneDelegate(httpClient: HTTPClientStub.offline, store: store, scheduler: .immediateOnMainQueue, artworksLimitPerPage: 10)
+        sut.sceneWillResignActive(UIApplication.shared.connectedScenes.first!)
+    }
+    
     private var imageData0: Data = UIImage.make(withColor: .red).pngData()!
     private var imageData1: Data = UIImage.make(withColor: .green).pngData()!
     private var imageData2: Data = UIImage.make(withColor: .blue).pngData()!
