@@ -543,21 +543,13 @@ class ArtworksUIIntegrationTests: XCTestCase {
 
 
     private func makeArtwork(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!) -> Artwork {
-        return Artwork(title: title, imageURL: url, artist: artist)
+        return Artwork(title: title, imageURL: url, artist: artist, id: UUID().hashValue)
     }
     
     private func anyImageData() -> Data {
         return UIImage.make(withColor: .red).pngData()!
     }
-    
-    private class DummyView: ResourceView {
-        func display(_ viewModel: Any) {}
-    }
-    
-    var loadError: String {
-        LoadResourcePresenter<Any, DummyView>.loadError
-    }
-    
+        
     private func makeSUT(
         file: StaticString = #file,
         line: UInt = #line

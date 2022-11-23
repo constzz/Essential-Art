@@ -12,6 +12,9 @@
 		BB0ABE19292A7F4D00280336 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0ABE18292A7F4D00280336 /* ViewController.swift */; };
 		BB0ABE1E292A7F4E00280336 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0ABE1D292A7F4E00280336 /* Assets.xcassets */; };
 		BB0ABE21292A7F4E00280336 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB0ABE1F292A7F4E00280336 /* LaunchScreen.storyboard */; };
+		BB6DCE48292D22AC00D2AB06 /* ArtworkDetailUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE47292D22AC00D2AB06 /* ArtworkDetailUIComposer.swift */; };
+		BB6DCE52292D61E500D2AB06 /* ArtworkDetailUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE51292D61E500D2AB06 /* ArtworkDetailUIIntegrationTests.swift */; };
+		BB6DCE55292E085400D2AB06 /* UIIntegrationTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6DCE54292E085400D2AB06 /* UIIntegrationTestHelpers.swift */; };
 		BB9AEAF6292AAA0000294B3F /* SceneDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */; };
 		BB9AEAFA292AAD3A00294B3F /* Essential_Art_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB9AEAF8292AAD3A00294B3F /* Essential_Art_iOS.framework */; };
 		BB9AEAFB292AAD3A00294B3F /* Essential_Art_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB9AEAF8292AAD3A00294B3F /* Essential_Art_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -64,6 +67,9 @@
 		BB0ABE20292A7F4E00280336 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB0ABE22292A7F4E00280336 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB0ABE63292AA97E00280336 /* Essential Art AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Essential Art AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB6DCE47292D22AC00D2AB06 /* ArtworkDetailUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailUIComposer.swift; sourceTree = "<group>"; };
+		BB6DCE51292D61E500D2AB06 /* ArtworkDetailUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailUIIntegrationTests.swift; sourceTree = "<group>"; };
+		BB6DCE54292E085400D2AB06 /* UIIntegrationTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIIntegrationTestHelpers.swift; sourceTree = "<group>"; };
 		BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateTests.swift; sourceTree = "<group>"; };
 		BB9AEAF8292AAD3A00294B3F /* Essential_Art_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Essential_Art_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB9AEAF9292AAD3A00294B3F /* Essential_Art.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Essential_Art.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				BB9AEAFF292AAE8C00294B3F /* ArtworksUIComposer.swift */,
+				BB6DCE47292D22AC00D2AB06 /* ArtworkDetailUIComposer.swift */,
 				BB9AEB12292ACC6100294B3F /* ArtworksViewAdapter.swift */,
 				BB0ABE14292A7F4D00280336 /* AppDelegate.swift */,
 				BB9AEB14292ACC7400294B3F /* CombineHelpers.swift */,
@@ -144,6 +151,7 @@
 				BB9AEB05292ABA5F00294B3F /* Helpers */,
 				BB9AEB01292AAF0500294B3F /* ArtworksUIIntegrationTests.swift */,
 				BB9AEAF5292AAA0000294B3F /* SceneDelegateTests.swift */,
+				BB6DCE51292D61E500D2AB06 /* ArtworkDetailUIIntegrationTests.swift */,
 			);
 			path = "Essential Art AppTests";
 			sourceTree = "<group>";
@@ -164,6 +172,7 @@
 				BB9AEB08292ABA9000294B3F /* UIControl+TestHelpers.swift */,
 				BB9AEB18292B90E500294B3F /* UIView+TestHelpers.swift */,
 				BB9AEB1A292BEE4A00294B3F /* XCTestCase+TestHelpers.swift */,
+				BB6DCE54292E085400D2AB06 /* UIIntegrationTestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -275,6 +284,7 @@
 				BB9AEB04292AB44500294B3F /* LoadResourcePresentationAdapter.swift in Sources */,
 				BB9AEB21292C098800294B3F /* NullStore.swift in Sources */,
 				BB9AEB00292AAE8C00294B3F /* ArtworksUIComposer.swift in Sources */,
+				BB6DCE48292D22AC00D2AB06 /* ArtworkDetailUIComposer.swift in Sources */,
 				BB9AEB13292ACC6100294B3F /* ArtworksViewAdapter.swift in Sources */,
 				BB9AEB11292ACC4800294B3F /* WeakRefVirtualProxy.swift in Sources */,
 				BB0ABE17292A7F4D00280336 /* SceneDelegate.swift in Sources */,
@@ -286,11 +296,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB6DCE52292D61E500D2AB06 /* ArtworkDetailUIIntegrationTests.swift in Sources */,
 				BB9AEB1B292BEE4A00294B3F /* XCTestCase+TestHelpers.swift in Sources */,
 				BB9AEB02292AAF0500294B3F /* ArtworksUIIntegrationTests.swift in Sources */,
 				BB9AEAF6292AAA0000294B3F /* SceneDelegateTests.swift in Sources */,
 				BB9AEB07292ABA7100294B3F /* UIRefreshControler+TestHelpers.swift in Sources */,
 				BB9AEB19292B90E500294B3F /* UIView+TestHelpers.swift in Sources */,
+				BB6DCE55292E085400D2AB06 /* UIIntegrationTestHelpers.swift in Sources */,
 				BB9AEB09292ABA9000294B3F /* UIControl+TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

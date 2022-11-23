@@ -59,7 +59,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private lazy var navigationController = UINavigationController(
         rootViewController: ArtworksUIComposer.artworksComposedWith(
             artworksLoader: makeRemoteFeedLoaderWithLocalFallback,
-            imageLoader: makeLocalImageLoaderWithRemoteFallback))
+            imageLoader: imageLoader,
+            selection: showDetails))
+    
+    private typealias ImageLoader = (URL) -> AnyPublisher<Data, Swift.Error>
+    private lazy var imageLoader: ImageLoader = makeLocalImageLoaderWithRemoteFallback
     
     private func makeLocalImageLoaderWithRemoteFallback(url: URL) -> AnyPublisher<Data, Swift.Error> {
         localImageStore
@@ -95,6 +99,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func configureWindow() {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+    }
+}
+
+// MARK: - Artwork Details Screen
+private extension SceneDelegate {
+    
+    func showDetails(artwork: Artwork) {
+        let artworkDetailLoader = makeArtworkDetailLoader(artworkID: artwork.id)
+        let viewController = ArtworkDetailUIComposer.artworkDetailComposedWith(
+            artworkDetailLoader: { artworkDetailLoader },
+            imageLoader: imageLoader)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+
+    
+    private func makeArtworkDetailLoader(artworkID: Int) -> AnyPublisher<ArtworkDetail, Error> {
+        let url = ArtworkDetailEndpoint.get(id: artworkID).url(baseURL: baseURL)
+        return httpClient
+            .getPublisher(url: url)
+            .tryMap(ArtworkDetailMapper.map)
+            .subscribe(on: scheduler)
+            .eraseToAnyPublisher()
     }
 }
 

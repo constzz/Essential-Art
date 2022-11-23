@@ -10,17 +10,16 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      language = "en">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB0492852924033000B136AB"
-               BuildableName = "Essential Art iOS Tests.xctest"
-               BlueprintName = "Essential Art iOS Tests"
-               ReferencedContainer = "container:Essential Art.xcodeproj">
+               BlueprintIdentifier = "BB0ABE62292AA97E00280336"
+               BuildableName = "Essential Art AppTests.xctest"
+               BlueprintName = "Essential Art AppTests"
+               ReferencedContainer = "container:Essential Art App.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

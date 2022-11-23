@@ -30,6 +30,7 @@ public class ArworkItemCell: UITableViewCell, Reusable {
     
     lazy var artworkImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     

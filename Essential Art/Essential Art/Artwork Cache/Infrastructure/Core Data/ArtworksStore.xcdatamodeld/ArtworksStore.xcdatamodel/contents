@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ManagedArtwork" representedClassName=".ManagedArtwork" syncable="YES">
         <attribute name="artist" attributeType="String"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imageURL" attributeType="URI"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="cache" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedArtworksCache" inverseName="artworks" inverseEntity="ManagedArtworksCache"/>
@@ -11,7 +12,7 @@
         <relationship name="artworks" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ManagedArtwork" inverseName="cache" inverseEntity="ManagedArtwork"/>
     </entity>
     <elements>
-        <element name="ManagedArtwork" positionX="-54" positionY="-9" width="128" height="89"/>
+        <element name="ManagedArtwork" positionX="-54" positionY="-9" width="128" height="104"/>
         <element name="ManagedArtworksCache" positionX="-63" positionY="-18" width="128" height="59"/>
     </elements>
 </model>

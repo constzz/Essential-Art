@@ -17,6 +17,7 @@ extension CoreDataArtworksStore: ArtworksStore {
                     managed.artist = artwork.artist
                     managed.imageURL = artwork.imageURL
                     managed.title = artwork.title
+                    managed.id = artwork.id
                     return managed
                 })
                 context.userInfo.removeAllObjects()
@@ -42,7 +43,8 @@ extension CoreDataArtworksStore: ArtworksStore {
                         guard let managedArtwork = ($0 as? ManagedArtwork) else { return nil }
                         return Artwork(title: managedArtwork.title,
                                        imageURL: managedArtwork.imageURL,
-                                       artist: managedArtwork.artist)
+                                       artist: managedArtwork.artist,
+                                       id: managedArtwork.id)
                     }
                     return (artworks, managedArtwork.timestamp)
                 }

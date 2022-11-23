@@ -26,6 +26,6 @@ final class ArtworksCachePolicy {
 
 private extension LocalArtwork {
     var model: Artwork {
-        return Artwork(title: title, imageURL: imageURL, artist: artist)
+        return Artwork(title: title, imageURL: imageURL, artist: artist, id: id)
     }
 }
