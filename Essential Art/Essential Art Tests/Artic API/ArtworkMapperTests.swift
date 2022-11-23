@@ -36,9 +36,9 @@ class ArtworkMapperTests: XCTestCase {
     func test_map_deliversEmptyList_on200ResponseStatusCodeAndEmptyJSONlist() throws {
         let emptyJSON = makeArtworksJSON([], baseURL: anyURL)
         
-        let artworks = try ArtworkMapper.map(data: emptyJSON, response: HTTPURLResponse(statusCode: 200))
+        let (mappedItems, _) = try ArtworkMapper.map(data: emptyJSON, response: HTTPURLResponse(statusCode: 200))
         
-        XCTAssertEqual(artworks, [])
+        XCTAssertEqual(mappedItems, [])
     }
     
     func test_map_deliversItems_on200ResponseStatusCodeAndItemsJSON() throws {
@@ -59,7 +59,7 @@ class ArtworkMapperTests: XCTestCase {
         
         let json = makeArtworksJSON([artwork1.json, artwork2.json], baseURL: baseURL)
         
-        let mappedItems = try ArtworkMapper.map(data: json, response: HTTPURLResponse(statusCode: 200))
+        let (mappedItems, _) = try ArtworkMapper.map(data: json, response: HTTPURLResponse(statusCode: 200))
         
         XCTAssertEqual([artwork1.model, artwork2.model], mappedItems)
     }
@@ -91,12 +91,17 @@ class ArtworkMapperTests: XCTestCase {
     
     private func makeArtworksJSON(
         _ artworks: [[String: Any]],
-        baseURL: URL
+        baseURL: URL,
+        hasNext: Bool = false
     ) -> Data {
         let json: [String: Any] = [
             "data": artworks,
             "config": [
                 "iiif_url": baseURL.absoluteString
+            ],
+            "pagination": [
+                "current_page": hasNext ? 1 : 2,
+                "total_pages": 3
             ]
         ]
         return try! JSONSerialization.data(withJSONObject: json)
