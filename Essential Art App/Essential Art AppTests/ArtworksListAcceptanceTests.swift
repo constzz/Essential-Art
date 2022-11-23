@@ -73,6 +73,12 @@ class ArtworksListAcceptanceTests: XCTestCase {
         XCTAssertFalse(offlineFeed.canLoadMoreFeed)
     }
     
+    func test_onLaunch_displaysEmptyFeedWhenCustomerHasNoConnectivityAndNoCache() {
+        let artworks = launch(httpClient: .offline, store: .empty)
+        
+        XCTAssertEqual(artworks.numberOfRenderedArtworks(), 0)
+    }
+    
     private var imageData0: Data = UIImage.make(withColor: .red).pngData()!
     private var imageData1: Data = UIImage.make(withColor: .green).pngData()!
     private var imageData2: Data = UIImage.make(withColor: .blue).pngData()!
