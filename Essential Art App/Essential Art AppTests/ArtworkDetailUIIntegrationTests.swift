@@ -229,6 +229,21 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork0.imageURL], "Expected two image URL requests for the detail screen after retry")
     }
 
+    func test_loadImageDataCompletion_dispatchesFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: makeArtworkDetail())
+        
+        let exp = expectation(description: "Wait for background queue")
+        let anyImageData = anyImageData()
+        DispatchQueue.global().async {
+            loader.completeArtworksImageLoading(with: anyImageData, at: 0)
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
+
     
     func test_deinit_cancelsRunningDetailInfoRequest() {
         var cancelCallCount = 0
@@ -290,6 +305,10 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
+    }
+    
+    private func anyImageData() -> Data {
+        return UIImage.make(withColor: .red).pngData()!
     }
     
     private func makeArtworkDetail(title: String = "", artist: String = "", url: URL = URL(string: "http://any-url.com")!, description: String? = nil) -> ArtworkDetail {
