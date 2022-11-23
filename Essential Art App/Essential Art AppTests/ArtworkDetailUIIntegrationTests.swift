@@ -194,7 +194,7 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         loader.completeArtworksImageLoadingWithError(at: 1)
         XCTAssertEqual(sut.isShowingImageRetryAction, true, "Expected retry action state on failed image loading")
         
-        sut.imageController.header.retryButton.simulate(event: .touchUpInside)
+        sut.simulateImageRetryButtonClick()
         XCTAssertEqual(sut.isShowingImageRetryAction, false, "Expected no retry button action on retry")
     }
     
@@ -211,6 +211,23 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.isShowingImageRetryAction, true, "Expected retry action once image loading completes with invalid image data")
     }
 
+
+    func test_imageViewRetryAction_retriesImageLoad() {
+        let artwork0 = makeArtworkDetail(url: URL(string: "http://url-0.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeArtworksLoading(with: artwork0, at: 0)
+        loader.completeArtworksImageLoadingWithError(at: 0)
+        
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL], "Expected image URL request for the detail screen")
+        
+        sut.simulateImageRetryButtonClick()
+
+        loader.completeArtworksImageLoading(with: UIImage.make(withColor: .green).pngData()!, at: 1)
+        
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork0.imageURL], "Expected two image URL requests for the detail screen after retry")
+    }
 
     
     func test_deinit_cancelsRunningDetailInfoRequest() {
@@ -295,6 +312,10 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
 
 // MARK: - ArtworkDetailController test helpers
 private extension ArtworkDetailController {
+    
+    func simulateImageRetryButtonClick() {
+        imageRetryButton.simulate(event: .touchUpInside)
+    }
     
     var imageRetryButton: UIButton {
         imageController.header.retryButton
