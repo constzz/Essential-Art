@@ -13,6 +13,13 @@ import XCTest
 
 extension ListViewController {
     private var artworkSection: Int { 0 }
+    
+    func simulateTapOnArtwork(at index: Int) {
+        let delegate = tableView.delegate
+        let index = IndexPath(row: index, section: artworksSection)
+        delegate?.tableView?(tableView, didSelectRowAt: index)
+    }
+    
     func numberOfRenderedArtworks() -> Int {
         numberOfRows(in: artworkSection)
     }
@@ -95,7 +102,24 @@ class ArtworksListAcceptanceTests: XCTestCase {
         XCTAssertNotNil(store.artworksCache, "Expected to keep non-expired cache")
     }
     
+    func test_onArtworkImageSelection_displaysDetail() {
+        let artworkDetail = showDetailForFirstArtwork()
+        artworkDetail.loadViewIfNeeded()
+        
+        artworkDetail.assertIsRendering(isRendering: firstArtworkDetail)
+    }
+    
     // MARK: - Helpers
+    
+    private func showDetailForFirstArtwork() -> ArtworkDetailController {
+        let artworks = launch(httpClient: .online(response), store: .empty)
+        
+        artworks.simulateTapOnArtwork(at: 0)
+        RunLoop.current.run(until: Date())
+        
+        let nav = artworks.navigationController
+        return nav?.topViewController as! ArtworkDetailController
+    }
     
     private func enterBackground(with store: InMemoryArtworksStore) {
         let sut = SceneDelegate(httpClient: HTTPClientStub.offline, store: store, scheduler: .immediateOnMainQueue, artworksLimitPerPage: 10)
@@ -112,6 +136,14 @@ class ArtworksListAcceptanceTests: XCTestCase {
         return (makeData(for: url), response)
     }
     
+    private lazy var firstArtworkDetail = ArtworkDetail(
+        title: "title",
+        artist: "artist",
+        description: "any description",
+        imageURL: baseURL)
+    
+    private let baseURL = URL(string: "http://url-0.com")!
+    
     lazy var imageDataForURLPath: [String: Data] = [
         "/0123/full/843,/0/default.jpg": imageData0,
         "/3273/full/843,/0/default.jpg": imageData1,
@@ -119,14 +151,14 @@ class ArtworksListAcceptanceTests: XCTestCase {
         "/44944/full/843,/0/default.jpg": imageData3
     ]
     
-    private func artworkWithImageID(_ imageID: String) -> [String: Any] {
-        return ["image_id": "\(imageID)", "artist_display": "artist",  "title": "title", "id": UUID().hashValue]
+    private func artworkWithImageID(_ imageID: String, customID: Int? = nil) -> [String: Any] {
+        return ["image_id": "\(imageID)", "artist_display": "artist",  "title": "title", "id": customID ?? UUID().hashValue]
     }
     
     private func artworksDataForPage(_ page: Int) -> [[String: Any]] {
         switch page {
         case 0:
-            return [artworkWithImageID("0123")]
+            return [artworkWithImageID("0123", customID: 0)]
         case 1:
             return [artworkWithImageID("3273")]
         case 2:
@@ -171,6 +203,22 @@ class ArtworksListAcceptanceTests: XCTestCase {
             ] as [String : Any]
             return try! JSONSerialization.data(withJSONObject: json)
             
+        case "/api/v1/artworks/0":
+            let detailJSON = [
+                "data": [
+                    "image_id": "0",
+                    "artist_display": firstArtworkDetail.artist,
+                    "title": firstArtworkDetail.title,
+                    "thumbnail": [
+                        "alt_text": firstArtworkDetail.description
+                    ]
+                ],
+                "config": [
+                    "iiif_url": baseURL.absoluteString
+                ]
+            ]
+            return try! JSONSerialization.data(withJSONObject: detailJSON)
+            
         default:
             return Data()
         }
@@ -193,5 +241,18 @@ class ArtworksListAcceptanceTests: XCTestCase {
         
         let nav = sut.window?.rootViewController as? UINavigationController
         return nav?.topViewController as! ListViewController
+    }
+}
+
+extension ArtworkDetailController {
+    func assertIsRendering(isRendering artworkDetail: ArtworkDetail?, file: StaticString = #file, line: UInt = #line) {
+        let expectedTitle: String? = {
+            if let artworkDetail = artworkDetail {
+                return artworkDetail.title + " – " + artworkDetail.artist
+            } else { return nil }
+        }()
+        
+        XCTAssertEqual(titleLabel.text, expectedTitle, file: file, line: line)
+        XCTAssertEqual(descrpitionLabel.text, artworkDetail?.description, file: file)
     }
 }
