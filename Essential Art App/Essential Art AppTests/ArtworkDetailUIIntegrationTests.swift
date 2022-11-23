@@ -117,6 +117,28 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.errorMessage, nil)
     }
     
+    // MARK: - Image View Tests
+    func test_imageView_loadsImageURLWhenScreenDataLoaded() {
+        let artwork0 = makeArtworkDetail(url: URL(string: "http://url-0.com")!)
+        let artwork1 = makeArtworkDetail(url: URL(string: "http://url-1.com")!)
+        
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until views become visible")
+        
+        loader.completeArtworksLoading(with: artwork0, at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL], "Expected first image URL request once screen data is loaded")
+        
+        sut.simulateUserInitiatedReload()
+        loader.completeArtworksLoading(with: artwork1, at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [artwork0.imageURL, artwork1.imageURL], "Expected second image URL request once screen data is loaded after reload")
+    }
+
+    
+    // MARK: - Helpers
+    
     private func makeSUT(
         file: StaticString = #file,
         line: UInt = #line
@@ -151,6 +173,11 @@ class ArtworkDetailUIIntegrationTests: XCTestCase {
 
 // MARK: - ArtworkDetailController test helpers
 private extension ArtworkDetailController {
+    
+    func simulateDataLoaded(_ artworkDetail: ArtworkDetail) {
+        display(ArtworkDetailPresenter.map(artworkDetail))
+    }
+    
     var refreshControl: UIRefreshControl? {
         scrollView.refreshControl
     }
