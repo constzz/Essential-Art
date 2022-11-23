@@ -21,21 +21,23 @@ public final class ArtworkDetailController: ViewControllerWithStackInScroll {
         static let stackViewSpacing: CGFloat = 6
     }
     
-    lazy var titleLabel: UILabel = {
+    private(set) lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = .preferredFont(forTextStyle: .title1)
         return label
     }()
     
-    lazy var descrpitionLabel: UILabel = {
+    private(set) lazy var descrpitionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = .preferredFont(forTextStyle: .body)
         return label
     }()
     
-    public lazy var imageController: ArtworkDetailImageController = {
+    private(set) lazy var errorView = ErrorView()
+    
+    public private(set) lazy var imageController: ArtworkDetailImageController = {
         let controller = ArtworkDetailImageController()
         addChild(controller)
         controller.didMove(toParent: self)
@@ -70,6 +72,11 @@ public final class ArtworkDetailController: ViewControllerWithStackInScroll {
     }
     
     private func addSubviews() {
+        view.add(view: errorView, constraints: [
+            errorView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            errorView.topAnchor.constraint(equalTo: view.topAnchor)
+        ])
+        
         stackView.addArrangedSubview(imageController.view)
         stackView.addSpace(size: Constants.stackViewSpacing, axis: .vertical)
         stackView.addArrangedSubview(titleLabel)
@@ -98,6 +105,7 @@ extension ArtworkDetailController: ResourceView, ResourceErrorView, ResourceLoad
     }
     
     public func display(_ viewModel: ResourceErrorViewModel) {
+        errorView.message = viewModel.errorMessage
     }
 }
 
