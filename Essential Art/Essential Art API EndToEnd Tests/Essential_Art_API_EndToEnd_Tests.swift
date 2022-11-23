@@ -70,7 +70,7 @@ class Essential_Art_API_EndToEnd_Tests: XCTestCase {
                 URLQueryItem(name: "fields", value: "id,title,artist_display,image_id"),
             ])!
         
-        return request(fromURL: url, mappingWith: ArtworkMapper.map)
+        return request(fromURL: url, mappingWith: { try ArtworkMapper.map(data: $0, response: $1).artworks })
     }
     
     func getArtowkImageData() -> Swift.Result<Data, Error> {

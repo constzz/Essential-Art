@@ -16,9 +16,26 @@ public final class ArtworkMapper {
     private struct ArtworkRoot: Decodable {
         let data: [ArtworkModel]
         private let config: Config
+        private let pagination: Pagination?
+        
+        private struct Pagination: Decodable {
+            let totalPages: Int
+            let currentPage: Int
+            private enum CodingKeys: String, CodingKey {
+                case totalPages = "total_pages", currentPage = "current_page"
+            }
+        }
         
         var baseURL: URL {
             config.iiifURL
+        }
+        
+        var hasNext: Bool {
+            guard let pagination = pagination else {
+                return false
+            }
+            
+            return pagination.currentPage < pagination.totalPages - 1
         }
         
         private struct Config: Decodable {
@@ -56,12 +73,13 @@ public final class ArtworkMapper {
     
     private static let validResponseCode = 200
 
-    public static func map(data: Data, response: HTTPURLResponse) throws -> [Artwork] {
+    public static func map(data: Data, response: HTTPURLResponse) throws -> (artworks: [Artwork], hasNext: Bool) {
         guard response.statusCode == validResponseCode,
               let artworkRoot = try? JSONDecoder().decode(ArtworkRoot.self, from: data)
         else {
             throw Error.invalidData
         }
-        return artworkRoot.data.compactMap { try? $0.artwork(withBaseURL: artworkRoot.baseURL) }
+        let artworks = artworkRoot.data.compactMap { try? $0.artwork(withBaseURL: artworkRoot.baseURL) }
+        return (artworks, artworkRoot.hasNext)
     }
 }

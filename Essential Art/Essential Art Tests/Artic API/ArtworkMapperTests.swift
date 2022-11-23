@@ -36,9 +36,9 @@ class ArtworkMapperTests: XCTestCase {
     func test_map_deliversEmptyList_on200ResponseStatusCodeAndEmptyJSONlist() throws {
         let emptyJSON = makeArtworksJSON([], baseURL: anyURL)
         
-        let artworks = try ArtworkMapper.map(data: emptyJSON, response: HTTPURLResponse(statusCode: 200))
+        let (mappedItems, _) = try ArtworkMapper.map(data: emptyJSON, response: HTTPURLResponse(statusCode: 200))
         
-        XCTAssertEqual(artworks, [])
+        XCTAssertEqual(mappedItems, [])
     }
     
     func test_map_deliversItems_on200ResponseStatusCodeAndItemsJSON() throws {
@@ -59,10 +59,26 @@ class ArtworkMapperTests: XCTestCase {
         
         let json = makeArtworksJSON([artwork1.json, artwork2.json], baseURL: baseURL)
         
-        let mappedItems = try ArtworkMapper.map(data: json, response: HTTPURLResponse(statusCode: 200))
+        let (mappedItems, _) = try ArtworkMapper.map(data: json, response: HTTPURLResponse(statusCode: 200))
         
         XCTAssertEqual([artwork1.model, artwork2.model], mappedItems)
     }
+    
+    func test_map_deliversHasNextBool_on200ResponseStatusCodeAccordingToPagination() throws {
+        
+        for hasNext in [true, false] {
+            let pagination: Pagination = (currentPage: hasNext ? 1 : 2, totalPages: 3)
+            let emptyJSON = makeArtworksJSON([], baseURL: anyURL, pagination: pagination)
+            
+            let (_, mappedHasNext) = try ArtworkMapper.map(data: emptyJSON, response: HTTPURLResponse(statusCode: 200))
+            
+            XCTAssertEqual(hasNext, mappedHasNext)
+        }
+        
+    }
+    
+    // MARK: - Helpers
+    private typealias Pagination = (currentPage: Int, totalPages: Int)
     
     private func makeArtwork(
         imageID: String,
@@ -91,12 +107,17 @@ class ArtworkMapperTests: XCTestCase {
     
     private func makeArtworksJSON(
         _ artworks: [[String: Any]],
-        baseURL: URL
+        baseURL: URL,
+        pagination: Pagination = (0, 1)
     ) -> Data {
         let json: [String: Any] = [
             "data": artworks,
             "config": [
                 "iiif_url": baseURL.absoluteString
+            ],
+            "pagination": [
+                "current_page": pagination.currentPage,
+                "total_pages": pagination.totalPages
             ]
         ]
         return try! JSONSerialization.data(withJSONObject: json)

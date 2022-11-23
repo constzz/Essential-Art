@@ -81,6 +81,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .eraseToAnyPublisher()
     }
     
+    private static let firstPage = 0
+    private var limit = 10
+        
+    convenience init(
+        httpClient: HTTPClient,
+        store: ArtworksStore & ArtworkImageStore,
+        scheduler: AnyDispatchQueueScheduler,
+        artworksLimitPerPage: Int
+    ) {
+        self.init()
+        self.httpClient = httpClient
+        self.store = store
+        self.localImageStore = store
+        self.scheduler = scheduler
+        self.limit = artworksLimitPerPage
+    }
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
 
@@ -100,6 +117,53 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
+}
+
+// MARK: - Artworks Screen
+private extension SceneDelegate {
+
+    func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<Paginated<Artwork>, Error> {
+        makeRemoteFeedLoader(page: Self.firstPage)
+            .map { $0 }
+            .caching(to: localArtworksLoader)
+            .fallback(to: { [localArtworksLoader] in
+                return localArtworksLoader.loadPublisher(hasNext: false)
+            })
+            .map { (artworks, hasNext) in
+                self.makePage(artworks: artworks, page: Self.firstPage, hasNext: hasNext)
+            }
+            .subscribe(on: scheduler)
+            .eraseToAnyPublisher()
+    }
+    
+    func makeRemoteFeedLoader(page: Int? = nil) -> AnyPublisher<(artworks: [Artwork], hasNext:  Bool), Error> {
+        let url = ArticEndpoint.get(page: page, limit: limit).url(baseURL: baseURL)
+        
+        return httpClient
+            .getPublisher(url: url)
+            .tryMap(ArtworkMapper.map)
+            .eraseToAnyPublisher()
+    }
+    
+    func makePage(artworks: [Artwork], page: Int, hasNext: Bool) -> Paginated<Artwork> {
+        Paginated(
+            items: artworks,
+            loadMorePublisher: hasNext ? {
+                self.makeRemoteLoadMoreLoader(oldArtworks: artworks, forPage: page + 1)
+            } : nil
+        )
+    }
+    
+    func makeRemoteLoadMoreLoader(oldArtworks: [Artwork], forPage page: Int) -> AnyPublisher<Paginated<Artwork>, Error> {
+        return makeRemoteFeedLoader(page: page)
+            .map { remoteItems in
+                return self.makePage(artworks: oldArtworks + remoteItems.artworks, page: page, hasNext: remoteItems.hasNext)
+            }
+            .caching(to: localArtworksLoader)
+            .subscribe(on: scheduler)
+            .eraseToAnyPublisher()
+    }
+
 }
 
 // MARK: - Artwork Details Screen
@@ -123,51 +187,3 @@ private extension SceneDelegate {
             .eraseToAnyPublisher()
     }
 }
-
-// MARK: - Artworks Screen
-private extension SceneDelegate {
-    
-    enum Constants {
-        static let firstPage = 0
-        static let limit = 10
-    }
-
-    func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<Paginated<Artwork>, Error> {
-        makeRemoteFeedLoader(page: Constants.firstPage)
-            .caching(to: localArtworksLoader)
-            .fallback(to: localArtworksLoader.loadPublisher)
-            .map({ self.makePage(artworks: $0, page: Constants.firstPage) })
-            .subscribe(on: scheduler)
-            .eraseToAnyPublisher()
-    }
-    
-    func makeRemoteFeedLoader(page: Int? = nil) -> AnyPublisher<[Artwork], Error> {
-        let url = ArticEndpoint.get(page: page, limit: Constants.limit).url(baseURL: baseURL)
-        
-        return httpClient
-            .getPublisher(url: url)
-            .tryMap(ArtworkMapper.map)
-            .eraseToAnyPublisher()
-    }
-    
-    func makePage(artworks: [Artwork], page: Int) -> Paginated<Artwork> {
-        Paginated(
-            items: artworks,
-            loadMorePublisher: { self.makeRemoteLoadMoreLoader(previousArtworks: artworks, forPage: page + 1) }
-        )
-    }
-    
-    func makeRemoteLoadMoreLoader(previousArtworks: [Artwork], forPage page: Int) -> AnyPublisher<Paginated<Artwork>, Error> {
-        let newPage = page + 1
-        return makeRemoteFeedLoader(page: newPage)
-            .map { newItems in
-                (previousArtworks + newItems, newPage)
-            }
-            .map(makePage)
-            .caching(to: localArtworksLoader)
-            .subscribe(on: scheduler)
-            .eraseToAnyPublisher()
-    }
-}
-
-
