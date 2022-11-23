@@ -64,6 +64,22 @@ class ArtworkMapperTests: XCTestCase {
         XCTAssertEqual([artwork1.model, artwork2.model], mappedItems)
     }
     
+    func test_map_deliversHasNextBool_on200ResponseStatusCodeAccordingToPagination() throws {
+        
+        for hasNext in [true, false] {
+            let pagination: Pagination = (currentPage: hasNext ? 1 : 2, totalPages: 3)
+            let emptyJSON = makeArtworksJSON([], baseURL: anyURL, pagination: pagination)
+            
+            let (_, mappedHasNext) = try ArtworkMapper.map(data: emptyJSON, response: HTTPURLResponse(statusCode: 200))
+            
+            XCTAssertEqual(hasNext, mappedHasNext)
+        }
+        
+    }
+    
+    // MARK: - Helpers
+    private typealias Pagination = (currentPage: Int, totalPages: Int)
+    
     private func makeArtwork(
         imageID: String,
         title: String,
@@ -92,7 +108,7 @@ class ArtworkMapperTests: XCTestCase {
     private func makeArtworksJSON(
         _ artworks: [[String: Any]],
         baseURL: URL,
-        hasNext: Bool = false
+        pagination: Pagination = (0, 1)
     ) -> Data {
         let json: [String: Any] = [
             "data": artworks,
@@ -100,8 +116,8 @@ class ArtworkMapperTests: XCTestCase {
                 "iiif_url": baseURL.absoluteString
             ],
             "pagination": [
-                "current_page": hasNext ? 1 : 2,
-                "total_pages": 3
+                "current_page": pagination.currentPage,
+                "total_pages": pagination.totalPages
             ]
         ]
         return try! JSONSerialization.data(withJSONObject: json)
