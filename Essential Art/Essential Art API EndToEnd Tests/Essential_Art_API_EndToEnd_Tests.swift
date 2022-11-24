@@ -12,7 +12,7 @@ class Essential_Art_API_EndToEnd_Tests: XCTestCase {
 
 	func test_endToEndTestServerGETArtworksList_matchesTheNumberOfArtworksInQuery() {
 		let artworksLimit = 5
-
+    
 		switch getArtworks(limit: artworksLimit) {
 		case .success(let artworks):
 			XCTAssertEqual(artworks.count, artworksLimit)
