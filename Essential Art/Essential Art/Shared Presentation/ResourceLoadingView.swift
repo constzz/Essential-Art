@@ -8,9 +8,9 @@
 import Foundation
 
 public struct ResourceLoadingViewModel {
-    public let isLoading: Bool
+	public let isLoading: Bool
 }
 
 public protocol ResourceLoadingView {
-    func display(_ viewModel: ResourceLoadingViewModel)
+	func display(_ viewModel: ResourceLoadingViewModel)
 }

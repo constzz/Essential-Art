@@ -10,7 +10,7 @@ import Foundation
 public typealias ArtworksCached = (artworks: [Artwork], timestamp: Date)
 
 public protocol ArtworksStore {
-    func insert(_ artworks: [Artwork], timestamp: Date) throws
-    func deleteCachedArtworks() throws
-    func retrieve() throws -> ArtworksCached?
+	func insert(_ artworks: [Artwork], timestamp: Date) throws
+	func deleteCachedArtworks() throws
+	func retrieve() throws -> ArtworksCached?
 }

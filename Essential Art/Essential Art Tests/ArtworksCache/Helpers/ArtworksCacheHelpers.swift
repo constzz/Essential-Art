@@ -9,16 +9,16 @@ import Foundation
 import Essential_Art
 
 func uniqueArtwork() -> Artwork {
-    return Artwork(title: UUID().uuidString, imageURL: anyURL, artist: "any", id: UUID().hashValue)
+	return Artwork(title: UUID().uuidString, imageURL: anyURL, artist: "any", id: UUID().hashValue)
 }
 
 func uniqueArtworks() -> (models: [Artwork], localItems: [LocalArtwork]) {
-    let models = [uniqueArtwork(), uniqueArtwork()]
-    return (models, models.map { LocalArtwork(title: $0.title, imageURL: $0.imageURL, artist: $0.artist, id: UUID().hashValue) })
+	let models = [uniqueArtwork(), uniqueArtwork()]
+	return (models, models.map { LocalArtwork(title: $0.title, imageURL: $0.imageURL, artist: $0.artist, id: UUID().hashValue) })
 }
 
 extension Date {
-    func minusArtworksCacheMaxAge() -> Date {
-        return adding(days: -14)
-    }
+	func minusArtworksCacheMaxAge() -> Date {
+		return adding(days: -14)
+	}
 }

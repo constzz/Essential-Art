@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol ArtworksCache {
-    func save(_ artworks: [Artwork]) throws
+	func save(_ artworks: [Artwork]) throws
 }

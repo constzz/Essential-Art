@@ -8,10 +8,10 @@
 import Foundation
 
 public struct ResourceErrorViewModel {
-    public let errorMessage: String?
-    public static let noError = ResourceErrorViewModel(errorMessage: nil)
+	public let errorMessage: String?
+	public static let noError = ResourceErrorViewModel(errorMessage: nil)
 }
 
 public protocol ResourceErrorView {
-    func display(_ viewModel: ResourceErrorViewModel)
+	func display(_ viewModel: ResourceErrorViewModel)
 }
