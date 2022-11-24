@@ -11,7 +11,7 @@ import Foundation
 class NullStore {}
 
 extension NullStore: ArtworksStore {
-    func insert(_ artworks: [Artwork], timestamp: Date) throws {}
-    func deleteCachedArtworks() throws {}
-    func retrieve() throws -> ArtworksCached? { .none }
+	func insert(_ artworks: [Artwork], timestamp: Date) throws {}
+	func deleteCachedArtworks() throws {}
+	func retrieve() throws -> ArtworksCached? { .none }
 }

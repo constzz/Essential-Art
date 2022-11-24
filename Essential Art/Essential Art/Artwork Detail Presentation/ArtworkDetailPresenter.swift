@@ -8,9 +8,9 @@
 import Foundation
 
 public final class ArtworkDetailPresenter {
-    private init () {}
+	private init() {}
 
-    public static func map(_ artworkDetail: ArtworkDetail) -> ArtworkDetailViewModel {
-        ArtworkDetailViewModel(title: artworkDetail.title, artist: artworkDetail.artist, description: artworkDetail.description)
-    }
+	public static func map(_ artworkDetail: ArtworkDetail) -> ArtworkDetailViewModel {
+		ArtworkDetailViewModel(title: artworkDetail.title, artist: artworkDetail.artist, description: artworkDetail.description)
+	}
 }

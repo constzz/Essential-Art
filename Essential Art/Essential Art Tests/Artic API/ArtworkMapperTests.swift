@@ -10,101 +10,101 @@ import XCTest
 import Essential_Art
 
 class ArtworkMapperTests: XCTestCase {
-    
-    func test_map_throwsErrorOnNon200ResponseStatusCode() throws {
-        let artworksJSON = makeArtworksJSON([], baseURL: anyURL)
-        let non200StatusCodes = [199, 201, 203, 299, 301, 400]
-        try non200StatusCodes.forEach { statusCode in
-            XCTAssertThrowsError(
-                try ArtworkMapper.map(data: artworksJSON, response: HTTPURLResponse(statusCode: statusCode)),
-                "Expected to throw on \(statusCode) status code."
-            )
-        }
-    }
-    
-    func test_map_throwsErrorOnInvalidData() throws {
-        let invalidData = Data("invalid data".utf8)
-        
-        let non200StatusCodes = [199, 200, 201, 299, 301, 400, 502]
-        try non200StatusCodes.forEach { statusCode in
-            XCTAssertThrowsError(
-                try ArtworkMapper.map(data: invalidData, response: HTTPURLResponse(statusCode: statusCode))
-            )
-        }
-    }
-    
-    func test_map_deliversEmptyList_on200ResponseStatusCodeAndEmptyJSONlist() throws {
-        let emptyJSON = makeArtworksJSON([], baseURL: anyURL)
-        
-        let artworks = try ArtworkMapper.map(data: emptyJSON, response: HTTPURLResponse(statusCode: 200))
-        
-        XCTAssertEqual(artworks, [])
-    }
-    
-    func test_map_deliversItems_on200ResponseStatusCodeAndItemsJSON() throws {
-        let baseURL = anyURL
-        let artwork1 = makeArtwork(
-            imageID: "1234",
-            title: "Any title",
-            baseURL: baseURL,
-            urlSuffix: "full/843,/0/default.jpg",
-            artist: "A famous one")
-        
-        let artwork2 = makeArtwork(
-            imageID: "5678",
-            title: "The art of programming",
-            baseURL: baseURL,
-            urlSuffix: "full/843,/0/default.jpg",
-            artist: "Unknown artist")
-        
-        let json = makeArtworksJSON([artwork1.json, artwork2.json], baseURL: baseURL)
-        
-        let mappedItems = try ArtworkMapper.map(data: json, response: HTTPURLResponse(statusCode: 200))
-        
-        XCTAssertEqual([artwork1.model, artwork2.model], mappedItems)
-    }
-    
-    private func makeArtwork(
-        imageID: String,
-        title: String,
-        baseURL: URL,
-        urlSuffix: String,
-        artist: String
-    ) -> (model: Artwork, json: [String: Any]) {
-        let id = UUID().hashValue
-        
-        let json = [
-            "image_id": imageID,
-            "artist_display": artist,
-            "title": title,
-            "id": id
-        ].compactMapValues({$0})
-        
-        let artwork = Artwork(
-            title: title,
-            imageURL: baseURL.appendingPathComponent(imageID).appendingPathComponent(urlSuffix),
-            artist: artist,
-            id: id)
-        
-        return (artwork, json)
-    }
-    
-    private func makeArtworksJSON(
-        _ artworks: [[String: Any]],
-        baseURL: URL
-    ) -> Data {
-        let json: [String: Any] = [
-            "data": artworks,
-            "config": [
-                "iiif_url": baseURL.absoluteString
-            ]
-        ]
-        return try! JSONSerialization.data(withJSONObject: json)
-    }
+
+	func test_map_throwsErrorOnNon200ResponseStatusCode() throws {
+		let artworksJSON = makeArtworksJSON([], baseURL: anyURL)
+		let non200StatusCodes = [199, 201, 203, 299, 301, 400]
+		try non200StatusCodes.forEach { statusCode in
+			XCTAssertThrowsError(
+				try ArtworkMapper.map(data: artworksJSON, response: HTTPURLResponse(statusCode: statusCode)),
+				"Expected to throw on \(statusCode) status code."
+			)
+		}
+	}
+
+	func test_map_throwsErrorOnInvalidData() throws {
+		let invalidData = Data("invalid data".utf8)
+
+		let non200StatusCodes = [199, 200, 201, 299, 301, 400, 502]
+		try non200StatusCodes.forEach { statusCode in
+			XCTAssertThrowsError(
+				try ArtworkMapper.map(data: invalidData, response: HTTPURLResponse(statusCode: statusCode))
+			)
+		}
+	}
+
+	func test_map_deliversEmptyList_on200ResponseStatusCodeAndEmptyJSONlist() throws {
+		let emptyJSON = makeArtworksJSON([], baseURL: anyURL)
+
+		let artworks = try ArtworkMapper.map(data: emptyJSON, response: HTTPURLResponse(statusCode: 200))
+
+		XCTAssertEqual(artworks, [])
+	}
+
+	func test_map_deliversItems_on200ResponseStatusCodeAndItemsJSON() throws {
+		let baseURL = anyURL
+		let artwork1 = makeArtwork(
+			imageID: "1234",
+			title: "Any title",
+			baseURL: baseURL,
+			urlSuffix: "full/843,/0/default.jpg",
+			artist: "A famous one")
+
+		let artwork2 = makeArtwork(
+			imageID: "5678",
+			title: "The art of programming",
+			baseURL: baseURL,
+			urlSuffix: "full/843,/0/default.jpg",
+			artist: "Unknown artist")
+
+		let json = makeArtworksJSON([artwork1.json, artwork2.json], baseURL: baseURL)
+
+		let mappedItems = try ArtworkMapper.map(data: json, response: HTTPURLResponse(statusCode: 200))
+
+		XCTAssertEqual([artwork1.model, artwork2.model], mappedItems)
+	}
+
+	private func makeArtwork(
+		imageID: String,
+		title: String,
+		baseURL: URL,
+		urlSuffix: String,
+		artist: String
+	) -> (model: Artwork, json: [String: Any]) {
+		let id = UUID().hashValue
+
+		let json = [
+			"image_id": imageID,
+			"artist_display": artist,
+			"title": title,
+			"id": id
+		].compactMapValues({ $0 })
+
+		let artwork = Artwork(
+			title: title,
+			imageURL: baseURL.appendingPathComponent(imageID).appendingPathComponent(urlSuffix),
+			artist: artist,
+			id: id)
+
+		return (artwork, json)
+	}
+
+	private func makeArtworksJSON(
+		_ artworks: [[String: Any]],
+		baseURL: URL
+	) -> Data {
+		let json: [String: Any] = [
+			"data": artworks,
+			"config": [
+				"iiif_url": baseURL.absoluteString
+			]
+		]
+		return try! JSONSerialization.data(withJSONObject: json)
+	}
 }
 
 extension HTTPURLResponse {
-    convenience init(statusCode: Int) {
-        self.init(url: anyURL, statusCode: statusCode, httpVersion: nil, headerFields: nil)!
-    }
+	convenience init(statusCode: Int) {
+		self.init(url: anyURL, statusCode: statusCode, httpVersion: nil, headerFields: nil)!
+	}
 }

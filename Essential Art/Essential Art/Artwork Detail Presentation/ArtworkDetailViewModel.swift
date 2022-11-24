@@ -8,17 +8,17 @@
 import Foundation
 
 public struct ArtworkDetailViewModel {
-    public let title: String
-    public let artist: String
-    public let description: String?
-    
-    public init(
-        title: String,
-        artist: String,
-        description: String?
-    ) {
-        self.title = title
-        self.artist = artist
-        self.description = description
-    }
+	public let title: String
+	public let artist: String
+	public let description: String?
+
+	public init(
+		title: String,
+		artist: String,
+		description: String?
+	) {
+		self.title = title
+		self.artist = artist
+		self.description = description
+	}
 }

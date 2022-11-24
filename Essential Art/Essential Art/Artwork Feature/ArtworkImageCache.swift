@@ -8,6 +8,6 @@
 import Foundation
 
 public protocol ArtworkImageStore {
-    func save(_ imageData: Data, for response: HTTPURLResponse) throws
-    func retrieve(dataForURL url: URL) throws -> Data
+	func save(_ imageData: Data, for response: HTTPURLResponse) throws
+	func retrieve(dataForURL url: URL) throws -> Data
 }

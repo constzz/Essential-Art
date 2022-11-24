@@ -10,11 +10,11 @@ import XCTest
 import Essential_Art
 
 extension XCTestCase {
-    class DummyView: ResourceView {
-        func display(_ viewModel: Any) {}
-    }
-    
-    var loadError: String {
-        LoadResourcePresenter<Any, DummyView>.loadError
-    }
+	class DummyView: ResourceView {
+		func display(_ viewModel: Any) {}
+	}
+
+	var loadError: String {
+		LoadResourcePresenter<Any, DummyView>.loadError
+	}
 }

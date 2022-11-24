@@ -8,14 +8,14 @@
 import Foundation
 
 public struct ArtworkItemViewModel {
-    public let title: String
-    public let artist: String
-    
-    public init(
-        title: String,
-        artist: String
-    ) {
-        self.title = title
-        self.artist = artist
-    }
+	public let title: String
+	public let artist: String
+
+	public init(
+		title: String,
+		artist: String
+	) {
+		self.title = title
+		self.artist = artist
+	}
 }

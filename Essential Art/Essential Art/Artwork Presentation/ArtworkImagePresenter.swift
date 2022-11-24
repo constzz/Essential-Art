@@ -8,7 +8,7 @@
 import Foundation
 
 public final class ArtworkImagePresenter {
-    public static func map(_ artwork: Artwork) -> ArtworkItemViewModel {
-        ArtworkItemViewModel(title: artwork.title, artist: artwork.artist)
-    }
+	public static func map(_ artwork: Artwork) -> ArtworkItemViewModel {
+		ArtworkItemViewModel(title: artwork.title, artist: artwork.artist)
+	}
 }
