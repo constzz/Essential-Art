@@ -17,7 +17,7 @@ class ArtworkDetailSnapshotTests: XCTestCase {
 	func test_artworkDetailWithContent() {
 		let sut = makeSUT(viewModel: fullContent())
 
-        sut.imageController.display(UIImage(data: architecturePhotoSample1.data)!)
+		sut.imageController.display(UIImage(data: architecturePhotoSample1.data)!)
 
 		assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "ARTWORK_DETAIL_WITH_CONTENT_light")
 		assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "ARTWORK_DETAIL_WITH_CONTENT_dark")
