@@ -24,7 +24,8 @@ public class ArworkItemCell: UITableViewCell, Reusable {
 
 	lazy var titleLabel: UILabel = {
 		let label = UILabel()
-		label.font = .preferredFont(forTextStyle: .title1)
+		label.numberOfLines = 2
+		label.font = .preferredFont(forTextStyle: .title2)
 		return label
 	}()
 
@@ -89,9 +90,9 @@ private extension ArworkItemCell {
 	}
 
 	func addSubviewsToStackView(_ stackView: UIStackView) {
-		stackViewContainer.addArrangedSubview(titleLabel)
-		stackViewContainer.addSpace(size: Constants.textToImageSpacing, axis: .vertical)
 		stackViewContainer.addArrangedSubview(artworkImageViewContainer)
+		stackViewContainer.addSpace(size: Constants.textToImageSpacing, axis: .vertical)
+		stackViewContainer.addArrangedSubview(titleLabel)
 		stackViewContainer.addSpace(size: Constants.textToImageSpacing, axis: .vertical)
 		stackViewContainer.addArrangedSubview(artistLabel)
 	}
