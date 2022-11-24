@@ -35,7 +35,7 @@ public final class ArtworkMapper {
 				return false
 			}
 
-			return pagination.currentPage < pagination.totalPages - 1
+			return pagination.currentPage < pagination.totalPages
 		}
 
 		private struct Config: Decodable {

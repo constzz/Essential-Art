@@ -13,9 +13,7 @@ import XCTest
 
 class ArtworksListAcceptanceTests: XCTestCase {
 	func test_onLaunch_displaysRemoteFeedWhenCustomerHasConnectivity() {
-		let artworks = launch(
-			httpClient: .online(response),
-			store: .empty)
+		let artworks = launch(httpClient: .online(response), store: .empty)
 
 		artworks.loadViewIfNeeded()
 
@@ -135,11 +133,11 @@ class ArtworksListAcceptanceTests: XCTestCase {
 
 	private func artworksDataForPage(_ page: Int) -> [[String: Any]] {
 		switch page {
-		case 0:
-			return [artworkWithImageID("0123", customID: 0)]
 		case 1:
-			return [artworkWithImageID("3273")]
+			return [artworkWithImageID("0123", customID: 0)]
 		case 2:
+			return [artworkWithImageID("3273")]
+		case 3:
 			return [artworkWithImageID("32923")]
 		default:
 			return []
@@ -157,15 +155,15 @@ class ArtworksListAcceptanceTests: XCTestCase {
 
 			var artworks: [[String: Any]] = []
 
-			if url.query?.contains("page=0") ?? false {
-				page = 0
-				artworks = artworksDataForPage(0)
-			} else if url.query?.contains("page=1") ?? false {
+			if url.query?.contains("page=1") ?? false {
 				page = 1
 				artworks = artworksDataForPage(1)
 			} else if url.query?.contains("page=2") ?? false {
 				page = 2
 				artworks = artworksDataForPage(2)
+			} else if url.query?.contains("page=3") ?? false {
+				page = 3
+				artworks = artworksDataForPage(3)
 			} else { XCTFail("Not expected case") }
 
 			let json = [

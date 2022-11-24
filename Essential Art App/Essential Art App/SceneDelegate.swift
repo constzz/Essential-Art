@@ -81,7 +81,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 			.eraseToAnyPublisher()
 	}
 
-	private static let firstPage = 0
+	private static let firstPage = 1
 	private var limit = 10
 
 	convenience init(

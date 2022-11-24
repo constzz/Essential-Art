@@ -67,7 +67,7 @@ class ArtworkMapperTests: XCTestCase {
 	func test_map_deliversHasNextBool_on200ResponseStatusCodeAccordingToPagination() throws {
 
 		for hasNext in [true, false] {
-			let pagination: Pagination = (currentPage: hasNext ? 1 : 2, totalPages: 3)
+			let pagination: Pagination = (currentPage: hasNext ? 2 : 3, totalPages: 3)
 			let emptyJSON = makeArtworksJSON([], baseURL: anyURL, pagination: pagination)
 
 			let (_, mappedHasNext) = try ArtworkMapper.map(data: emptyJSON, response: HTTPURLResponse(statusCode: 200))
