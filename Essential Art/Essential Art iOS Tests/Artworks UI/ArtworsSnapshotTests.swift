@@ -61,10 +61,10 @@ class ArtworsSnapshotTests: XCTestCase {
 		let imageStubs = [
 			ImageStub(title: "First art",
 			          artist: "Apple",
-			          image: .make(withColor: .green)),
+			          image: UIImage(data: architecturePhotoSample1.data)),
 			ImageStub(title: "Second art",
 			          artist: "Another artist",
-			          image: .make(withColor: .red))
+			          image: UIImage(data: architecturePhotoSample2.data))
 		]
 
 		return imageStubs.map { stub in
