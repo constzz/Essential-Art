@@ -52,22 +52,14 @@ class ArtworsSnapshotTests: XCTestCase {
 	private func makeSUT() -> ListViewController {
 		let viewController = ArtworksController()
 		viewController.loadViewIfNeeded()
+		viewController.tableView.separatorStyle = .none
 		viewController.tableView.showsVerticalScrollIndicator = false
 		viewController.tableView.showsHorizontalScrollIndicator = false
 		return viewController
 	}
 
 	private func artworksItems() -> [CellController] {
-		let imageStubs = [
-			ImageStub(title: "First art",
-			          artist: "Apple",
-			          image: UIImage(data: architecturePhotoSample1.data)),
-			ImageStub(title: "Second art",
-			          artist: "Another artist",
-			          image: UIImage(data: architecturePhotoSample2.data))
-		]
-
-		return imageStubs.map { stub in
+		return artworksWithContent().map { stub in
 			let cellController = ArtworksItemCellController(
 				viewModel: stub.viewModel,
 				delegate: stub,
@@ -79,12 +71,12 @@ class ArtworsSnapshotTests: XCTestCase {
 
 	private func artworksWithContent() -> [ImageStub] {
 		return [
-			ImageStub(title: "First art",
-			          artist: "Apple",
-			          image: nil),
-			ImageStub(title: "Second art",
+			ImageStub(title: "The very high building",
+			          artist: "Architect",
+			          image: UIImage(data: architecturePhotoSample1.data)),
+			ImageStub(title: "Sandbox",
 			          artist: "Another artist",
-			          image: nil)
+			          image: UIImage(data: architecturePhotoSample2.data))
 		]
 	}
 
