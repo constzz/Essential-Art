@@ -47,14 +47,14 @@ class ArtworkMapperTests: XCTestCase {
 			imageID: "1234",
 			title: "Any title",
 			baseURL: baseURL,
-			urlSuffix: "full/843,/0/default.jpg",
+			urlSuffix: "full/400,/0/default.jpg",
 			artist: "A famous one")
 
 		let artwork2 = makeArtwork(
 			imageID: "5678",
 			title: "The art of programming",
 			baseURL: baseURL,
-			urlSuffix: "full/843,/0/default.jpg",
+			urlSuffix: "full/400,/0/default.jpg",
 			artist: "Unknown artist")
 
 		let json = makeArtworksJSON([artwork1.json, artwork2.json], baseURL: baseURL)
