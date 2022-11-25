@@ -56,7 +56,7 @@ class Essential_Art_API_EndToEnd_Tests: XCTestCase {
 	]
 
 	private func imageURLForID(_ id: String) -> URL {
-		return URL(string: "https://www.artic.edu/iiif/2/" + id + "/full/843,/0/default.jpg")!
+		return URL(string: "https://www.artic.edu/iiif/2/" + id + "/full/400,/0/default.jpg")!
 	}
 
 	private var baseURL = URL(string: "https://api.artic.edu")!

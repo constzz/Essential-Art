@@ -59,7 +59,7 @@ public final class ArtworkMapper {
 
 			let imageURL = baseURL
 				.appendingPathComponent("/\(imageID)")
-				.appendingPathComponent("/full/843,/0/default.jpg")
+				.appendingPathComponent("/full/400,/0/default.jpg")
 
 			return Artwork(title: title, imageURL: imageURL, artist: artist, id: id)
 		}

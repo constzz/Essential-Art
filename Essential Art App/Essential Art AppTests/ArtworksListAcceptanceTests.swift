@@ -120,11 +120,13 @@ class ArtworksListAcceptanceTests: XCTestCase {
 
 	private let baseURL = URL(string: "http://url-0.com")!
 
+	private let artworksFeedImageSize: Int = 400
+
 	lazy var imageDataForURLPath: [String: Data] = [
-		"/0123/full/843,/0/default.jpg": imageData0,
-		"/3273/full/843,/0/default.jpg": imageData1,
-		"/32923/full/843,/0/default.jpg": imageData2,
-		"/44944/full/843,/0/default.jpg": imageData3
+		"/0123/full/\(artworksFeedImageSize),/0/default.jpg": imageData0,
+		"/3273/full/\(artworksFeedImageSize),/0/default.jpg": imageData1,
+		"/32923/full/\(artworksFeedImageSize),/0/default.jpg": imageData2,
+		"/44944/full/\(artworksFeedImageSize),/0/default.jpg": imageData3
 	]
 
 	private func artworkWithImageID(_ imageID: String, customID: Int? = nil) -> [String: Any] {
